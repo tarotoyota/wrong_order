@@ -18,7 +18,7 @@ Repositioner           : 異常行為を to treat {A} as {B} や to treat {A} as
 Repositioned Speech    : Repositionerに則り、Normal Position Speech 内の Normal Position Fact を置換したもの。
                          "I bought 5 pounds of dog."
                          "During the prohibition era, there was a shortage of sanitiser."
-Hidden Position Speech : アルバム型コントにおいては、実際に登場人物が Repositioner および Repositioned Speech を実行しているわけではない。その旨を明示するために一部のプレースホルダをあいまいな表現(=誤解を解消しない表現)に置き換えた Repositioned Speechを指す。
+Hidden Position Speech : アルバム型コントにおいては、実際に登場人物が Repositioner を実行しているわけではない。その旨を明示するために一部のプレースホルダをあいまいな表現(=誤解を解消しない表現)に置き換えた Normal Position Speechを指す。
                          "I bought 5 pounds of it."
                          "During the prohibition era, there was a shortage of it."
                          
