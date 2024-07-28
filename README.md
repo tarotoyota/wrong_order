@@ -21,4 +21,25 @@ Repositioned Speech    : Repositionerに則り、Normal Position Speech 内の N
 Hidden Position Speech : アルバム型コントにおいては、実際に登場人物が Repositioner を実行しているわけではない。その旨を明示するために一部のプレースホルダをあいまいな表現(=誤解を解消しない表現)に置き換えた Normal Position Speechを指す。
                          "I bought 5 pounds of it."
                          "During the prohibition era, there was a shortage of it."
+
                          
+def condition_voyeur():
+  Ali_imagines, Bob_imagines = [], []
+  HPS_voyeur = ["I took a photo here."]
+  for i in Place.ALL_PLACES:
+    if i.camera_ok_ban == "o": # _1_mountain
+      Ali_imagines.append(i.place_name)
+    elif i.camera_ok_ban == "b": # _1_public_restroom
+      Bob_imagines.append(i.place_name)
+  return HPS_voyeur, Ali_imagines, Bob_imagines
+      
+この関数におけるrepositioner は to sneak a photo in {A} であり、 A = _1_public_restroom である。
+(撮影すると盗撮になる場所, フォトスポット)はたくさんある。そのためPlaceクラスのアトリビュート「.camera_ok_ban」の値でそれらをラベリングする。
+「盗撮」はrepositionerとして適している。
+
+
+
+
+
+
+
