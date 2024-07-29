@@ -8,7 +8,7 @@ class Place:
     place_name        : List[str]
     kids_olds         :str # Highly associated with kids -> "k", olds -> "o"
     not_facility      :str # Not a facility -> "y"
-    animal            :str # Highly associated with animals -> "y"
+    animal            :str # Highly associated with living animals -> "y"
     food              :str # Highly associated with food -> "y"
     holy_unholy       :str # Commonly holy -> "h", unholy -> "u"
     clean_dirty       :str # Commonly dirty -> "d", clean -> "c"
@@ -34,7 +34,6 @@ class Place:
     normal_5tp1w      :str # Normal to visit 5+ times a week -> "y"
     problemer         :str # Only people with mental, financial or physical problems visit -> "y"
 
-
     def __hash__(self):
         return hash(self.place_name[0]) # Assuming Place_name is a list with a single name.
     def get_place_names(self):
@@ -45,6 +44,7 @@ class Place:
 # Prompt = "Define _1_  hot_spring     .Match the position of the text and whitespace to the existing instance."
 
 
+
                                                          #kid,not,ani ,foo,hol,cle ,cri,ris,thr ,enj,enj,ser ,cam,pic,wea,edu,wat,gro  ret pai ban cou  mou,veh,exc,nor  pro,
 _1_church                =Place(["church"               ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"y","" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
 _1_mosque                =Place(["mosque"               ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"y","" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
@@ -53,7 +53,7 @@ _1_brothel               =Place(["brothel"              ],"" ,"" ,""  ,"" ,"u","
 _1_strip_club            =Place(["strip club"           ],"" ,"" ,""  ,"" ,"u",""  ,"" ,"" ,""  ,"y","y",""  ,"b","" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
 _1_nursing_home          =Place(["nursing home"         ],"o","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y","" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"y", "" ,)
 _1_dumpyard              =Place(["dumpyard"             ],"" ,"" ,""  ,"" ,"" ,"d" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_mountain              =Place(["mountain"             ],"" ,"y","y" ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"o","" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
+_1_mountain              =Place(["mountain"             ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"o","" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
 _1_kindergarten          =Place(["kindergarten"         ],"k","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"y","" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,)
 _1_obstetrics            =Place(["obstetrics"           ],"" ,"" ,""  ,"" ,"h","c" ,"" ,"" ,""  ,"y","" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "y",)
 _1_lost_child_department =Place(["lost child department"],"k","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
@@ -62,8 +62,8 @@ _1_safari                =Place(["safari"               ],"" ,"" ,"y" ,"" ,"" ,"
 _1_animal_shelter        =Place(["animal shelter"       ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"o","" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,)
 _1_butcher               =Place(["butcher"              ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,)
 _1_restaurant            =Place(["restaurant"           ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,)
-_1_fish_market           =Place(["fishmarket"           ],"" ,"" ,"y" ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,)
-_1_aquarium              =Place(["aquarium"             ],"" ,"" ,"y" ,"y","" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,"" ,"y","y",""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
+_1_fish_market           =Place(["fishmarket"           ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,)
+_1_aquarium              =Place(["aquarium"             ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,"" ,"y","y",""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
 _1_car_dealer            =Place(["car dealer"           ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
 _1_parking_lot           =Place(["parking lot"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"y", "" ,)
 _1_flower_shop           =Place(["flower shop"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
@@ -73,8 +73,8 @@ _1_wallet_shop           =Place(["wallet shop"          ],"" ,"" ,""  ,"" ,"" ,"
 _1_lost_and_found        =Place(["lost and found"       ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
 _1_gallery               =Place(["gallery"              ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
 _1_public_restroom       =Place(["public restroom"      ],"" ,"" ,""  ,"" ,"" ,"d" ,"" ,"" ,""  ,"" ,"" ,""  ,"b","" ,"" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"y", "" ,)
-_1_river                 =Place(["river"                ],"" ,"y","y" ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"o","" ,"" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_ocean                 =Place(["ocean"                ],"" ,"y","y" ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"o","" ,"" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
+_1_river                 =Place(["river"                ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"o","" ,"" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
+_1_ocean                 =Place(["ocean"                ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"o","" ,"" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
 _1_beach                 =Place(["beach"                ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"b","y","" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
 _1_hotel                 =Place(["hotel"                ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
 _1_ice_rink              =Place(["ice rink"             ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
@@ -125,6 +125,8 @@ _1_sandbox               =Place(["sandbox"              ],"k","y",""  ,"" ,"" ,"
 _1_farm                  =Place(["farm"                 ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" , "" ,)
 _1_botanical_garden      =Place(["botanical_garden"     ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,"" ,"y","" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,)
 _1_hot_spring            =Place(["hot_spring"           ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"y","" ,""  ,"b","" ,"" ,"" ,"y","" ,""  ,"y","" ,"" , "" ,"" ,"" ,"" ,""  ,)
+_1_burning_house         =Place(["burning house"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","y" ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
+_1_womans_house          =Place(["woman's house"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
 
 
 #for i in Place.ALL_PLACES:
@@ -385,9 +387,73 @@ Please make sure that the new instance you just created does not violate the fol
 # Do not create rejected instances again.
 # Don't use a Place instance that doesn't exist.
 """
+############################
+############################
+"""
+Misunderstand type comedy creation task. Answer in English.
+The spekaer talk about x(zoo, safari, etc.). The listener mistakes that the speaker is talking about y(butcher, restaurant, etc.)
+"""
+ate_inedible_animal_1_general=["There were a lot of animal", "I'm glad they are protected from poachers.", "I gave my pets to them, I can't keep them so I have no choice.", "There were a lot of rescued animals there."]
+
+_1_zoo.ate_inedible_animal_1=["There was an endangered species section.", "There was a gorilla section.", "They had a special event to celebrate the birth of a new animal."]
+_1_safari.ate_inedible_animal_1=["There was an endangered species section.", "There was a lot of gorilla section."]
+_1_animal_shelter.ate_inedible_animal_1=["I found many dogs and cats there.", "It was sad to see so many abandoned pets.", "It was heartwarming to see them being nursed back to health."]
+_1_aquarium.ate_inedible_animal_1 = ["I saw whales and dolphins there."]
+
+"""
+Add statements that would surprise or make angry the listener if the speaker uttered it.
+If Ali says "It was sad to see so many abandoned pets.", it's funny because based on Bob's misunderstanding, Ali ate the animal after feeling pity for it.
+
+Rules=[
+Don't just add different animal names, like "There were many lions" or "The sea turtles were huge." That's just bulking things up, not enriching the content.
+Don't add a sentence like "S + V + [animal genre name]."  , like "There were many lions" or "The sea turtles were huge.
+Don't add a sentence like "The guided tour was very adventurous.", "They have a great adoption program." or "The jellyfish exhibit was mesmerizing." because it makes it clear that the place the speaker is referring to is not a butcher shop or a restaurant.
+Don't add sentences that are nearly identical to existing sentences.
+]
+"""
+####
+"""
+Please check that the sentences you have just added do not violate the following rules:
+
+Don't just add different animal names, like "There were many lions" or "The sea turtles were huge." That's just bulking things up, not enriching the content.
+Don't add a sentence like "S + V + [animal genre name]."  like "The penguins were very playful.", "There were many lions" or "The sea turtles were huge.
+Don't add a sentence like "The guided tour was very adventurous." or "They have a great adoption program." or "The jellyfish exhibit was mesmerizing." because it makes it clear that the place the speaker is referring to is not a butcher shop or a restaurant.
+Don't add sentences that are nearly identical to existing sentences.
+"""
+
+############################
+############################
+
+
+
+
+
+
 
 
 ############################
+############################
+
+# Misunderstand type comedy creation task.
+# The spekaer talk about x. The listener mistakes that the speaker is talking about [' brothel '].
+# What kind of statements will surprise the listener when uttered by the speaker?
+
+
+
+# MAKE _1_aquarium.ate_inedible_animal_1
+
+#Add new English statements in these lists
+
+# Define new x and the sentences.
+
+############################
+############################
+
+
+
+
+all_Place_instances="church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,"
+# These are Place instances' .name. Place instances' name start with "_1_"
 
 @dataclass
 class Freepick: # This class is for creating misunderstand type comedy. Ali talks about fp_ali_place but Bob mistook it for about fp_bob_place
@@ -408,7 +474,9 @@ _f_enjoyed_plant       =Freepick(["enjoyed plant"]    , [_1_botanical_garden] , 
 _f_gave_my_pet         =Freepick(["gave my pet"]      , [_1_animal_shelter]   , [_1_butcher]        ,["This can't be helped since I can no longer keep pets."])
 _f_celebrated_mass     =Freepick(["celebrated mass"]  , [_1_church]           , [_1_mosque]         ,["I donated a christmas tree."])
 _f_took_a_ride         =Freepick(["took a ride"]      , [_1_roller_coaster]   , [_1_police_station] ,["The experience was thrilling and fun.", "I couldn't stop screaming.", "I would definitely do it again."])
+_f_broke_in            =Freepick(["broke in"]         , [_1_burning_house]    , [_1_womans_house]   ,["Next thing I knew, I had broken the glass and was inside.", "I did it for her", "Before I knew it, I was hugging her."])
 
+# Define new Freepick instance in English witout any explanations. respond only new instances you defined.
 
 # Add new statements in each .fp_ali_statement2
 
@@ -418,8 +486,7 @@ _f_took_a_ride         =Freepick(["took a ride"]      , [_1_roller_coaster]   , 
 ############################
 """
 
-all_Place_instances="church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,"
-# These are Place instances' .name. Place instances' name start with "_1_"
+
 
 @dataclass
 class Misunderstand: # This class is for creating misunderstand comedy.
