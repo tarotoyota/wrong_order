@@ -7,6 +7,43 @@ from wrong_order_inst import Freepick
 import re # for only extract_mirror_pairs
 from collections import defaultdict # for only extract_mirror_pairs
 
+#def extract_mirror_pairs(nation_list):
+#    # nation_listがリストであることを確認
+#    if not isinstance(nation_list, list):
+#        raise ValueError("Input should be a list containing the nation string.")
+#
+#    # リスト内の文字列を結合して一つの文字列にする
+#    nation_string = "".join(nation_list).strip()
+#
+#    # 改行で分割してリストに入れる
+#    lines = nation_string.split('\n')
+#
+#    # ペアを解析するための辞書
+#    pair_dict = defaultdict(set)
+#
+#    for line in lines:
+#        # 正規表現でペアを抽出
+#        match = re.match(r'\[(.*?)\s*:\s*(.*?)\]', line)
+#        if match:
+#            left = match.group(1).strip().strip("[]").replace("'", "").replace(" ", "").split(',')
+#            right = match.group(2).strip().strip("[]").replace("'", "").replace(" ", "").split(',')
+#
+#            # ペアを辞書に格納
+#            for l in left:
+#                for r in right:
+#                    pair_dict[(l, r)].add((0, 1))
+#                    pair_dict[(r, l)].add((1, 0))
+#
+#    mirror_pairs = set()
+#
+#    # ミラー対関係を探す
+#    for pair, positions in pair_dict.items():
+#        if (0, 1) in positions and (1, 0) in positions:
+#            mirror_pairs.add(tuple(sorted(pair)))
+#
+#    # 結果をリストに変換して返す
+#    return list(mirror_pairs)
+
 def extract_mirror_pairs(nation_list):
     # nation_listがリストであることを確認
     if not isinstance(nation_list, list):
@@ -15,34 +52,21 @@ def extract_mirror_pairs(nation_list):
     # リスト内の文字列を結合して一つの文字列にする
     nation_string = "".join(nation_list).strip()
 
-    # 改行で分割してリストに入れる
-    lines = nation_string.split('\n')
-
     # ペアを解析するための辞書
     pair_dict = defaultdict(set)
 
-    for line in lines:
-        # 正規表現でペアを抽出
-        match = re.match(r'\[(.*?)\s*:\s*(.*?)\]', line)
-        if match:
-            left = match.group(1).strip().strip("[]").replace("'", "").replace(" ", "").split(',')
-            right = match.group(2).strip().strip("[]").replace("'", "").replace(" ", "").split(',')
+    # 正規表現でペアを抽出し、辞書に格納
+    for left, right in re.findall(r'\[(.*?)\s*:\s*(.*?)\]', nation_string):
+        left = left.strip("[]").replace("'", "").replace(" ", "").split(',')
+        right = right.strip("[]").replace("'", "").replace(" ", "").split(',')
+        for l in left:
+            for r in right:
+                pair_dict[(l, r)].add(0)
+                pair_dict[(r, l)].add(1)
 
-            # ペアを辞書に格納
-            for l in left:
-                for r in right:
-                    pair_dict[(l, r)].add((0, 1))
-                    pair_dict[(r, l)].add((1, 0))
+    # ミラー対関係を探し、重複を取り除いて結果を返す
+    return list(set(tuple(sorted(pair)) for pair, positions in pair_dict.items() if {0, 1} == positions))
 
-    mirror_pairs = set()
-
-    # ミラー対関係を探す
-    for pair, positions in pair_dict.items():
-        if (0, 1) in positions and (1, 0) in positions:
-            mirror_pairs.add(tuple(sorted(pair)))
-
-    # 結果をリストに変換して返す
-    return list(mirror_pairs)
 
 def generate_html_table(title, hps_list, ali_imagines, bob_imagines):
     return f"""<table>
@@ -117,13 +141,14 @@ def wrong_order_func():
     ]
     hps_sexual_if_kids=[
       "There were about 4 years old children."
+    , "I'll pick him up there."
     , "I saw a baby."
     , "I hope there will be more opportunities like this."  # Positive poem
     , hps_cb_use_place_x_for_purpose_y
     ]
     hps_sexual_if_animal=[
       "I saw monkeys there."
-    , "There were about 4 years old children."
+    , "I'll pick him up there."
     , "I saw a baby."
     , "I hope there will be more opportunities like this."  # Positive poem
     , hps_cb_use_place_x_for_purpose_y
@@ -182,6 +207,20 @@ def wrong_order_func():
     , "I complained because there was no toilet paper." # damage + cope
     , hps_cb_use_place_x_for_purpose_y
     ]
+
+    hps_to_eat_inedible_animals_1=[ # Misunderstanding Comedy Creation Task. Answer in English. The speaker talks about x(butcher, restaurant, etc.) but the listener mistakes it for about y(zoo, animal shelter, etc.). Add new 5 statements without any explanations. Respond only new statements you added.
+      "The food there is delicious."
+    , "The food there is fresh and can be eaten raw or alive."
+    , "I got food poisoning from the food there."
+    , "I left a rating for it on yelp."
+    , "It's Chiba's traditional food."
+    , "I couldn't finish my meal, it was too much."
+    , "This is too little and not satisfying."
+    , hps_cb_use_place_x_for_purpose_y
+    ]
+
+
+
     hps_eat=[
       "The food there is delicious."
     , "The food there is fresh and can be eaten raw or alive."  # superior
@@ -223,7 +262,7 @@ def wrong_order_func():
     ]
 
     hps_olds = [
-    "I put my grandfather here."                    # usage revealing
+      "I put my grandfather here."                  # usage revealing
     , "My grandfather didn't want to go into here." # be opposed
     , "My grandfather made many friends here."      #
     , "He receives excellent care at this facility."#
@@ -232,7 +271,7 @@ def wrong_order_func():
     , hps_cb_use_place_x_for_purpose_y
     ]
 
-    hps_pervert = [
+    hps_to_folk = [
       "I (had/bought) sex here."                    # usage revealing
     , "For some reason there was no sexual service."# inferior
     , "It's cheaper than call girls nearby."        # superior
@@ -259,6 +298,7 @@ def wrong_order_func():
     , "I bought an expensive camera for this purpose."  # precost
     , "It was difficult to keep the subject still."     # difficulty
     , "My wife wanted to go home early."                # opposed + bring others
+    , "I couldn't help but take a picture."             #???
     , hps_cb_use_place_x_for_purpose_y
     ]
     hps_complaint = [
@@ -307,63 +347,162 @@ def wrong_order_func():
     , hps_cb_use_place_x_for_purpose_y
     ]
 
+    hps_break_into=[
+      "(Notice: The Ali imagine place was on fire.)"
+    , "Before I knew it, I had broken the window and got inside."
+    , "I did it for her."
+    , "My body just moved on its own."
+    , "I frantically searched around for the woman inside."
 
-    def condition_freepick():
+    ]
 
-        freepick_table_col=[]
 
-        for i in Freepick.ALL_FREEPICKS:
-            fp_ali_places = i.get_fp_ali_place_names()
-            fp_bob_places = i.get_fp_bob_place_names()
+    ate_inedible_animal_1_general=["There were a lot of animal", "I'm glad they are protected from poachers.", "I gave my pets to them, I can't keep them so I have no choice.", "There were a lot of rescued animals there."]
 
-            freepick_table_col.append(f"<tr><td>{fp_ali_places}</td><td>{fp_bob_places}</td><td>{i.fp_ali_statement, i.fp_ali_statement2}</td></tr>")
+####
 
-            misun_pairs.append(f"[{fp_ali_places} : {fp_bob_places}]")
+    def to_eat_inedible_animals_0(): # aia1 # to
+        ali_places=[]
+        bob_places=[]
+        col_aia1=[]
 
-        freepick_table = f"""<table>
-        <tr><th colspan="3">condition_freepick                              </th></tr>
-        <tr><th colspan="2">HPS                  </th><td>{{}}              </td></tr>
+        for i in Place.ALL_PLACES:
+            if i.animal and     hasattr(i, 'ate_inedible_animal_1'): # _1_zoo
+                ali_places.append(i.place_name[0])
+                col_aia1.append(f"<tr><td>{i.place_name}</td><td>{i.ate_inedible_animal_1}</td></tr>")
+            if i.animal and not hasattr(i, 'ate_inedible_animal_1'): #
+                ali_places.append(i.place_name[0])
+                col_aia1.append(f"<tr><td>{i.place_name}</td><td>                       </td></tr>")
+            elif i.food: # _1_restaurant
+                bob_places.append(i.place_name[0])
+
+        misun_pairs.append(f"[{ali_places} : {bob_places}]")
+
+        table_to_eat_inedible_animals_0 = f"""<table>
+        <tr><th colspan="2">to_eat_inedible_animals_0                </th></tr>
+        <tr><th>HPS         </th><td>{ate_inedible_animal_1_general+hps_to_eat_inedible_animals_1}</td></tr>
         </table>
         <table>
-        <tr><th>            </th><th>            </th><th>HPS(depend on places)     </th></tr>
-        <tr><th>Ali imagines</th><th>Bob imagines</th><th>I got</tr>
-        {''.join(freepick_table_col)}
+        <tr><th>Ali imagines    </th><th>HPS(depend on places)      </th></tr>
+        {''.join(col_aia1)}
+        <tr><th>Bob imagines    </th><th>                           </th></tr>
+        <tr><td>{bob_places}    </td><th>                           </th></tr>
         </table>
         """
-        return freepick_table
 
-    freepick_table = condition_freepick()
-    base.append(freepick_table)
+        return table_to_eat_inedible_animals_0
+
+    table_to_eat_inedible_animals_0 = to_eat_inedible_animals_0()
+    base.append(table_to_eat_inedible_animals_0)
 
 
-    def condition_belong():
+    def to_eat_inedible_animals_1(i, person): # aia2
+        if person == 'Ali':
+            return     i.food
+        elif person == 'Bob':
+            return not i.food and i.animal
 
-        belong_table_col=[]
+    ali_imagines, bob_imagines = gather_imagines(to_eat_inedible_animals_1)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_eat_inedible_animals_1", hps_eat, ali_imagines, bob_imagines))
+
+
+####
+
+    def to_folk_animals(): # fa1
+        ali_places=[]
+        bob_places=[]
+        col=[]
+
+        for i in Place.ALL_PLACES:
+            if hasattr(i, 'ate_inedible_animal_1'): # _1_zoo
+                ali_places.append(i.place_name[0])
+                col.append(f"<tr><td>{i.place_name}</td><td>{i.ate_inedible_animal_1}</td></tr>")
+            elif i.place_name == ['brothel']: # _1_brothel
+                bob_places.append(i.place_name[0])
+
+        misun_pairs.append(f"[{ali_places} : {bob_places}]")
+
+        table_to_folk_animals = f"""<table>
+        <tr><th colspan="3">to_folk_animals                      </th></tr>
+        <tr><th colspan="2">HPS                  </th><td>{ate_inedible_animal_1_general+hps_sexual_if_animal}              </td></tr>
+        </table>
+        <table>
+        <tr><th>Ali imagines    </th><th>HPS(depend on places)  </th></tr>
+        {''.join(col)}
+        <tr><th>Bob imagines    </th><th>                       </th></tr>
+        <tr><td>{bob_places}</td><th>                       </th></tr>
+        </table>
+        """
+
+        return table_to_folk_animals
+
+    table_to_folk_animals = to_folk_animals()
+    base.append(table_to_folk_animals)
+
+
+    def to_folk_kids(i, person):
+        if person == 'Ali':
+            return i.kids_olds == 'k'
+        elif person == 'Bob':
+            return i.place_name == ['brothel'] # _1_brothel
+
+    ali_imagines, bob_imagines = gather_imagines(to_folk_kids)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_folk_kids", hps_kids+hps_sexual_if_kids, ali_imagines, bob_imagines))
+
+    def to_folk_olds(i, person):
+        if person == 'Ali':
+            return i.kids_olds == 'o'
+        elif person == 'Bob':
+            return i.place_name == ['brothel'] # _1_brothel
+
+    ali_imagines, bob_imagines = gather_imagines(to_folk_olds)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_folk_olds", hps_olds+hps_sexual_if_olds, ali_imagines, bob_imagines))
+
+    def to_folk(i, person):
+        if person == 'Ali':
+            return i.place_name == ['brothel']
+        elif person == 'Bob':
+            return i.animal or i.kids_olds == 'k' or i.kids_olds == 'o'
+
+    ali_imagines, bob_imagines = gather_imagines(to_folk)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_folk", hps_to_folk, ali_imagines, bob_imagines))
+
+###
+
+
+    def to_steal():
+
+        col=[]
 
         for i in Belong.ALL_BELONGS:
-            cannot_places = i.get_cannot_place_names()
-            can_places = i.get_can_place_names()
-
-            belong_table_col.append(f"<tr><td>{can_places}</td><td>{cannot_places}</td><td>{i.belong_name}</td></tr>")
-
-            misun_pairs.append(f"[{can_places} : {cannot_places}]")
+            ali_places = i.get_can_place_names()
+            bob_places = i.get_cannot_place_names()
 
 
-        belong_table = f"""<table>
-        <tr><th colspan="3">condition_belong                                        </th></tr>
+            col.append(f"<tr><td>{ali_places}</td><td>{bob_places}</td><td>{i.belong_name}</td></tr>")
+
+            misun_pairs.append(f"[{ali_places} : {bob_places}]")
+
+
+        table_to_steal = f"""<table>
+        <tr><th colspan="3">to_steal                                                </th></tr>
         <tr><th colspan="2">HPS                  </th><td>{hps_belong}              </td></tr>
         </table>
         <table>
         <tr><th>            </th><th>            </th><th>HPS(depend on places)     </th></tr>
         <tr><th>Ali imagines</th><th>Bob imagines</th><th>I got</tr>
-        {''.join(belong_table_col)}
+        {''.join(col)}
         </table>
         """
 
-        return belong_table
+        return table_to_steal
 
-    belong_table = condition_belong()
-    base.append(belong_table)
+    table_to_steal = to_steal()
+    base.append(table_to_steal)
 
     def condition_complaint():
 
@@ -451,35 +590,27 @@ def wrong_order_func():
     be_when_table, tmp_ali_imagines_name, be_when_bob_imagines_name = condition_be_when()
     base.append(be_when_table)
 
-    def condition_voyeur(i, person):
+    def to_sneak_a_photo(i, person):
         if person == 'Ali':
             return i.camera_ok_ban == "o"
         elif person == 'Bob':
             return i.camera_ok_ban == "b"
 
-    ali_imagines, bob_imagines = gather_imagines(condition_voyeur)
+    ali_imagines, bob_imagines = gather_imagines(to_sneak_a_photo)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("condition_voyeur", hps_voyeur, ali_imagines, bob_imagines))
+    base.append(generate_html_table("to_sneak_a_photo", hps_voyeur, ali_imagines, bob_imagines))
 
-    def condition_pic(i, person):
+    def to_pick_up(i, person):
         if person == 'Ali':
             return i.pick_up_spot
         elif person == 'Bob':
             return i.holy_unholy == "h" or i.kids_olds == "k" or i.serious
 
-    ali_imagines, bob_imagines = gather_imagines(condition_pic)
+    ali_imagines, bob_imagines = gather_imagines(to_pick_up)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("condition_pic", hps_pick_up, ali_imagines, bob_imagines))
+    base.append(generate_html_table("to_pick_up", hps_pick_up, ali_imagines, bob_imagines))
 
-    def condition_pervert(i, person):
-        if person == 'Ali':
-            return hasattr(i, 'sex')
-        elif person == 'Bob':
-            return i.kids_olds == 'k' or i.animal
 
-    ali_imagines, bob_imagines = gather_imagines(condition_pervert)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("condition_pervert", hps_pervert, ali_imagines, bob_imagines))
 
     def condition_kids(i, person):
         if person == 'Ali':
@@ -493,7 +624,7 @@ def wrong_order_func():
 
     def condition_olds(i, person):
         if person == 'Ali':
-            return i.kids_olds == 'k'
+            return i.kids_olds == 'o'
         elif person == 'Bob':
             return hasattr(i, 'sex') or i.holy_unholy == "u" or i.clean_dirty == "d" or i.crime_ridden
 
@@ -521,15 +652,6 @@ def wrong_order_func():
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("condition_wedding", hps_wedding, ali_imagines, bob_imagines))
 
-    def condition_eat(i, person):
-        if person == 'Ali':
-            return i.food
-        elif person == 'Bob':
-            return not i.food and i.animal and not i.not_facility
-
-    ali_imagines, bob_imagines = gather_imagines(condition_eat)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("condition_eat", hps_eat, ali_imagines, bob_imagines))
 
     def condition_excrete(i, person):
         if person == 'Ali':
@@ -601,32 +723,32 @@ def wrong_order_func():
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("condition_get_son", hps_get_son, ali_imagines, bob_imagines))
 
-    def condition_sexual_if_animal(i, person):
-        if person == 'Ali':
-            return i.animal
-        elif person == 'Bob':
-            return hasattr(i, 'sexual') #_1_brothel, _1_strip_club
-    ali_imagines, bob_imagines = gather_imagines(condition_sexual_if_animal)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("condition_sexual_if_animal", hps_sexual_if_animal, ali_imagines, bob_imagines))
-
-    def condition_sexual_if_kids(i, person):
-        if person == 'Ali':
-            return i.kids_olds == 'k'
-        elif person == 'Bob':
-            return hasattr(i, 'sexual') #_1_brothel, _1_strip_club
-    ali_imagines, bob_imagines = gather_imagines(condition_sexual_if_kids)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("condition_sexual_if_kids", hps_sexual_if_kids, ali_imagines, bob_imagines))
-
-    def condition_sexual_if_olds(i, person):
-        if person == 'Ali':
-            return i.kids_olds == 'o'
-        elif person == 'Bob':
-            return hasattr(i, 'sexual') #_1_brothel, _1_strip_club
-    ali_imagines, bob_imagines = gather_imagines(condition_sexual_if_olds)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("condition_sexual_if_olds", hps_sexual_if_olds, ali_imagines, bob_imagines))
+#    def condition_sexual_if_animal(i, person):
+#        if person == 'Ali':
+#            return i.animal
+#        elif person == 'Bob':
+#            return hasattr(i, 'sexual') #_1_brothel, _1_strip_club
+#    ali_imagines, bob_imagines = gather_imagines(condition_sexual_if_animal)
+#    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+#    base.append(generate_html_table("condition_sexual_if_animal", hps_sexual_if_animal, ali_imagines, bob_imagines))
+#
+#    def condition_sexual_if_kids(i, person):
+#        if person == 'Ali':
+#            return i.kids_olds == 'k'
+#        elif person == 'Bob':
+#            return hasattr(i, 'sexual') #_1_brothel, _1_strip_club
+#    ali_imagines, bob_imagines = gather_imagines(condition_sexual_if_kids)
+#    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+#    base.append(generate_html_table("condition_sexual_if_kids", hps_sexual_if_kids, ali_imagines, bob_imagines))
+#
+#    def condition_sexual_if_olds(i, person):
+#        if person == 'Ali':
+#            return i.kids_olds == 'o'
+#        elif person == 'Bob':
+#            return hasattr(i, 'sexual') #_1_brothel, _1_strip_club
+#    ali_imagines, bob_imagines = gather_imagines(condition_sexual_if_olds)
+#    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+#    base.append(generate_html_table("condition_sexual_if_olds", hps_sexual_if_olds, ali_imagines, bob_imagines))
 
     def condition_sexual_work(i, person):
         if person == 'Ali':
@@ -676,15 +798,58 @@ def wrong_order_func():
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("condition_ground", hps_ground, ali_imagines, bob_imagines))
 
+    def condition_freepick():# burning houseじゃなくて、burning hospitalとかでもいいわけだから！
+
+        freepick_table_col=[]
+
+        for i in Freepick.ALL_FREEPICKS:
+            fp_ali_places = i.get_fp_ali_place_names()
+            fp_bob_places = i.get_fp_bob_place_names()
+
+            freepick_table_col.append(f"<tr><td>{fp_ali_places}</td><td>{fp_bob_places}</td><td>{i.fp_ali_statement, i.fp_ali_statement2}</td></tr>")
+
+            misun_pairs.append(f"[{fp_ali_places} : {fp_bob_places}]")
+
+        freepick_table = f"""<table>
+        <tr><th colspan="3">condition_freepick                              </th></tr>
+        <tr><th colspan="2">HPS                  </th><td>{{}}              </td></tr>
+        </table>
+        <table>
+        <tr><th>            </th><th>            </th><th>HPS(depend on places)     </th></tr>
+        <tr><th>Ali imagines</th><th>Bob imagines</th><th>I got</tr>
+        {''.join(freepick_table_col)}
+        </table>
+        """
+        return freepick_table
+
+    freepick_table = condition_freepick()
+    base.append(freepick_table)
+    """
+    def condition_break_into(i, person):
+        if person == 'Ali':
+            return not i.not_facility
+        elif person == 'Bob':
+            return not i.not_facility
+
+    ali_imagines, bob_imagines = gather_imagines(condition_break_into)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("condition_break_into", hps_break_into, ali_imagines, bob_imagines))
+    """
+
+
 
 ###
-    if misun_pairs:
-        base += misun_pairs
 
-    mirror_pairs_result=extract_mirror_pairs(misun_pairs) # なぜかmirror_pairs_resultに何も代入されない
+    mirror_pairs_result=extract_mirror_pairs(misun_pairs)
 
     if mirror_pairs_result:
+        base += ["***** mirror pairs *****"]
+        mirror_pairs_result.sort()
         base += mirror_pairs_result
+
+
+
+
 ###
 
     return apply_color_styles_saraba('<br>'.join(map(str, base)))
