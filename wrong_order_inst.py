@@ -8,7 +8,7 @@ class Place:
     place_name        : List[str]
     kids_olds         :str # Highly associated with kids -> "k", olds -> "o"
     not_facility      :str # Not a facility -> "y"
-    animal            :str # Highly associated with living animals -> "y"
+    animal            :str # Facility with animals owned by humans -> "y"
     food              :str # Highly associated with food -> "y"
     holy_unholy       :str # Commonly holy -> "h", unholy -> "u"
     clean_dirty       :str # Commonly dirty -> "d", clean -> "c"
@@ -33,6 +33,11 @@ class Place:
     excite            :str # Exciting -> "y"
     normal_5tp1w      :str # Normal to visit 5+ times a week -> "y"
     problemer         :str # Only people with mental, financial or physical problems visit -> "y"
+    acommodation      :str # facility with accommodation functions.
+    better_leave      :str # You'd better leave quickly -> "y"
+#    littering         :str # where littering can be a particular problem -> "y"
+#   loud               :str # where loud can be a prticular problem -> "y"
+    fun_for_kids_adults:str # Fun for kids -> "k", fun for adults -> "a", fun for both -> "b"
 
     def __hash__(self):
         return hash(self.place_name[0]) # Assuming Place_name is a list with a single name.
@@ -45,94 +50,118 @@ class Place:
 
 
 
-                                                         #kid,not,ani ,foo,hol,cle ,cri,ris,thr ,enj,enj,ser ,cam,pic,wea,edu,wat,gro  ret pai ban cou  mou,veh,exc,nor  pro,
-_1_church                =Place(["church"               ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"y","" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_mosque                =Place(["mosque"               ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"y","" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_casino                =Place(["casino"               ],"" ,"" ,""  ,"" ,"u",""  ,"" ,"" ,"y" ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","y","y", "" ,"" ,"y","" , "" ,)
-_1_brothel               =Place(["brothel"              ],"" ,"" ,""  ,"" ,"u",""  ,"" ,"" ,""  ,"y","" ,""  ,"b","" ,"" ,"" ,"" ,""  ,"y","y","y","y", "" ,"" ,"y","" , "" ,)
-_1_strip_club            =Place(["strip club"           ],"" ,"" ,""  ,"" ,"u",""  ,"" ,"" ,""  ,"y","y",""  ,"b","" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
-_1_nursing_home          =Place(["nursing home"         ],"o","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y","" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"y", "" ,)
-_1_dumpyard              =Place(["dumpyard"             ],"" ,"" ,""  ,"" ,"" ,"d" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_mountain              =Place(["mountain"             ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"o","" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_kindergarten          =Place(["kindergarten"         ],"k","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"y","" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_obstetrics            =Place(["obstetrics"           ],"" ,"" ,""  ,"" ,"h","c" ,"" ,"" ,""  ,"y","" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "y",)
-_1_lost_child_department =Place(["lost child department"],"k","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_zoo                   =Place(["zoo"                  ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"o","" ,"" ,"y","" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
-_1_safari                =Place(["safari"               ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"y",""  ,"y","y",""  ,"o","" ,"" ,"y","" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
-_1_animal_shelter        =Place(["animal shelter"       ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"o","" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_butcher               =Place(["butcher"              ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,)
-_1_restaurant            =Place(["restaurant"           ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,)
-_1_fish_market           =Place(["fishmarket"           ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,)
-_1_aquarium              =Place(["aquarium"             ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,"" ,"y","y",""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_car_dealer            =Place(["car dealer"           ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_parking_lot           =Place(["parking lot"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"y", "" ,)
-_1_flower_shop           =Place(["flower shop"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_graveyard             =Place(["graveyard"            ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,"" ,"y" ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_war_memorial          =Place(["war memorial"         ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"y","" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_wallet_shop           =Place(["wallet shop"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_lost_and_found        =Place(["lost and found"       ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_gallery               =Place(["gallery"              ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_public_restroom       =Place(["public restroom"      ],"" ,"" ,""  ,"" ,"" ,"d" ,"" ,"" ,""  ,"" ,"" ,""  ,"b","" ,"" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"y", "" ,)
-_1_river                 =Place(["river"                ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"o","" ,"" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_ocean                 =Place(["ocean"                ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"o","" ,"" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_beach                 =Place(["beach"                ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"b","y","" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_hotel                 =Place(["hotel"                ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_ice_rink              =Place(["ice rink"             ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
-_1_concert               =Place(["concert"              ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
-_1_library               =Place(["library"              ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,"" ,"y","" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_sauna                 =Place(["sauna"                ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"b","" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"y", "" ,)
-_1_ski_area              =Place(["ski area"             ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"o","y","" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
-_1_haunted_house         =Place(["haunted house"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
-_1_magic_show            =Place(["magic show"           ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
-_1_ticket_machine        =Place(["ticket machine"       ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_escape_room           =Place(["escape room"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,)
-_1_pool                  =Place(["pool"                 ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"y","" ,""  ,"b","" ,"" ,"" ,"y",""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_tent_city             =Place(["tent_city"            ],"" ,"" ,""  ,"" ,"u","d" ,"y","" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y","" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y",)
-_1_slum                  =Place(["slum"                 ],"" ,"" ,""  ,"" ,"u","d" ,"y","" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"y","" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y",)
-_1_camp_gear_shop        =Place(["camp gear shop"       ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_terminal_ward         =Place(["terminal ward"        ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y","" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_psychiatric_ward      =Place(["psychiatric ward"     ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y","" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_comedy_club           =Place(["comedy club"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_genie_machine         =Place(["genie machine"        ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_antique_shop          =Place(["antique shop"         ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_museum                =Place(["museum"               ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_bar                   =Place(["bar"                  ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"y","" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,)
-_1_robbery_scene         =Place(["robbery scene"        ],"" ,"y",""  ,"" ,"u",""  ,"y","y","y" ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_beggar_scene          =Place(["beggar scene"         ],"" ,"y",""  ,"" ,"u","d" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y","" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_charity_event         =Place(["charity evenet"       ],"" ,"y",""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_dental_clinic         =Place(["dental clinic"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "y",)
-_1_payday_loan           =Place(["payday loan"          ],"" ,"" ,""  ,"" ,"u",""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"y","" ,"" ,""  ,"" ,"y","y","" , "" ,"" ,"" ,"" , "y",)
-_1_prison                =Place(["prison"               ],"" ,"" ,""  ,"" ,"u",""  ,"y","" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"y","" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y",)
-_1_hospital              =Place(["hospital"             ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"y","" ,"" ,""  ,"" ,"y","y","" , "" ,"" ,"" ,"" , "y",)
-_1_pharmacy              =Place(["pharmacy"             ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "y",)
-_1_orphanage             =Place(["orphanage"            ],"k","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y","" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_apple_store           =Place(["apple store"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_laundry               =Place(["laundry"              ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"y", "" ,)
-_1_cloth_shop            =Place(["cloth shop"           ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_roller_coaster        =Place(["roller coaster"       ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"y","y","" , "" ,)
-_1_taxi                  =Place(["taxi"                 ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"y","" ,"y", "" ,)
-_1_airplane              =Place(["airplane"             ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"y","" ,"" , "" ,)
-_1_light_show            =Place(["light show"           ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_funeral_home          =Place(["funeral home"         ],"" ,"" ,""  ,"" ,"h","c" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_crematorium           =Place(["crematorium"          ],"" ,"" ,""  ,"" ,"h","c" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,)
-_1_steak_house           =Place(["steak house"          ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_police_station        =Place(["police station"       ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y",)
-_1_elephant              =Place(["elephant"             ],"" ,"y","y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"y","" ,"" , "" ,)
-_1_wedding_hall          =Place(["wedding hall"         ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,)
-_1_night_club            =Place(["night club"           ],"" ,"" ,""  ,"" ,"u",""  ,"y","" ,""  ,"y","" ,""  ,"" ,"y","" ,"" ,"" ,""  ,"" ,"y","" ,"" ,""  ,"" ,"y","" , "" ,)
-_1_fountain              =Place(["fountain"             ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,"" ,"" ,"y",""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_sandbox               =Place(["sandbox"              ],"k","y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,"" ,"" ,"" ,"y" ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_farm                  =Place(["farm"                 ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" , "" ,)
-_1_botanical_garden      =Place(["botanical_garden"     ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,"" ,"y","" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_hot_spring            =Place(["hot_spring"           ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"y","" ,""  ,"b","" ,"" ,"" ,"y","" ,""  ,"y","" ,"" , "" ,"" ,"" ,"" ,""  ,)
-_1_burning_house         =Place(["burning house"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","y" ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
-_1_womans_house          =Place(["woman's house"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,)
+
+
+                                                         #kid,not,ani ,foo,hol,cle ,cri,ris,thr ,enj,enj,ser ,cam,pic,wea ,edu,wat,gro  ret pai ban cou  mou,veh,exc,nor  pro,aco,bet,fun
+_1_church                =Place(["church"               ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_mosque                =Place(["mosque"               ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_casino                =Place(["casino"               ],"" ,"" ,""  ,"" ,"u",""  ,"" ,"" ,"y" ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","y","y", "" ,"" ,"y","" , "" ,"" ,"" ,"a")
+_1_brothel               =Place(["brothel"              ],"" ,"" ,""  ,"" ,"u",""  ,"" ,"" ,""  ,"y","" ,""  ,"b","" ,""  ,"" ,"" ,""  ,"y","y","y","y", "" ,"" ,"y","" , "" ,"" ,"" ,"a")
+_1_strip_club            =Place(["strip club"           ],"" ,"" ,""  ,"" ,"u",""  ,"" ,"" ,""  ,"y","y",""  ,"b","" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"" ,"a")
+_1_nursing_home          =Place(["nursing home"         ],"o","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"y", "" ,"" ,"" ,"" )
+_1_dumpyard              =Place(["dumpyard"             ],"" ,"" ,""  ,"" ,"" ,"d" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_mountain              =Place(["mountain"             ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"o","" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,"" ,"" ,"b")
+_1_volcano               =Place(["volcano"              ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y","y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_kindergarten          =Place(["kindergarten"         ],"k","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_obstetrics            =Place(["obstetrics"           ],"" ,"" ,""  ,"" ,"h","c" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "y","" ,"" ,"" )
+_1_lost_child_department =Place(["lost child department"],"k","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","" ,"y","" )
+_1_zoo                   =Place(["zoo"                  ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"o","" ,""  ,"y","" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"" ,"b")
+_1_safari                =Place(["safari"               ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"y",""  ,"y","y",""  ,"o","" ,""  ,"y","" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"" ,"b")
+_1_animal_shelter        =Place(["animal shelter"       ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"o","" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_butcher               =Place(["butcher"              ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,"" ,"" ,"" )
+_1_restaurant            =Place(["restaurant"           ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,"" ,"" ,"b")
+_1_fish_market           =Place(["fishmarket"           ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,"" ,"" ,"" )
+_1_aquarium              =Place(["aquarium"             ],"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,""  ,"y","y",""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"b")
+_1_car_dealer            =Place(["car dealer"           ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_parking_lot           =Place(["parking lot"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"y", "" ,"" ,"" ,"" )
+_1_flower_shop           =Place(["flower shop"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_graveyard             =Place(["graveyard"            ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_war_memorial          =Place(["war memorial"         ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_wallet_shop           =Place(["wallet shop"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_lost_and_found        =Place(["lost and found"       ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","" ,"" ,"" )
+_1_gallery               =Place(["gallery"              ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"a")
+_1_public_restroom       =Place(["public restroom"      ],"" ,"" ,""  ,"" ,"" ,"d" ,"" ,"" ,""  ,"" ,"" ,""  ,"b","" ,""  ,"" ,"y",""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"y", "" ,"" ,"" ,"" )
+_1_river                 =Place(["river"                ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"o","" ,""  ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_ocean                 =Place(["ocean"                ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"o","" ,""  ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_beach                 =Place(["beach"                ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"b","y",""  ,"" ,"y",""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,"" ,"" ,"b")
+_1_forest                =Place(["forest"               ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"o","" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_hotel                 =Place(["hotel"                ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,"y","" ,"" )
+_1_ice_rink              =Place(["ice rink"             ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"" ,"b")
+_1_concert               =Place(["concert"              ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"" ,"b")
+_1_library               =Place(["library"              ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_sauna                 =Place(["sauna"                ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"b","" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"y", "" ,"" ,"" ,"a")
+_1_ski_area              =Place(["ski area"             ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"o","y",""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"" ,"b")
+_1_haunted_house         =Place(["haunted house"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"" ,"k")
+_1_magic_show            =Place(["magic show"           ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"" ,"b")
+_1_ticket_machine        =Place(["ticket machine"       ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_escape_room           =Place(["escape room"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"y","k")
+_1_pool                  =Place(["pool"                 ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"y","" ,""  ,"b","" ,""  ,"" ,"y",""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_tent_city             =Place(["tent_city"            ],"" ,"" ,""  ,"" ,"u","d" ,"y","" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","y","y","" )
+_1_slum                  =Place(["slum"                 ],"" ,"" ,""  ,"" ,"u","d" ,"y","" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","y","y","" )
+_1_camp_gear_shop        =Place(["camp gear shop"       ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_terminal_ward         =Place(["terminal ward"        ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "y","y","y","" )
+_1_psychiatric_ward      =Place(["psychiatric ward"     ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "y","y","y","" )
+_1_comedy_club           =Place(["comedy club"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"a")
+_1_genie_machine         =Place(["genie machine"        ],"k","y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_antique_shop          =Place(["antique shop"         ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"a")
+_1_museum                =Place(["museum"               ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"b")
+_1_bar                   =Place(["bar"                  ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"y", "" ,"" ,"" ,"a")
+_1_robbery_scene         =Place(["robbery scene"        ],"" ,"y",""  ,"" ,"u",""  ,"y","y","y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","" ,"y","" )
+_1_beggar_scene          =Place(["beggar scene"         ],"" ,"y",""  ,"" ,"u","d" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_charity_event         =Place(["charity evenet"       ],"" ,"y",""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_dental_clinic         =Place(["dental clinic"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "y","" ,"" ,"" )
+_1_payday_loan           =Place(["payday loan"          ],"" ,"" ,""  ,"" ,"u",""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"y","y","" , "" ,"" ,"" ,"" , "y","" ,"" ,"" )
+_1_prison                =Place(["prison"               ],"" ,"" ,""  ,"" ,"u",""  ,"y","" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","y","y","" )
+_1_hospital              =Place(["hospital"             ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"y","y","" , "" ,"" ,"" ,"" , "y","y","" ,"" )
+_1_pharmacy              =Place(["pharmacy"             ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "y","" ,"" ,"" )
+_1_orphanage             =Place(["orphanage"            ],"k","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"y","" ,"" )
+_1_apple_store           =Place(["apple store"          ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_laundry               =Place(["laundry"              ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"y", "" ,"" ,"" ,"" )
+_1_cloth_shop            =Place(["cloth shop"           ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"a")
+_1_roller_coaster        =Place(["roller coaster"       ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"y","y","" , "" ,"" ,"" ,"k")
+_1_taxi                  =Place(["taxi"                 ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"y","" ,"y", "" ,"" ,"" ,"" )
+_1_airplane              =Place(["airplane"             ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"y","" ,"" , "" ,"" ,"" ,"" )
+_1_light_show            =Place(["light show"           ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"b")
+_1_funeral_home          =Place(["funeral home"         ],"" ,"" ,""  ,"" ,"h","c" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "y","" ,"" ,"" )
+_1_crematorium           =Place(["crematorium"          ],"" ,"" ,""  ,"" ,"h","c" ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "y","" ,"" ,"" , "y","" ,"" ,"" )
+_1_steak_house           =Place(["steak house"          ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"b")
+_1_police_station        =Place(["police station"       ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","" ,"" ,"" )
+_1_elephant              =Place(["elephant"             ],"" ,"y","y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"y","" ,"" , "" ,"" ,"" ,"k")
+_1_wedding_hall          =Place(["wedding hall"         ],"" ,"" ,""  ,"" ,"h",""  ,"" ,"" ,""  ,"y","y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"y", "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_night_club            =Place(["night club"           ],"" ,"" ,""  ,"" ,"u",""  ,"y","" ,""  ,"y","" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"" ,"y","" ,"" ,""  ,"" ,"y","" , "" ,"" ,"" ,"a")
+_1_fountain              =Place(["fountain"             ],"" ,"y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_sandbox               =Place(["sandbox"              ],"k","y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_farm                  =Place(["farm"                 ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" , "" ,"" ,"" ,"" )
+_1_livestock_farm        =Place(["livestock farm"       ],"" ,"" ,"y" ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"" ,"" ,""  ,"" ,"" ,"" , "" ,"" ,"" ,"" )# to_eat_inedible_animals_0に注意
+_1_botanical_garden      =Place(["botanical_garden"     ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y",""  ,"o","" ,""  ,"y","" ,""  ,"" ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"a")
+_1_hot_spring            =Place(["hot_spring"           ],"" ,"" ,""  ,"" ,"" ,"c" ,"" ,"" ,""  ,"y","" ,""  ,"b","" ,""  ,"" ,"y","" ,""  ,"y","" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"a")
+_1_burning_house         =Place(["burning house"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"y","" )
+_1_womans_house          =Place(["woman's house"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"y","" ,"" )
+_1_food_bank             =Place(["food bank"            ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","" ,"y","" )
+_1_evacuation_center     =Place(["evacuation center"    ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","y","y","" )
+_1_homeless_shelter      =Place(["homeless shelter"     ],"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"" ,"y" ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "y","y","y","" )
+_1_boxing_ring           =Place(["boxing ring "         ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","y" ,"y","y",""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","" ,"" , "" ,"" ,"y","" , "" ,"" ,"" ,"b")
+_1_soccer_ground         =Place(["soccer ground"        ],"" ,"" ,""  ,"" ,"" ,""  ,"" ,"y","y" ,"y","y",""  ,"" ,"" ,""  ,"" ,"" ,"y" ,"" ,"y","" ,"" , "" ,"" ,"y","" , "" ,"" ,"" ,"b")
+_1_swing_set             =Place(["swing set"            ],"k","y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_trampline             =Place(["trampoline"           ],"k","y",""  ,"" ,"" ,""  ,"" ,"y","y" ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_water_slide           =Place(["water slide"          ],"k","" ,""  ,"" ,"" ,""  ,"" ,"y","y" ,"y","" ,""  ,"" ,"" ,""  ,"" ,"y",""  ,"" ,"y","" ,"y", "" ,"" ,"y","" , "" ,"" ,"" ,"k")
+_1_jungle_gym            =Place(["jungle gym"           ],"k","y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_merry_go_round        =Place(["merry-go-round"       ],"k","y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_see_saw               =Place(["see-saw"              ],"k","y",""  ,"" ,"" ,""  ,"" ,"y",""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"" ,"" ,"" ,"" , "" ,"" ,"" ,"" , "" ,"" ,"" ,"k")
+_1_ice_cream_truck       =Place(["ice cream truck"      ],"k","y",""  ,"y","" ,""  ,"" ,"" ,""  ,"y","" ,""  ,"" ,"" ,""  ,"" ,"" ,""  ,"y","y","" ,"y", "" ,"y","" ,"" , "" ,"" ,"" ,"k")
+# risk_of_injury + brothel?
+
+
+# sandbox, genie machine / casino, soccer ground = "This was so much fun that before I knew it, eight hours had passed.", "I do it while voice chatting with my colleagues.", "I stream myself doing this on youtube.", "I compete in this as a team." , "I spent about 30,000 dollars on the tools to do this.","I want to become a pro at this.", "I take an hour train to get here."
+
 
 
 #for i in Place.ALL_PLACES:
 #    print(','.join(i.place_name), end=',')
 
-all_Place_instances="church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,"
+all_Place_instances="""
+church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,volcano,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,forest,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,livestock farm,botanical_garden,hot_spring,burning house,woman's house,food bank,evacuation center,homeless shelter,boxing ring ,soccer ground,
+"""
 # These are Place instances' .name. Place instances' name start with "_1_"
 
 excrete_instances = [_1_public_restroom]
@@ -164,9 +193,10 @@ for instance in sexual_instance:
 
 ### be_when #################
 
-all_Place_instances="church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,"
+all_Place_instances="""
+church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,volcano,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,forest,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,livestock farm,botanical_garden,hot_spring,burning house,woman's house,food bank,evacuation center,homeless shelter,boxing ring ,soccer ground,
+"""
 # These are Place instances' .name. Place instances' name start with "_1_"
-
 
 
 #.be_when is required for important timings such as critical conditions, funerals, childbirth, graduation ceremony etc. Do not set .be_when on instances in places that are not related to these important timings.
@@ -218,10 +248,9 @@ _1_magic_show.weaks_watch = ["I often go to see them for excitement.","I love wa
 
 
 #### Complaint #############
-
-all_Place_instances="church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,"
-# These are Place instances' .name. Place instances' name start with "_1_"
-
+all_Place_instances="""
+church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,volcano,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,forest,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,livestock farm,botanical_garden,hot_spring,burning house,woman's house,food bank,evacuation center,homeless shelter,boxing ring ,soccer ground,
+"""# These are Place instances' .name. Place instances' name start with "_1_"
 @dataclass
 class Complaint:
     ALL_COMPLAINTS: ClassVar[List['Complaint']] = []
@@ -229,14 +258,18 @@ class Complaint:
     cope_had_bring:list # I had a staff to bring {cope_bring}
     cope_had_do:list # I had a staff {cope_do}
     because_my:list # I complained to them because my {because_my}
-    noproblem   : List[Place] # It's common and normal and not bad to the .noproblem is .complanit_name  e.g. It's not bad to a sauna is hot.
-    problem     : List[Place] # It's bad to the .problem is .complaint_name e.g. It's bad to a hotel is hot.
+    noproblem   : List[Place]
+    problem     : List[Place]
     def get_noproblem_place_names(self):
         return ", ".join(place.get_place_names()[0] for place in self.noproblem)
     def get_problem_place_names(self):
         return ", ".join(place.get_place_names()[0] for place in self.problem)
     def __post_init__(self):
         Complaint.ALL_COMPLAINTS.append(self)
+
+#for i in Complaint.ALL_COMPLAINTS:
+# print(f"I complained about the {i.problem} was {i.complaint_name} and scolded them, telling them it's like a {i.noproblem}.")
+
 
 _c_loud     =Complaint(["loud"]       ,["ear plugs"]        ,["turn the volume down"],["wife is pregnant"]
                   ,[_1_concert]
@@ -296,12 +329,8 @@ _c_dark     =Complaint(["dark"]       ,["flashlight"]       ,["increase the ligh
                   ,[_1_haunted_house]
                   ,[_1_hotel])
 
-
-#for i in Complaint.ALL_COMPLAINTS:
-#    print(f"It's common and normal and usual and not bad to a {i.noproblem} is {i.complaint_name}. But it's bad to {i.problem} is {i.complaint_name}."
-
 # Define new 5 Complaint instances without any explanations.
-# Don't create an instance that is almost identical to an existing instance. For example, don't create a _c_noisy instance when you already have a _c_loud instance.
+# Don't create an instance that is almost identical to an existing instance. For example, don't create _c_noisy instance when there's _c_loud instance. when there's _c_dangerous, don't create _c_unsafe. when there's _c_heady, don't create _c_unfriendly .
 # Only respond new instances you defined.
 # Align text and whitespace with existing instances.
 # Don't define _c_crowded
@@ -317,27 +346,69 @@ all_Place_instances="church,mosque,casino,brothel,strip club,nursing home,dumpya
 
 Please make sure and explain that the new instance you just created does not violate the following rules:
 
-# Don't create an instance that is almost identical to an existing instance. For example, don't create a _c_noisy instance when you already have a _c_loud instance.
+# Don't create an instance that is almost identical to an existing instance. For example, don't create _c_noisy instance when there's _c_loud instance. when there's _c_dangerous, don't create _c_unsafe. when there's _c_heady, don't create _c_unfriendly .
 # Don't use the same Place instance multiple times.
 # Do not create rejected instances again.
 # Don't use a Place instance that doesn't exist.
-# It's common and normal and not bad to the .noproblem is .complanit_name  e.g. It's not bad to a sauna is hot.
-# It's bad to the .problem is .complaint_name e.g. It's bad to a hotel is hot.
 """
 
 ############################
+##### stop ##################
+all_Place_instances="""
+church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,volcano,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,forest,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,livestock farm,botanical_garden,hot_spring,burning house,woman's house,food bank,evacuation center,homeless shelter,boxing ring ,soccer ground,
+""" # These are Place instances' .name. Place instances' name start with "_1_"
+@dataclass
+class Stop:
+    ALL_STOPS:ClassVar[List['Stop']] = []
+    st_ali_statement: List[str]
+    st_ali_place: List[Place]
+    st_bob_place: List[Place]
+    st_ali_statement2: List[str]
+    def get_st_ali_place_names(self):
+        return ", ".join(place.get_place_names()[0] for place in self.st_ali_place)
+    def get_st_bob_place_names(self):
+        return ", ".join(place.get_place_names()[0] for place in self.st_bob_place)
+    def __post_init__(self):
+        Stop.ALL_STOPS.append(self)
+
+# I {st_ali_statement} in the {st_ali_place} and scolded them, telling them this wasn't a {st_bob_place}.
+
+_s_stopped_a_fight      =Stop(["stopped a fight"]   , [_1_night_club]       , [_1_boxing_ring]      ,["I asked them why they were fighting.","I called the police.", "I kicked them out of the place."])
+_s_stopped_running      =Stop(["stopped running"]   , [_1_hospital]         , [_1_soccer_ground]    ,["I asked them why they were running.","I called the police.", "I scolded them because it was dangerous."])
+_s_stopped_laughing     =Stop(["stopped laughing"]  , [_1_homeless_shelter] , [_1_comedy_club]      ,["I asked them why they were laughing.","I asked them to show some respect.", "I scolded him for laughing at someone who was working hard."])#gpt4
+_s_stopped_playing      =Stop(["stopped playing"]   , [_1_concert]          , [_1_kindergarten]     ,["I asked them why they were playing.","I told them it was time to pay attention.", "I asked them to sit down quietly."])#gpt4
+_s_stopped_eating       =Stop(["stopped eating"]    , [_1_library]          , [_1_restaurant]       ,["I asked them why they were eating."])#gpt4
+_s_stopped_screaming    =Stop(["stopped screaming"] , [_1_library]          , [_1_haunted_house, _1_roller_coaster]         ,["I asked them to be quiet."])#gpt4
+_s_stopped_talking      =Stop(["stopped talking"]   , [_1_library, _1_concert]          , [_1_comedy_club]      ,["I asked them why they were talking.", "I told them to be quiet.", "I asked them to step outside if they needed to talk."])#gpt4
+_s_stopped_driving      =Stop(["stopped driving"]   , [_1_bar]              , [_1_taxi]             ,["I asked him why he was trying to drive.", "I told him not to drive and called the police."])
+_s_stopped_kissing      =Stop(["stopped kissing"]   , [_1_library]          , [_1_wedding_hall]     ,["I scolded them, why you were kissing.", "I asked them to leave."]) # gemini
+_s_stopped_littering    =Stop(["stopped littering"] , [_1_beach] , [_1_dumpyard] ,["I asked them why they were littering.", "I told them to pick up their trash.", "I informed them about the importance of keeping the place clean."]) # gpt4
+_s_stopped_excreting    =Stop(["stopped excreting"] , [_1_river] , [_1_public_restroom], ["I asked them why they were excreting.", "I told them this is not a proper place.", "I asked them to use proper facilities."]) # gpt4
+_s_stopped_to_refuse_to_pay = Stop(["stopped to refuse to pay"], [_1_restaurant], [_1_robbery_scene], ["I asked them why they were refusing to pay.","I called the police.", "I reminded them of their obligation to settle the bill."])
+
+# define _s_stopped_to_refuse_to_pay without any explanations. Only respond new instances you defined. Start answer with ```python
+
+# Define new Stop instances without any explanations. Only respond new instances you defined. Start answer with ```python
 
 
+_s_stopped_fight_for_the_ball =Stop(["stopped fighting for the ball"], [_1_kindergarten], [_1_soccer_ground], ["I asked them why they were fighting for the ball.", "I told them to share the ball."]) # This instance cannot be generated with the prompt "# I {st_ali_statement} in the {st_ali_place} and scolded them, telling them this wasn't a {st_bob_place}."
+
+
+
+
+############################
+############################
+
+
+
+
+
+############################
 #### Belong ################
-
-'''
-all_place_name = [i.place_name[0] for i in Place.ALL_PLACES]
-print(all_place_name)
-'''
-
-all_Place_instances="church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,"
+all_Place_instances="""
+church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,volcano,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,forest,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,livestock farm,botanical_garden,hot_spring,burning house,woman's house,food bank,evacuation center,homeless shelter,boxing ring ,soccer ground,
+"""
 # These are Place instances' .name. Place instances' name start with "_1_"
-
 @dataclass
 class Belong: # Use for misun_thief()
     ALL_BELONGS:ClassVar[List['Belong']] = []
@@ -368,7 +439,7 @@ _b_animal     =Belong("animal"    ,[_1_safari, _1_zoo], [_1_animal_shelter]) # D
 _b_stone      =Belong("stone"     ,[_1_graveyard], [_1_mountain]) # Defined by Gemini from Colaboratory
 _b_tent       =Belong("tent"      ,[_1_tent_city], [_1_camp_gear_shop])
 _b_money      =Belong("money"     ,[_1_charity_event], [_1_payday_loan])
-# Define 10 new Belong instance in English without any explanations. Choice .place_where_x_is_but_you_cannot_get_others_x and .place_where_x_is_but_you_can_get_others_x from all_pbs_1_instance. The object name of the PBS_1 instance starts with _1_.
+# Define 10 new Belong instance in English without any explanations.
 
 
 # ''' 0 ''' new instances have been adopted. The others were rejected. Do not create rejected instances again.
@@ -452,9 +523,10 @@ Don't add sentences that are nearly identical to existing sentences.
 
 
 
-all_Place_instances="church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,"
+all_Place_instances="""
+church,mosque,casino,brothel,strip club,nursing home,dumpyard,mountain,volcano,kindergarten,obstetrics,lost child department,zoo,safari,animal shelter,butcher,restaurant,fishmarket,aquarium,car dealer,parking lot,flower shop,graveyard,war memorial,wallet shop,lost and found,gallery,public restroom,river,ocean,beach,forest,hotel,ice rink,concert,library,sauna,ski area,haunted house,magic show,ticket machine,escape room,pool,tent_city,slum,camp gear shop,terminal ward,psychiatric ward,comedy club,genie machine,antique shop,museum,bar,robbery scene,beggar scene,charity evenet,dental clinic,payday loan,prison,hospital,pharmacy,orphanage,apple store,laundry,cloth shop,roller coaster,taxi,airplane,light show,funeral home,crematorium,steak house,police station,elephant,wedding hall,night club,fountain,sandbox,farm,livestock farm,botanical_garden,hot_spring,burning house,woman's house,food bank,evacuation center,homeless shelter,boxing ring ,soccer ground,
+"""
 # These are Place instances' .name. Place instances' name start with "_1_"
-
 @dataclass
 class Freepick: # This class is for creating misunderstand type comedy. Ali talks about fp_ali_place but Bob mistook it for about fp_bob_place
     ALL_FREEPICKS:ClassVar[List['Freepick']] = []
@@ -466,24 +538,25 @@ class Freepick: # This class is for creating misunderstand type comedy. Ali talk
         return ", ".join(place.get_place_names()[0] for place in self.fp_ali_place)
     def get_fp_bob_place_names(self):
         return ", ".join(place.get_place_names()[0] for place in self.fp_bob_place)
-
     def __post_init__(self):
         Freepick.ALL_FREEPICKS.append(self)
-_f_grilled_meat        =Freepick(["grilled meat"]     , [_1_steak_house]      , [_1_crematorium]    ,["Meat juices splashed onto my clothes.","It was difficult to flip it over.","I inserted a skewer to check the doneness."])
-_f_enjoyed_plant       =Freepick(["enjoyed plant"]    , [_1_botanical_garden] , [_1_night_club]     ,["I was introduced to a variety of plants.", "I saw rare leaves and exotic mushrooms."]) # If there's a plant in night club, it's an illegal drug.
-_f_gave_my_pet         =Freepick(["gave my pet"]      , [_1_animal_shelter]   , [_1_butcher]        ,["This can't be helped since I can no longer keep pets."])
-_f_celebrated_mass     =Freepick(["celebrated mass"]  , [_1_church]           , [_1_mosque]         ,["I donated a christmas tree."])
-_f_took_a_ride         =Freepick(["took a ride"]      , [_1_roller_coaster]   , [_1_police_station] ,["The experience was thrilling and fun.", "I couldn't stop screaming.", "I would definitely do it again."])
-_f_broke_in            =Freepick(["broke in"]         , [_1_burning_house]    , [_1_womans_house]   ,["Next thing I knew, I had broken the glass and was inside.", "I did it for her", "Before I knew it, I was hugging her."])
+
+_f_grilled_meat         =Freepick(["grilled meat"]      , [_1_steak_house]      , [_1_crematorium]      ,["Meat juices splashed onto my clothes.","It was difficult to flip it over.","I inserted a skewer to check the doneness."])
+_f_enjoyed_plant        =Freepick(["enjoyed plant"]     , [_1_botanical_garden] , [_1_night_club]       ,["I was introduced to a variety of plants.", "I saw rare leaves and exotic mushrooms."]) # If there's a plant in night club, it's an illegal drug.
+_f_gave_my_pet          =Freepick(["gave my pet"]       , [_1_animal_shelter]   , [_1_butcher]          ,["This can't be helped since I can no longer keep pets."])
+_f_celebrated_mass      =Freepick(["celebrated mass"]   , [_1_church]           , [_1_mosque]           ,["I donated a christmas tree."])
+_f_gave_alcohol         =Freepick(["gave alcohol"]      , [_1_womans_house]     , [_1_mosque]           ,["I spent a month thinking about what to give her to make her happy."])
+_f_took_a_ride          =Freepick(["took a ride"]       , [_1_roller_coaster]   , [_1_police_station]   ,["The experience was thrilling and fun.", "I couldn't stop screaming.", "I would definitely do it again."])
+_f_broke_in             =Freepick(["broke in"]          , [_1_burning_house]    , [_1_womans_house]     ,["Next thing I knew, I had broken the glass and was inside.", "I did it for her", "Before I knew it, I was hugging her."])
+_f_hunted_animals       =Freepick(["hunted animals"]    , [_1_forest]           , [_1_zoo]              ,[])
+
 
 # Define new Freepick instance in English witout any explanations. respond only new instances you defined.
 
 # Add new statements in each .fp_ali_statement2
-
-
-
-
 ############################
+############################
+
 """
 
 
@@ -498,6 +571,7 @@ grilled_meat        =Misunderstand(["grilled meat"]     , [_1_steak_house]      
 enjoyed_plant       =Misunderstand(["enjoyed plant"]    , [_1_botanical_garden] , [_1_night club]) # If there's a plant in night club, it's an illegal drug.
 gave_my_pet         =Misunderstand(["gave my pet"]      , [_1_animal_shelter]   , [_1_butcher])
 celebrated_mass     =Misunderstand(["celebrated mass"]  , [_1_church]           , [_1_mosque])
+_f_gave_alcohol     =Misunderstand(["gave alcohol"]     , [_1_womans_house]     , [_1_mosque])
 took_a_ride         =Misunderstand(["took a ride"]      , [_1_roller_coaster]   , [_1_police_station]) # GPT4 # Bob mistakenly believes Ali rode a police car.
 
 bought_drug         =Misunderstand(["bought drug"]      , [_1_pharmacy]         , [_1_night club])
@@ -517,6 +591,7 @@ watched_a_movie     =Misunderstand(["watched a movie"]  , [_1_cinema]           
 played_with_kids    =Misunderstand(["played with kids"] , [_1_kindergarten]     , [_1_strip_club]) # GPT4
 bought_a_meal       =Misunderstand(["bought a meal"]    , [_1_restaurant]       , [_1_animal_shelter])#GPT4
 loughed             =Misunderstand(["loughed"]          , [_1_comedy_club]      , [_1_psychiatric_ward])
+hunted_animals      =Misunderstand(["hunted animals"]   , [_1_forest]           , [_1_zoo]) # GPT4
 
 # Define new 10 instances without any explanations. Only respond new instances you defined.
 # Bob has to mistake Ali for a pervert, crazy or criminal. Ali isn't
