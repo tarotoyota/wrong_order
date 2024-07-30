@@ -4,6 +4,7 @@ from wrong_order_inst import Place
 from wrong_order_inst import Complaint
 from wrong_order_inst import Belong
 from wrong_order_inst import Freepick
+from wrong_order_inst import Stop
 import re # for only extract_mirror_pairs
 from collections import defaultdict # for only extract_mirror_pairs
 
@@ -153,7 +154,7 @@ def wrong_order_func():
     , "I hope there will be more opportunities like this."  # Positive poem
     , hps_cb_use_place_x_for_purpose_y
     ]
-    hps_get_son = [
+    hps_kidnap = [
       "I met my son here for the first time and became a father."
     , "I brought my son home from here."
     , "This is a place of memories for me and my son."      # Positive poem
@@ -170,15 +171,7 @@ def wrong_order_func():
     , "For some reason, They didn't accept credit cards."   # ancillary service + fail
     , hps_cb_use_place_x_for_purpose_y
     ]
-    hps_bankrupt = [
-      "My father spent too much money here and ended up bankrupt."  # damage
-    , "My father was addicted to this place."                       # damage
-    , "My father used to come here every weekend."                  # damage
-    , "Eventually, he had to sell our house."                       # damage
-    , "He even used his company's money and his children's tuition fees for this." # damage
-    , "He was denied bankruptcy."                                   # damage + cope + failed
-    , hps_cb_use_place_x_for_purpose_y
-    ]
+
     hps_medicine = [
       "I pick up my drugs here regularly."
     , "I refused to take opioids."                      # damage + cope
@@ -188,18 +181,7 @@ def wrong_order_func():
     , "I feel much better after taking the drug."
     , hps_cb_use_place_x_for_purpose_y
     ]
-    hps_thrilling_enjoy = [
-      "I became addicted to the thrill there."
-    , "I went many times with my family who didn't like it."    # opposed
-    , "I said I'd pay him to make it more (thrilling / rough)."           # encouragement
-    , hps_cb_use_place_x_for_purpose_y
-    ]
-    hps_thrilling_not_enjoy = [
-      "I was scared so I called the police."                    # damage + cope
-    , "I called for help, but no one around me did anything." # damage + cope + fail
-    , "This wasn't covered by travel insurance."                    # damage + cope + fail
-    , "I was scared so I (hit him / broke the window) and ran away."# damage + cope
-    ]
+
 
     hps_excrete = [
       "I excreted here."
@@ -357,7 +339,13 @@ def wrong_order_func():
     ]
 
 
+
+
+
     ate_inedible_animal_1_general=["There were a lot of animal", "I'm glad they are protected from poachers.", "I gave my pets to them, I can't keep them so I have no choice.", "There were a lot of rescued animals there."]
+
+    hps_game=["I do it while voice chatting with my colleagues.", "I stream myself doing this on youtube.", "I compete in this as a team." , "I want to become a pro at this."]
+
 
 ####
 
@@ -373,7 +361,7 @@ def wrong_order_func():
             if i.animal and not hasattr(i, 'ate_inedible_animal_1'): #
                 ali_places.append(i.place_name[0])
                 col_aia1.append(f"<tr><td>{i.place_name}</td><td>                       </td></tr>")
-            elif i.food: # _1_restaurant
+            elif not i.animal and i.food and i.retail: # _1_restaurant
                 bob_places.append(i.place_name[0])
 
         misun_pairs.append(f"[{ali_places} : {bob_places}]")
@@ -471,22 +459,48 @@ def wrong_order_func():
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("to_folk", hps_to_folk, ali_imagines, bob_imagines))
 
+
+
 ###
 
+    hps_stop=["I scolded him, saying everyone is looking at you.", "I asked them to leave."]
+
+    def to_stop():
+        col=[]
+        for i in Stop.ALL_STOPS:
+            ali_places = i.get_st_ali_place_names()
+            bob_places = i.get_st_bob_place_names()
+
+            col.append(f"<tr><td>{ali_places}</td><td>{bob_places}</td><td>{i.st_ali_statement, i.st_ali_statement2}</td></tr>")
+
+            misun_pairs.append(f"[{ali_places} : {bob_places}]")
+
+        table_to_stop = f"""<table>
+        <tr><th colspan="3">to_stop                                                 </th></tr>
+        <tr><th colspan="2">HPS                  </th><td>{hps_stop}              </td></tr>
+        </table>
+        <table>
+        <tr><th>            </th><th>            </th><th>HPS(depend on places)     </th></tr>
+        <tr><th>Ali imagines</th><th>Bob imagines</th><th>Ali says</tr>
+        {''.join(col)}
+        </table>
+        """
+
+        return table_to_stop
+
+    table_to_stop = to_stop()
+    base.append(table_to_stop)
+###
 
     def to_steal():
-
         col=[]
-
         for i in Belong.ALL_BELONGS:
             ali_places = i.get_can_place_names()
             bob_places = i.get_cannot_place_names()
 
-
             col.append(f"<tr><td>{ali_places}</td><td>{bob_places}</td><td>{i.belong_name}</td></tr>")
 
             misun_pairs.append(f"[{ali_places} : {bob_places}]")
-
 
         table_to_steal = f"""<table>
         <tr><th colspan="3">to_steal                                                </th></tr>
@@ -503,7 +517,7 @@ def wrong_order_func():
 
     table_to_steal = to_steal()
     base.append(table_to_steal)
-
+###
     def condition_complaint():
 
         complaint_table_col = []
@@ -662,6 +676,24 @@ def wrong_order_func():
     ali_imagines, bob_imagines = gather_imagines(condition_excrete)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("condition_excrete", hps_excrete, ali_imagines, bob_imagines))
+####
+
+    hps_thrilling_enjoy = [
+      "I became addicted to the thrill there."                  #
+    , "I went many times with my family who didn't like it."    # opposed
+    , "I said I'd pay him to make it more (thrilling / rough)." # encouragement
+    , "I recommended it to all my friends."                     # recommend
+    , hps_cb_use_place_x_for_purpose_y
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    hps_thrilling_not_enjoy = [
+      "I was scared so I called the police."                        # damage + cope
+    , "I called for help, but no one around me did anything."       # damage + cope + fail
+    , "This wasn't covered by travel insurance."                    # damage + cope + fail
+    , "I was scared so I (hit him / broke the window) and ran away."# damage + cope
+    , "I felt betrayed by my friends who convinced me to go."       # recommend
+    , "I lost trust in people and became isolated."
+    , "I was diagnosed with PTSD."
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
 
     def condition_thrilling_enjoy(i, person):
         if person == 'Ali':
@@ -675,14 +707,14 @@ def wrong_order_func():
 
     def condition_thrilling_not_enjoy(i, person):
         if person == 'Ali':
-            return i.thrilling and     i.crime_ridden # _1_robbery_scene
+            return i.thrilling and not i.enjoyment # _1_robbery_scene
         elif person == 'Bob':
-            return i.thrilling and not i.crime_ridden # _1_roller_coaster
+            return i.thrilling and     i.enjoyment # _1_roller_coaster
 
     ali_imagines, bob_imagines = gather_imagines(condition_thrilling_not_enjoy)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("condition_thrilling_not_enjoy", hps_thrilling_not_enjoy, ali_imagines, bob_imagines))
-
+####
     def condition_medicine(i, person):
         if person == 'Ali':
             return hasattr(i, 'medicine')
@@ -693,15 +725,6 @@ def wrong_order_func():
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("condition_medicine", hps_medicine, ali_imagines, bob_imagines))
 
-    def condition_bankrupt(i, person):
-        if person == 'Ali':
-            return i.coupon and i.bankrupt # _1_casino
-        elif person == 'Bob':
-            return i.coupon and not i.bankrupt # _1_genie_machine
-
-    ali_imagines, bob_imagines = gather_imagines(condition_bankrupt)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("condition_bankrupt", hps_bankrupt, ali_imagines, bob_imagines))
 
     def condition_commercial(i, person):
         if person == 'Ali':
@@ -713,15 +736,15 @@ def wrong_order_func():
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("condition_commercial", hps_commercial, ali_imagines, bob_imagines))
 
-    def condition_get_son(i, person):
+    def to_kidnap(i, person):
         if person == 'Ali':
             return hasattr(i, 'get_son')
         elif person == 'Bob':
             return i.kids_olds == "k" and not hasattr(i, 'get_son')
 
-    ali_imagines, bob_imagines = gather_imagines(condition_get_son)
+    ali_imagines, bob_imagines = gather_imagines(to_kidnap)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("condition_get_son", hps_get_son, ali_imagines, bob_imagines))
+    base.append(generate_html_table("to_kidnap", hps_kidnap, ali_imagines, bob_imagines))
 
 #    def condition_sexual_if_animal(i, person):
 #        if person == 'Ali':
@@ -836,14 +859,105 @@ def wrong_order_func():
     base.append(generate_html_table("condition_break_into", hps_break_into, ali_imagines, bob_imagines))
     """
 
+    hps_to_spend_a_long_time=["I (lived/stayed) here for a long time.", "I want to (spend time/stay) here again.", hps_cb_use_place_x_for_purpose_y]
+
+    def to_spend_a_long_time(i, person):
+        if person == 'Ali':
+            return not i.better_leave and not i.holy_unholy == 'u' and not i.clean_dirty == 'd' and not i.problemer
+        elif person == 'Bob':
+            return     i.better_leave
+
+    ali_imagines, bob_imagines = gather_imagines(to_spend_a_long_time)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_spend_a_long_time", hps_to_spend_a_long_time, ali_imagines, bob_imagines))
+
+    hps_to_made_to_pay=["He refused to pay so I scolded him.", "He refused to pay so I called the police."]
+
+    def to_made_to_pay(i, person):
+        if person == 'Ali':
+            return i.paid
+        elif person == 'Bob':
+            return i.place_name == ['robbery scene']
+
+    ali_imagines, bob_imagines = gather_imagines(to_made_to_pay)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_made_to_pay", hps_to_made_to_pay, ali_imagines, bob_imagines))
+
+####
+    hps_to_go_bankrupt = [
+      "My dad spent too much money here and ended up bankrupt." # damage
+    , "My dad did this about fifteen hours a day."              # frequency
+    , "My dad got so into it that he lost his wife."            # damage
+    , "My dad used to come here every weekend."                 # damage
+    , "Eventually, he had to sell our house."                   # damage
+    , "He even used his children's tuition fees for this."      # damage
+    , "He was denied bankruptcy."                               # damage + cope + failed
+    , "He experienced withdrawal symptoms when can't do this."  # danage
+    , "He used counselling to stop this."                       # damage + cope
+    , hps_cb_use_place_x_for_purpose_y
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    #It's not enough to simply say "He went bankrupted.", "He regret it" or "He's in trouble".
+
+    def to_go_bankrupt(i, person):
+        if person == 'Ali':
+            return i.place_name == ['casino']
+        elif person == 'Bob':
+            return (i.coupon and not i.bankrupt and not i.holy_unholy == 'u') or (i.fun_for_kids_adults == 'k' and (i.enjoyment or i.enjoyment_watch)) # _1_aquarium, _1_genie_machine
+
+    ali_imagines, bob_imagines = gather_imagines(to_go_bankrupt)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_go_bankrupt", hps_to_go_bankrupt, ali_imagines, bob_imagines))
+####
+####
+
+# Infidelity.related_noun=["lawyer", "counselor", "compensation", "have sex", "divorce", "find out", "evidence","confession",] # Don't put in adjectives. Concrete noun and verb only. Don't put in words that have the same meaning as existing words. add new 10 words without any explanations, start answer with ``python
 
 
-###
+    hps_to_get_excited=[ # the speaker is cheating.
+      "I got excited and got an erection."      #
+    , "Honestly, this is better than my wife."  # superior
+    , "Please keep this a secret from my wife." # cope
+    , "My wife told me that if I go next time, she will divorce me."# damage
+    , "My lawyer told me that this could be grounds for divorce."   # damage
+    , "I wanted to tell my therapist about it."                     # cope
+    , "I feel guilty about cheating on my wife."
+    , hps_cb_use_place_x_for_purpose_y
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    #It's not enough to simply say "I got excited." Add sentences that mentions new topics, such as lawyer or counseling. There is no need for sentences to refer to topics that have already been mentioned.
+
+    def to_get_excited(i, person):
+        if person == 'Ali':
+            return                  i.place_name == ['brothel'] or     i.place_name == ['strip club']
+        elif person == 'Bob':
+            return i.excite and not i.place_name == ['brothel'] and not i.place_name == ['strip club']
+
+    ali_imagines, bob_imagines = gather_imagines(to_get_excited)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_get_excited", hps_to_get_excited, ali_imagines, bob_imagines))
+####
+####
+#
+#    hps_[]
+#
+#    def to_(i, person):
+#        if person == 'Ali':
+#            pass
+#        elif person == 'Bob':
+#            pass
+#
+#
+#
+#
+
+
+####
+
+
 
     mirror_pairs_result=extract_mirror_pairs(misun_pairs)
 
     if mirror_pairs_result:
-        base += ["***** mirror pairs *****"]
+        base += [f"***** mirror pairs *****\nQuantity : {len(mirror_pairs_result)}"]
         mirror_pairs_result.sort()
         base += mirror_pairs_result
 
