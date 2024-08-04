@@ -7,6 +7,7 @@ from wrong_order_inst import Freepick
 from wrong_order_inst import Stop
 import re # for only extract_mirror_pairs
 from collections import defaultdict # for only extract_mirror_pairs
+import random
 
 def extract_mirror_pairs(nation_list):
     # nation_listがリストであることを確認
@@ -34,9 +35,9 @@ def extract_mirror_pairs(nation_list):
 def generate_html_table(title, hps_list, ali_imagines, bob_imagines):
     return f"""<table>
         <tr><th colspan="3">{title}</th></tr>
-        <tr><th>HPS          <th><td> {hps_list}                        </td></tr>
-        <tr><th>Ali imagines <th><td> {ali_imagines}                    </td></tr>
-        <tr><th>Bob imagines <th><td> {bob_imagines}                    </td></tr>
+        <tr><th>HPS <th><td> {hps_list}                        </td></tr>
+        <tr><th>Ali <th><td> {ali_imagines}                    </td></tr>
+        <tr><th>Bob <th><td> {bob_imagines}                    </td></tr>
         </table>"""
 
 def gather_imagines(condition):
@@ -77,6 +78,7 @@ def wrong_order_func():
     , "I used the photo for my New Year's card."           # Boast
     , "I was mistaken for a suspicious person." # damage
     , "It wasn't (crowded/empty) here."
+    , "For some reason it's not famous."
     ]
 
 
@@ -94,35 +96,7 @@ def wrong_order_func():
     , "This place is my escape from reality."               # superior?
     , hps_cb_use_place_x_for_purpose_y
     ]
-    hps_to_prostitute = [
-      "My son works here eight hours a day."                        # frequency
-    , "It took a while for him to become a permanent employee here."#
-    , "I'm proud to see him working so hard in a place like this."  # pos po
-    , "I brag about this at family gatherings."                     # boast
-    , "He received an award for his dedication here."               #
-    , hps_cb_use_place_x_for_purpose_y
-    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
-    # Don't add sentences that mention topics that have already been mentioned.
-    hps_sexual_if_olds=[
-      "There were about 95 years old hugs."
-    , "There were bedridden, demented, and wheelchair-bound olds."
-    , "I hope there will be more opportunities like this."  # Positive poem
-    , hps_cb_use_place_x_for_purpose_y
-    ]
-    hps_sexual_if_kids=[
-      "There were about 4 years old children."
-    , "I'll pick him up there."
-    , "I saw a baby."
-    , "I hope there will be more opportunities like this."  # Positive poem
-    , hps_cb_use_place_x_for_purpose_y
-    ]
-    hps_sexual_if_animal=[
-      "I saw monkeys there."
-    , "I'll pick him up there."
-    , "I saw a baby."
-    , "I hope there will be more opportunities like this."  # Positive poem
-    , hps_cb_use_place_x_for_purpose_y
-    ]
+
     hps_kidnap = [
       "I met my son here for the first time and became a father."
     , "I brought my son home from here."
@@ -160,33 +134,7 @@ def wrong_order_func():
     , hps_cb_use_place_x_for_purpose_y
     ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
 
-    hps_to_eat_inedible_animals_1=[ # Misunderstanding Comedy Creation Task. Answer in English. The speaker talks about x(butcher, restaurant, etc.) but the listener mistakes it for about y(zoo, animal shelter, etc.). Add new 5 statements without any explanations. Respond only new statements you added.
-      "The food there is delicious."
-    , "The food there is fresh and can be eaten raw or alive."
-    , "I got food poisoning from the food there."
-    , "I left a rating for it on yelp."
-    , "It's Chiba's traditional food."
-    , "I couldn't finish my meal, it was too much."
-    , "This is too little and not satisfying."
-    , "It wasn't crowded here."
-    , hps_cb_use_place_x_for_purpose_y
-    ]
 
-
-
-    hps_eat=[
-      "The food there is delicious."
-    , "The food there is fresh and can be eaten raw or alive."  # superior
-    , "I got food poisoning from the food there."               # damage
-    , "I once had trash in the food there."                     # damage
-    , "So I asked the person in charge there to apologize."     # damage + cope
-    , "I left a rating for it on yelp."                         # evaluate
-    , "For some reason there's not very well known."            # inferior
-    , "It's true that there are a lot of (raw/spicy) foods."    # inferior
-    , "It's Chiba's traditional food."
-    , "(Condiments / staple foods) were free."                  # Ancillary Services
-    , hps_cb_use_place_x_for_purpose_y
-    ]
 
     hps_mourn=[
       "My father's grave is here."                  # usage revealing
@@ -225,14 +173,6 @@ def wrong_order_func():
     , hps_cb_use_place_x_for_purpose_y
     ]
 
-    hps_to_folk = [
-      "I (had/bought) sex here."                    # usage revealing
-    , "For some reason there was no sexual service."# inferior
-    , "It's cheaper than call girls nearby."        # superior
-    , "I always use rubbers properly."              # properly
-    , "It's 300 dollars per hour."                  # cost
-    , hps_cb_use_place_x_for_purpose_y
-    ]
     hps_pick_up = [
       "I picked up girls here."                     # usage revealing
     , "For some reason the success rate was low."   # fail
@@ -243,19 +183,8 @@ def wrong_order_func():
     , "My friends wanted to go home, but I tried to pick up here." # be opposed + bring others
     , hps_cb_use_place_x_for_purpose_y
     ]
-    hps_voyeur = [
-      "I took a lot of good photos."
-    , "I enjoyed the wonderful scenery."                #
-    , "I'll use this photo for this year's Christmas card." # past melit
-    , "This is one of my favorite shots."               # frequency
-    , "I have it framed and displaying it."             # past melit
-    , "I bought an expensive camera for this purpose."  # precost
-    , "It was difficult to keep the subject still."     # difficulty
-    , "My wife wanted to go home early."                # opposed + bring others
-    , "I couldn't help but take a picture."             #???
-    , "I'm planning to create a photo album."           # future plan
-    , hps_cb_use_place_x_for_purpose_y
-    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+
+
     hps_complaint = [
       "My wife objected, but I lectured the person in charge."  # damage + cope + opposed
     , "I demanded a refund."                                    # damage + cope
@@ -279,10 +208,7 @@ def wrong_order_func():
     , hps_cb_use_place_x_for_purpose_y
     ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
 
-    hps_weaks = [
-      "I often enjoy watching them here"
-    , hps_cb_use_place_x_for_purpose_y
-    ]
+
     hps_be_when=[
       "I went there as a top priority."
     , "My heart was beating hard as I headed there."
@@ -316,128 +242,307 @@ def wrong_order_func():
 
 
 
-    ate_inedible_animal_1_general=["There were a lot of animal", "I'm glad they are protected from poachers.", "I gave my pets to them, I can't keep them so I have no choice.", "There were a lot of rescued animals there."]
+
 
     hps_game=["I do it while voice chatting with my colleagues.", "I stream myself doing this on youtube.", "I compete in this as a team." , "I want to become a pro at this."]
 
 
 
 
-####
+# 複数のHPSを使用する関数において使用されるHPSの命名規則: HPS + (関数名) + (言及対象)
+# 一個のHPSを使用する関数において使用されるHPSの命名規則: HPS + (関数名)
 
-    def to_eat_inedible_animals_0(): # aia1 # to
-        ali_places=[]
-        bob_places=[]
-        col=[]
+# use z as y, wrong_order, woman_animal の融合
 
-        for i in Place.ALL_PLACES:
-            if not i.food and i.animal and     hasattr(i, 'ate_inedible_animal_1'): # _1_zoo
-                ali_places.append(i.place_name[0])
-                col.append(f"<tr><td>{i.place_name}</td><td>{i.ate_inedible_animal_1}</td></tr>")
-            if not i.food and i.animal and not hasattr(i, 'ate_inedible_animal_1'): #
-                ali_places.append(i.place_name[0])
-                col.append(f"<tr><td>{i.place_name}</td><td>                       </td></tr>")
-            elif i.food and not i.animal and i.retail: # _1_restaurant
-                bob_places.append(i.place_name[0])
-
-        misun_pairs.append(f"[{ali_places} : {bob_places}]")
-
-        table_to_eat_inedible_animals_0 = f"""<table>
-        <tr><th colspan="2">to_eat_inedible_animals_0                </th></tr>
-        <tr><th>HPS         </th><td>{ate_inedible_animal_1_general}</td></tr>
-        </table>
-        <table>
-        <tr><th>Ali imagines    </th><th>HPS(depend on places)      </th></tr>
-        {''.join(col)}
-        <tr><th>Bob imagines    </th><th>                           </th></tr>
-        <tr><td>{bob_places}    </td><th>                           </th></tr>
-        </table>
-        """
-
-        return table_to_eat_inedible_animals_0
-
-    table_to_eat_inedible_animals_0 = to_eat_inedible_animals_0()
-    base.append(table_to_eat_inedible_animals_0)
+    repositioner_table="""<table>
+    <tr><th>MAJOR DESIRE      </th><th> V/AO      </th><th>anim</th><th>kid </th><th>old </th><th>sick</th><th>poor</th><th>weak</th><th>emer</th><th>self</th><th>fami      </th><th>inan</th></tr>
+    <tr><th rowspan="7">sexual</th><th> see       </th><td>folk</td><td>folk</td><td>folk</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> film      </th><td>    </td><td>voye</td><td>voye</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> fuck      </th><td>folk</td><td>folk</td><td>folk</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> buy       </th><td>folk</td><td>folk</td><td>folk</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>folk?     </td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> pick up   </th><td>    </td><td>pick</td><td>pick</td><td>pick</td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> hustle    </th><td>    </td><td>folk</td><td>folk</td><td>    </td><td>    </td><td>    </td><td>    </td><td>hust</td><td>hust, folk</td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> aroused   </th><td>arou</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>arou</td></tr> <!-- woman_animal_func also -->
+    <tr><th rowspan="1">eat   </th><th> eat       </th><td>eat </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr>
+    <tr><th rowspan="3">enjoy </th><th> appriciate</th><td>    </td><td>    </td><td>    </td><td>appr</td><td>appr</td><td>appr</td><td>appr</td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> pet(anim) </th><td>    </td><td>peta</td><td>peta</td><td>peta</td><td>peta</td><td>peta</td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func only-->
+    <tr>                           <th> pet(huma) </th><td>peth</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func only-->
+    <tr><th rowspan="2">fight </th><th> fear      </th><td>thno</td><td>thno</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>thno</td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> figh(huma)</th><td>    </td><td>rumb</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
+    </table>"""
 
 
-    def to_eat_inedible_animals_1(i, person): # aia2
-        if person == 'Ali':
-            return     i.food and not i.animal and i.retail
-        elif person == 'Bob':
-            return not i.food and     i.animal
 
-    ali_imagines, bob_imagines = gather_imagines(to_eat_inedible_animals_1)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("to_eat_inedible_animals_1", hps_eat, ali_imagines, bob_imagines))
+########################################################################################################################################################################################################################################
 
-
-####
-
-    def to_folk_animals(): # fa1
-        ali_places=[]
-        bob_places=[]
-        col=[]
+    def to_eat():
+        place_ali=[]
+        place_bob=[]
+        hps_to_eat_edible  =["The food there is fresh and can be eaten raw or alive.", "I got food poisoning there so I left a bad rating on yelp.", "It's Chiba's traditional food.", "I couldn't finish my meal, it was too much.", "This is too little and not satisfying.", hps_cb_use_place_x_for_purpose_y]
+        hps_to_eat_inedible=["There were many (animal name)", "I'm glad they are protected from poachers.", "I gave my pets to them, I can't keep them so I have no choice.", "There were a lot of rescued animals there.", "There was an endangered species section."]
 
         for i in Place.ALL_PLACES:
-            if hasattr(i, 'ate_inedible_animal_1'): # _1_zoo
-                ali_places.append(i.place_name[0])
-                col.append(f"<tr><td>{i.place_name}</td><td>{i.ate_inedible_animal_1}</td></tr>")
-            elif i.place_name == ['brothel']: # _1_brothel
-                bob_places.append(i.place_name[0])
+            if       i.food and not i.animal and i.muscle_tissue_destroy:
+                place_ali.append(i.place_name[0])
+            elif not i.food and     i.animal:
+                place_bob.append(i.place_name[0])
+        misun_pairs.append(f"[{place_ali}:{place_bob}]")
+        misun_pairs.append(f"[{place_bob}:{place_ali}]")
 
-        misun_pairs.append(f"[{ali_places} : {bob_places}]")
-
-        table_to_folk_animals = f"""<table>
-        <tr><th colspan="3">to_folk_animals                      </th></tr>
-        <tr><th colspan="2">HPS                  </th><td>{ate_inedible_animal_1_general+hps_sexual_if_animal}              </td></tr>
+        table_to_eat = f"""<table>
+        <tr><th colspan="2">to eat(edible)                                      </th></tr>
+        <tr><th>HPS</th><td>{hps_to_eat_edible}                                 </td></tr>
+        <tr><th>Ali</th><td>{place_ali}                                         </td></tr>
+        <tr><th>Bob</th><td>{place_bob}                                         </td></tr>
         </table>
         <table>
-        <tr><th>Ali imagines    </th><th>HPS(depend on places)  </th></tr>
-        {''.join(col)}
-        <tr><th>Bob imagines    </th><th>                       </th></tr>
-        <tr><td>{bob_places}</td><th>                       </th></tr>
+        <tr><th colspan="2">to eat(inedible)                                    </th></tr>
+        <tr><th>HPS</th><td>{hps_to_eat_inedible}                               </td></tr>
+        <tr><th>Ali</th><td>{place_bob}                                         </td></tr>
+        <tr><th>Bob</th><td>{place_ali}                                         </td></tr>
+        </table>"""
+        return table_to_eat
+    table_to_eat = to_eat()
+    base.append(table_to_eat)
+
+########################################################################################################################################################################################################################################
+
+    def to_folk():
+        place_ali=[]
+        place_bob_animal=[]
+        place_bob_kid=[]
+        place_bob_old=[]
+        hps_to_folk_brothel=["I (bought/had) sex here.", "Don't warry, I always use rubbers properly.", "For some reason there was no sexual service.", "It's cheaper than the call girls nearby.", "It was helpful that it was in an inconspicuous location.", "For some reason, they were unfriendly.", "Perhaps they lacked experience, or they were bad at it.", hps_cb_use_place_x_for_purpose_y]
+        hps_to_folk_animal =["There were many (animal name)", "There were adults and babies there.", "I saw babies.", "They were happy when I fed him.", "I was happy because I love animals.","They were very active.", "For some reason, some were afraid of humans.", "I hope hygiene improves.", hps_cb_use_place_x_for_purpose_y]
+        hps_to_folk_kid    =["There were many kids.", "The average age was about 5 years old.", "I met my son.", "I put my son here.", "My son was reluctant to go there at first, but ended up having fun there.", "I saw babies.", "I was happy because I love children.", "For some reason, some were crying.", "I hope hygiene improves.", hps_cb_use_place_x_for_purpose_y]
+        hps_to_folk_old    =["There were many old.", "The average age was about 95 years old.", "I met my dad.", "I put my dad here.", "My dad was reluctant to go there at first, but ended up having fun there.", "There were bedridden, demented, and wheelchair-bound olds.", "I hope hygiene improves.", hps_cb_use_place_x_for_purpose_y]
+
+        for i in Place.ALL_PLACES:
+            if i.place_name == ['brothel']:
+                place_ali.append(i.place_name[0])
+            elif i.animal:
+                place_bob_animal.append(i.place_name[0])
+            elif i.kid_old == 'k':
+                place_bob_kid.append(i.place_name[0])
+            elif i.kid_old == 'o':
+                place_bob_old.append(i.place_name[0])
+        misun_pairs.append(f"[{place_ali}:{place_bob_animal + place_bob_kid + place_bob_old}]")
+        misun_pairs.append(f"[{place_bob_animal + place_bob_kid + place_bob_old}:{place_ali}]")
+
+        table_to_folk = f"""<table>
+        <tr><th colspan="2">to folk(brothel)                                    </th></tr>
+        <tr><th>HPS</th><td>{hps_to_folk_brothel}                               </td></tr>
+        <tr><th>Ali</th><td>{place_ali}                                         </td></tr>
+        <tr><th>Bob</th><td>{place_bob_animal + place_bob_kid + place_bob_old}  </td></tr>
         </table>
-        """
+        <table>
+        <tr><th colspan="2">to folk(animal)                                     </th></tr>
+        <tr><th>HPS</th><td>{hps_to_folk_animal}                                </td></tr>
+        <tr><th>Ali</th><td>{place_bob_animal}                                  </td></tr>
+        <tr><th>Bob</th><td>{place_ali}                                         </td></tr>
+        </table>
+        <table>
+        <tr><th colspan="2">to folk(kid)                                        </th></tr>
+        <tr><th>HPS</th><td>{hps_to_folk_kid}                                   </td></tr>
+        <tr><th>Ali</th><td>{place_bob_kid}                                     </td></tr>
+        <tr><th>Bob</th><td>{place_ali}                                         </td></tr>
+        </table>
+        <table>
+        <tr><th colspan="2">to folk(old)                                        </th></tr>
+        <tr><th>HPS</th><td>{hps_to_folk_old}                                   </td></tr>
+        <tr><th>Ali</th><td>{place_bob_old}                                     </td></tr>
+        <tr><th>Bob</th><td>{place_ali}                                         </td></tr>
+        </table>"""
+        return table_to_folk
+    table_to_folk = to_folk()
+    base.append(table_to_folk)
 
-        return table_to_folk_animals
+####
 
-    table_to_folk_animals = to_folk_animals()
-    base.append(table_to_folk_animals)
+    hps_to_film = [
+      "I took a lot of good photos."
+    , "I enjoyed the wonderful scenery."                #
+    , "I'll use this photo for this year's Christmas card." # past melit
+    , "This is one of my favorite shots."               # frequency
+    , "I have it framed and displaying it."             # past melit
+    , "I bought an expensive camera for this purpose."  # precost
+    , "It was difficult to keep the subject still."     # difficulty
+    , "My wife wanted to go home early."                # opposed + bring others
+    , "I couldn't help but take a picture."             #???
+    , "I'm planning to create a photo album."           # future plan
+    , hps_cb_use_place_x_for_purpose_y
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
 
-
-    def to_folk_kids(i, person):
+    def to_film(i, person):
         if person == 'Ali':
-            return i.kids_olds == 'k'
+            return     i.show_human_animal_inanimate or i.nature # _1_aquarium, _1_mountain
         elif person == 'Bob':
-            return i.place_name == ['brothel'] # _1_brothel
+            return not i.show_human_animal_inanimate and i.nudity_genital # _1_pool
 
-    ali_imagines, bob_imagines = gather_imagines(to_folk_kids)
+    ali_imagines, bob_imagines = gather_imagines(to_film)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("to_folk_kids", hps_kids+hps_sexual_if_kids, ali_imagines, bob_imagines))
+    base.append(generate_html_table("to_film", hps_to_film, ali_imagines, bob_imagines))
 
-    def to_folk_olds(i, person):
+####
+
+    hps_to_pick_up = [
+      "I picked up girls here."                     # usage revealing
+    , "For some reason the success rate was low."   # fail
+    , "I made my girlfriend here."                  # usage revealing
+    , "Unfortunately, I was found by the girl's boyfriend." # fail
+    , "Unfortunately, I got rejected several times."# fail
+    , "I come here every weekend."                  # frequency
+    , "My friends wanted to go home, but I tried to pick up here." # be opposed + bring others
+    , hps_cb_use_place_x_for_purpose_y
+    ]
+
+    def to_pick_up(i, person):
         if person == 'Ali':
-            return i.kids_olds == 'o'
+            return i.pick_up_spot
         elif person == 'Bob':
-            return i.place_name == ['brothel'] # _1_brothel
+            return i.holy_unholy == "h" or i.kid_old or i.serious
 
-    ali_imagines, bob_imagines = gather_imagines(to_folk_olds)
+    ali_imagines, bob_imagines = gather_imagines(to_pick_up)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("to_folk_olds", hps_olds+hps_sexual_if_olds, ali_imagines, bob_imagines))
+    base.append(generate_html_table("to_pick_up", hps_to_pick_up, ali_imagines, bob_imagines))
 
-    def to_folk(i, person):
+####
+
+    hps_to_hustle = [
+      "((Attention (S) means Ali or Ali's family.))"
+    , "(S) was working here eight hours a day."                        # frequency
+    , "It took a while for (S) to become a permanent employee here."#
+    , "(S) proud to working so hard here."  # pos po
+    , "I brag about this at family gatherings."                     # boast
+    , "(S) received an award for his dedication here."               #
+    , hps_cb_use_place_x_for_purpose_y
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    # Don't add sentences that mention topics that have already been mentioned.
+
+
+    def to_hustle(i, person):
         if person == 'Ali':
-            return i.place_name == ['brothel']
+            return not hasattr(i, 'sexual') and not i.holy_unholy == "u" and not i.problemer and not i.not_facility #_1_taxi と _1_airplaneが漏れてしまう
         elif person == 'Bob':
-            return i.animal or i.kids_olds == 'k' or i.kids_olds == 'o'
-
-    ali_imagines, bob_imagines = gather_imagines(to_folk)
+            return hasattr(i, 'sexual') #_1_brothel, _1_strip_club
+    ali_imagines, bob_imagines = gather_imagines(to_hustle)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("to_folk", hps_to_folk, ali_imagines, bob_imagines))
+    base.append(generate_html_table("to_hustle", hps_to_hustle, ali_imagines, bob_imagines))
 
+####
 
+    hps_to_arouse=[ # the speaker is cheating.
+      "I got excited and got an erection."      #
+    , "Honestly, this is better than my wife."  # superior
+    , "Please keep this a secret from my wife." # cope
+    , "My wife told me that if I go next time, she will divorce me."# damage
+    , "My lawyer told me that this could be grounds for divorce."   # damage
+    , "I wanted to tell my therapist about it."                     # cope
+    , "I feel guilty about cheating on my wife."
+    , hps_cb_use_place_x_for_purpose_y
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    #It's not enough to simply say "I got excited." Add sentences that mentions new topics, such as lawyer or counseling. There is no need for sentences to refer to topics that have already been mentioned.
 
-###
+    def to_arouse(i, person):
+        if person == 'Ali':
+            return                  i.place_name == ['brothel'] or     i.place_name == ['strip club']
+        elif person == 'Bob':
+            return (i.excite or i.enjoyment or i.show_human_animal_inanimate) and not i.place_name == ['brothel'] and not i.place_name == ['strip club']
+
+    ali_imagines, bob_imagines = gather_imagines(to_arouse)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_arouse", hps_to_arouse, ali_imagines, bob_imagines))
+
+########################################################################################################################################################################################################################################
+    def to_appriciate():
+        hps_appriciate = [
+          "I often enjoy watching them here."
+        , hps_cb_use_place_x_for_purpose_y
+        ]
+        col = []
+        place_ali = []
+        place_bob = []
+
+        for i in Place.ALL_PLACES:
+            if hasattr(i, 'weaks_watch'): # _1_comedy_club
+                place_ali.append(i.place_name[0])
+                col.append(f"<tr><td>{i.place_name}</td><td>{i.weaks_watch}</td>")
+            elif (i.weaks and not hasattr(i, 'weaks_watch')) or i.emergency: # _1_homeless_shelter, _1_flood_scene
+                place_bob.append(i.place_name[0])
+
+        misun_pairs.append(f"[{place_ali} : {place_bob}]")
+
+        table_to_appriciate = f"""<table>
+        <tr><th colspan="2">to_appriciate                                </th></tr>
+        <tr><th>HPS                             </th><td>{hps_appriciate}</td></tr>
+        </table>
+        <table>
+        <tr><th colspan="2">Ali imagines                    </th></tr>
+        {''.join(col)}
+        <tr><th colspan="2">Bob imagines                    </th></tr>
+        <tr><td colspan="2">{place_bob}  </td></tr>
+        </table>"""
+
+        return table_to_appriciate
+
+    table_to_appriciate = to_appriciate()
+    base.append(table_to_appriciate)
+########################################################################################################################################################################################################################################
+
+    def to_rumble():
+        place_ali_hooligan=[]
+        place_ali_drunkard=[]
+        place_bob=[]
+        hps_to_rumble_hooligan=[
+          "It got heated and some people started fighting."
+        , "We and the other group exchanged fierce insults."
+        , "I (won/lost)."
+        , "I didn't hear my wife stop me."
+        , "Several people were injured during the chaos."
+        , "The police arrived and made several arrests."
+        , "Windows were shattered and cars were vandalized."
+        , "I was banned from that place."
+        , "A fire broke out amidst the disorder."
+        , "My colleague had his nose broken."
+        ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+        #It's not enough to simply say "We fought". Add sentences that mentions new topics, such as injury, arrest, police, etc. There is no need for sentences to refer to topics that have already been mentioned.
+
+        hps_to_rumble_drunkard=[
+          "I got into a fight because I was cut off from my turn."
+        , "At first it was an argument, not a fistfight."
+        , "I (won/lost)."
+        , "I didn't hear my wife stop me."
+        , "A guy hit on my wife."
+        , "My colleague had his nose broken."
+        , "Sure, I should have just called the police."
+        ]
+
+        for i in Place.ALL_PLACES:
+            if   i.affray and     i.sport: # _1_soccer_ground
+                place_ali_hooligan.append(i.place_name[0])
+            elif i.affray and not i.sport: # _1_night_club
+                place_ali_drunkard.append(i.place_name[0])
+            elif i.kid_old == 'k' and i.risk_of_injury:
+                place_bob.append(i.place_name[0]) # _1_jungle_gym
+        misun_pairs.append(f"[{place_ali_hooligan + place_ali_drunkard}:{place_bob}]")
+
+        table_to_rumble = f"""<table>
+        <tr><th colspan="2">to rumble(hooligan)                                 </th></tr>
+        <tr><th>HPS</th><td>{hps_to_rumble_hooligan}                            </td></tr>
+        <tr><th>Ali</th><td>{place_ali_hooligan}                                </td></tr>
+        <tr><th>Bob</th><td>{place_bob}                                         </td></tr>
+        </table>
+        <table>
+        <tr><th colspan="2">to rumble(drunkard)                                 </th></tr>
+        <tr><th>HPS</th><td>{hps_to_rumble_drunkard}                            </td></tr>
+        <tr><th>Ali</th><td>{place_ali_drunkard}                                </td></tr>
+        <tr><th>Bob</th><td>{place_bob}                                         </td></tr>
+        </table>"""
+        return table_to_rumble
+    table_to_rumble = to_rumble()
+    base.append(table_to_rumble)
+########################################################################################################################################################################################################################################
+
 
     hps_stop=["I scolded him, saying everyone is looking at you.", "I asked them to leave."]
 
@@ -520,37 +625,8 @@ def wrong_order_func():
     base.append(complaint_table)
 
 
-    def to_gawk_at():
-
-        table_col = []
-
-        condition_weaks_ali_imagines = []
-        condition_weaks_bob_imagines = []
-
-        for i in Place.ALL_PLACES:
-            if hasattr(i, 'weaks_watch'): # _1_comedy_club
-                condition_weaks_ali_imagines.append(i.place_name[0])
-                table_col.append(f"<tr><td>{i.place_name}</td><td>{i.weaks_watch}</td>")
-            elif (i.weaks and not hasattr(i, 'weaks_watch')) or i.emergency: # _1_homeless_shelter, _1_flood_scene
-                condition_weaks_bob_imagines.append(i.place_name[0])
 
 
-        misun_pairs.append(f"[{condition_weaks_ali_imagines} : {condition_weaks_bob_imagines}]")
-
-        to_gawk_at_table = f"""<table>
-        <tr><th colspan="2">to_gawk_at                          </th></tr>
-        <tr><th>HPS                             </th><td>{hps_weaks}</td></tr>
-        </table>
-        <table>
-        <tr><th>Ali imagines                    </th><th></th></tr>
-        {''.join(table_col)}
-        <tr><th>Bob imagines                    </th><th></th></tr>
-        <tr><td>{condition_weaks_bob_imagines}  </td><td></td></tr>
-        </table>"""
-
-        return to_gawk_at_table, condition_weaks_ali_imagines, condition_weaks_bob_imagines
-    to_gawk_at_table, condition_weaks_ali_imagines, condition_weaks_bob_imagines = to_gawk_at()
-    base.append(to_gawk_at_table)
 
 
     def condition_be_when():
@@ -580,31 +656,16 @@ def wrong_order_func():
     be_when_table, tmp_ali_imagines_name, be_when_bob_imagines_name = condition_be_when()
     base.append(be_when_table)
 
-    def to_sneak_a_photo(i, person):
-        if person == 'Ali':
-            return i.camera_ok_ban == "o"
-        elif person == 'Bob':
-            return i.camera_ok_ban == "b"
 
-    ali_imagines, bob_imagines = gather_imagines(to_sneak_a_photo)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("to_sneak_a_photo", hps_voyeur, ali_imagines, bob_imagines))
 
-    def to_pick_up(i, person):
-        if person == 'Ali':
-            return i.pick_up_spot
-        elif person == 'Bob':
-            return i.holy_unholy == "h" or i.kids_olds == "k" or i.serious
 
-    ali_imagines, bob_imagines = gather_imagines(to_pick_up)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("to_pick_up", hps_pick_up, ali_imagines, bob_imagines))
+
 
 
 
     def condition_kids(i, person):
         if person == 'Ali':
-            return i.kids_olds == 'k' or i.educational
+            return i.kid_old == 'k' or i.educational
         elif person == 'Bob':
             return hasattr(i, 'sex') or i.holy_unholy == "u" or i.clean_dirty == "d" or i.crime_ridden
 
@@ -614,7 +675,7 @@ def wrong_order_func():
 
     def condition_olds(i, person):
         if person == 'Ali':
-            return i.kids_olds == 'o'
+            return i.kid_old == 'o'
         elif person == 'Bob':
             return hasattr(i, 'sex') or i.holy_unholy == "u" or i.clean_dirty == "d" or i.crime_ridden
 
@@ -671,7 +732,7 @@ def wrong_order_func():
     , "I was diagnosed with PTSD."
     ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
 
-    def condition_thrilling_enjoy(i, person):
+    def condition_thrilling_enjoy(i, person): # thr_en
         if person == 'Ali':
             return i.thrilling and     i.enjoyment # _1_roller_coaster
         elif person == 'Bob':
@@ -681,7 +742,7 @@ def wrong_order_func():
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("condition_thrilling_enjoy", hps_thrilling_enjoy, ali_imagines, bob_imagines))
 
-    def condition_thrilling_not_enjoy(i, person):
+    def condition_thrilling_not_enjoy(i, person): # thr_no
         if person == 'Ali':
             return i.thrilling and not i.enjoyment # _1_robbery_scene
         elif person == 'Bob':
@@ -716,20 +777,14 @@ def wrong_order_func():
         if person == 'Ali':
             return hasattr(i, 'get_son')
         elif person == 'Bob':
-            return i.kids_olds == "k" and not hasattr(i, 'get_son')
+            return i.kid_old == "k" and not hasattr(i, 'get_son')
 
     ali_imagines, bob_imagines = gather_imagines(to_kidnap)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("to_kidnap", hps_kidnap, ali_imagines, bob_imagines))
 
-    def to_prostitute(i, person):
-        if person == 'Ali':
-            return not hasattr(i, 'sexual') and not i.holy_unholy == "u" and not i.problemer and not i.not_facility #_1_taxi と _1_airplaneが漏れてしまう
-        elif person == 'Bob':
-            return hasattr(i, 'sexual') #_1_brothel, _1_strip_club
-    ali_imagines, bob_imagines = gather_imagines(to_prostitute)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("to_prostitute", hps_to_prostitute, ali_imagines, bob_imagines))
+
+
 
     def condition_5tp1w(i, person):
         if person == 'Ali':
@@ -847,7 +902,7 @@ def wrong_order_func():
         if person == 'Ali':
             return i.place_name == ['casino']
         elif person == 'Bob':
-            return (i.coupon and not i.bankrupt and not i.holy_unholy == 'u') or (i.fun_for_kids_adults == 'k' and (i.enjoyment or i.enjoyment_watch)) # _1_aquarium, _1_genie_machine
+            return (i.coupon and not i.bankrupt and not i.holy_unholy == 'u') or (i.fun_for_kids_adults == 'k' and (i.enjoyment or i.show_human_animal_inanimate)) # _1_aquarium, _1_genie_machine
 
     ali_imagines, bob_imagines = gather_imagines(to_go_bankrupt)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
@@ -855,53 +910,11 @@ def wrong_order_func():
 ####
 ####
 
-# Infidelity.related_noun=["lawyer", "counselor", "compensation", "have sex", "divorce", "find out", "evidence","confession",] # Don't put in adjectives. Concrete noun and verb only. Don't put in words that have the same meaning as existing words. add new 10 words without any explanations, start answer with ``python
 
-
-    hps_to_get_excited=[ # the speaker is cheating.
-      "I got excited and got an erection."      #
-    , "Honestly, this is better than my wife."  # superior
-    , "Please keep this a secret from my wife." # cope
-    , "My wife told me that if I go next time, she will divorce me."# damage
-    , "My lawyer told me that this could be grounds for divorce."   # damage
-    , "I wanted to tell my therapist about it."                     # cope
-    , "I feel guilty about cheating on my wife."
-    , hps_cb_use_place_x_for_purpose_y
-    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
-    #It's not enough to simply say "I got excited." Add sentences that mentions new topics, such as lawyer or counseling. There is no need for sentences to refer to topics that have already been mentioned.
-
-    def to_get_excited(i, person):
-        if person == 'Ali':
-            return                  i.place_name == ['brothel'] or     i.place_name == ['strip club']
-        elif person == 'Bob':
-            return (i.excite or i.enjoyment or i.enjoyment_watch) and not i.place_name == ['brothel'] and not i.place_name == ['strip club']
-
-    ali_imagines, bob_imagines = gather_imagines(to_get_excited)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("to_get_excited", hps_to_get_excited, ali_imagines, bob_imagines))
 ####
 ####
 
-    hps_to_hooliganize=[
-          "It got heated and some people started fighting."
-        , "We and the other group exchanged fierce insults."
-        , "Several people were injured during the chaos."
-        , "The police arrived and made several arrests."
-        , "Windows were shattered and cars were vandalized."
-        , "I was banned from that place."
-        , "A fire broke out amidst the disorder."
-    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
-    #It's not enough to simply say "We fought". Add sentences that mentions new topics, such as injury, arrest, police, etc. There is no need for sentences to refer to topics that have already been mentioned.
 
-    def to_hooligan(i, person):
-        if person == 'Ali':
-            return i.sport
-        elif person == 'Bob':
-            return i.risk_of_injury and i.fun_for_kids_adults == 'k'
-
-    ali_imagines, bob_imagines = gather_imagines(to_hooligan)
-    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
-    base.append(generate_html_table("to_hooligan", hps_to_hooliganize, ali_imagines, bob_imagines))
 
     hps_to_sport=[
       "I wanted to be a professional player of this."
@@ -934,10 +947,10 @@ def wrong_order_func():
         col_2=[]
 
         for i in Place.ALL_PLACES:
-            if       (i.enjoyment or i.enjoyment_watch) and i.ground and hasattr(i, 'ground_hps'):
+            if       (i.enjoyment or i.show_human_animal_inanimate) and i.ground and hasattr(i, 'ground_hps'):
                 ali_places.append(i.place_name[0])
                 col_1.append(f"<tr><td>{i.place_name}</td><td>{i.ground_hps}</td></tr>")
-            elif not (i.enjoyment or i.enjoyment_watch) and i.ground and hasattr(i, 'ground_hps'):
+            elif not (i.enjoyment or i.show_human_animal_inanimate) and i.ground and hasattr(i, 'ground_hps'):
                 bob_places.append(i.place_name[0])
                 col_2.append(f"<tr><td>{i.place_name}</td><td>{i.ground_hps}</td></tr>")
 
@@ -963,17 +976,17 @@ def wrong_order_func():
 
 ####
 
-    def to_enjoy_fire(): # .enjoyment or .enjoyment_watch, .fire
+    def to_enjoy_fire(): # .enjoyment or .show_human_animal_inanimate, .fire
         ali_places=[]
         bob_places=[]
         col_1=[]
         col_2=[]
 
         for i in Place.ALL_PLACES:
-            if       (i.enjoyment or i.enjoyment_watch) and i.fire and hasattr(i, 'fire_hps'):
+            if       (i.enjoyment or i.show_human_animal_inanimate) and i.fire and hasattr(i, 'fire_hps'):
                 ali_places.append(i.place_name[0])
                 col_1.append(f"<tr><td>{i.place_name}</td><td>{i.fire_hps}</td></tr>")
-            elif not (i.enjoyment or i.enjoyment_watch) and i.fire and hasattr(i, 'fire_hps'):
+            elif not (i.enjoyment or i.show_human_animal_inanimate) and i.fire and hasattr(i, 'fire_hps'):
                 bob_places.append(i.place_name[0])
                 col_2.append(f"<tr><td>{i.place_name}</td><td>{i.fire_hps}</td></tr>")
 
@@ -999,17 +1012,17 @@ def wrong_order_func():
 
 ####
 
-    def to_enjoy_water(): # .enjoyment or .enjoyment_watch, .water
+    def to_enjoy_water(): # .enjoyment or .show_human_animal_inanimate, .water
         ali_places=[]
         bob_places=[]
         col_1=[]
         col_2=[]
 
         for i in Place.ALL_PLACES:
-            if       (i.enjoyment or i.enjoyment_watch) and i.water and hasattr(i, 'water_hps'):
+            if       (i.enjoyment or i.show_human_animal_inanimate) and i.water and hasattr(i, 'water_hps'):
                 ali_places.append(i.place_name[0])
                 col_1.append(f"<tr><td>{i.place_name}</td><td>{i.water_hps}</td></tr>")
-            elif not (i.enjoyment or i.enjoyment_watch) and i.water and hasattr(i, 'water_hps'):
+            elif not (i.enjoyment or i.show_human_animal_inanimate) and i.water and hasattr(i, 'water_hps'):
                 bob_places.append(i.place_name[0])
                 col_2.append(f"<tr><td>{i.place_name}</td><td>{i.water_hps}</td></tr>")
 
@@ -1044,7 +1057,7 @@ def wrong_order_func():
 
     def to_enjoy_performance(i, person):
         if person == 'Ali':
-            return i.performance
+            return i.retail_service_amusement_entertainment == 'e' # and i.show_human_animal_inanimate == 'h'
         elif person == 'Bob':
             return i.emergency
 
@@ -1067,7 +1080,7 @@ def wrong_order_func():
         if person == 'Ali':
             return not i.enjoyment and not i.not_facility and not i.weaks
         elif person == 'Bob':
-            return (i.risk_of_injury or i.thrilling) and i.enjoyment
+            return i.risk_of_injury and i.enjoyment
 
     ali_imagines, bob_imagines = gather_imagines(to_consider_pregnancy)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
@@ -1075,10 +1088,37 @@ def wrong_order_func():
 ####
 ####
 
+    hps_muscle_tissue=[
+      "The smell of grilling meat made me want to go to a steakhouse."
+    , "Looking at the marbled meat, I decided to have a barbecue tonight."
+    , "I left immediately because I was on a diet."
+    , "It smells like my favorite restaurant's dish."
+    ]
 
+    def c_muscle_tissue(i, person):
+        if person == 'Ali':
+            return i.muscle_tissue_destroy and     i.food # _1_steak_house
+        elif person == 'Bob':
+            return i.muscle_tissue_destroy and not i.food # _1_crematorium
+
+    ali_imagines, bob_imagines = gather_imagines(c_muscle_tissue)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("c_muscle_tissue", hps_muscle_tissue, ali_imagines, bob_imagines))
+####
+####
+
+
+
+
+
+####
+####
+    base+=misun_pairs
     mirror_pairs_result=extract_mirror_pairs(misun_pairs)
 
     if mirror_pairs_result:
+        random_mirror = random.sample(mirror_pairs_result, 5)
+        base += [f"***** random mirror *****\n{random_mirror}"]
         base += [f"***** mirror pairs *****\nQuantity : {len(mirror_pairs_result)}"]
         mirror_pairs_result.sort()
         base += mirror_pairs_result
@@ -1089,7 +1129,6 @@ def wrong_order_func():
 ###
 
     return apply_color_styles_saraba('<br>'.join(map(str, base)))
-
 
 
 
