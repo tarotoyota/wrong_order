@@ -173,18 +173,6 @@ def wrong_order_func():
     , hps_cb_use_place_x_for_purpose_y
     ]
 
-    hps_pick_up = [
-      "I picked up girls here."                     # usage revealing
-    , "For some reason the success rate was low."   # fail
-    , "I made my girlfriend here."                  # usage revealing
-    , "Unfortunately, I was found by the girl's boyfriend." # fail
-    , "Unfortunately, I got rejected several times."# fail
-    , "I come here every weekend."                  # frequency
-    , "My friends wanted to go home, but I tried to pick up here." # be opposed + bring others
-    , hps_cb_use_place_x_for_purpose_y
-    ]
-
-
     hps_complaint = [
       "My wife objected, but I lectured the person in charge."  # damage + cope + opposed
     , "I demanded a refund."                                    # damage + cope
@@ -256,20 +244,28 @@ def wrong_order_func():
 
     repositioner_table="""<table>
     <tr><th>MAJOR DESIRE      </th><th> V/AO      </th><th>anim</th><th>kid </th><th>old </th><th>sick</th><th>poor</th><th>weak</th><th>emer</th><th>self</th><th>fami      </th><th>inan</th></tr>
-    <tr><th rowspan="7">sexual</th><th> see       </th><td>folk</td><td>folk</td><td>folk</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr><th rowspan="8">sexual</th><th> see       </th><td>folk</td><td>folk</td><td>folk</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
     <tr>                           <th> film      </th><td>    </td><td>voye</td><td>voye</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
     <tr>                           <th> fuck      </th><td>folk</td><td>folk</td><td>folk</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
     <tr>                           <th> buy       </th><td>folk</td><td>folk</td><td>folk</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>folk?     </td><td>    </td></tr> <!-- woman_animal_func also -->
     <tr>                           <th> pick up   </th><td>    </td><td>pick</td><td>pick</td><td>pick</td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> date      </th><td>    </td><td>date</td><td>date</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr>
     <tr>                           <th> hustle    </th><td>    </td><td>folk</td><td>folk</td><td>    </td><td>    </td><td>    </td><td>    </td><td>hust</td><td>hust, folk</td><td>    </td></tr> <!-- woman_animal_func also -->
     <tr>                           <th> aroused   </th><td>arou</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>arou</td></tr> <!-- woman_animal_func also -->
     <tr><th rowspan="1">eat   </th><th> eat       </th><td>eat </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr>
-    <tr><th rowspan="3">enjoy </th><th> appriciate</th><td>    </td><td>    </td><td>    </td><td>appr</td><td>appr</td><td>appr</td><td>appr</td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
-    <tr>                           <th> pet(anim) </th><td>    </td><td>peta</td><td>peta</td><td>peta</td><td>peta</td><td>peta</td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func only-->
+    <tr><th rowspan="4">enjoy </th><th> appriciate</th><td>    </td><td>    </td><td>    </td><td>appr</td><td>appr</td><td>appr</td><td>appr</td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
+    <tr>                           <th> pet(anim) </th><td>    </td><td>peta</td><td>peta</td><td>peta</td><td>peta</td><td>peta</td><td>    </td><td>    </td><td>peta      </td><td>    </td></tr> <!-- woman_animal_func only-->
     <tr>                           <th> pet(huma) </th><td>peth</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func only-->
+    <tr>                           <th> play with </th><td>    </td><td>play</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr>
     <tr><th rowspan="2">fight </th><th> fear      </th><td>thno</td><td>thno</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>thno</td></tr> <!-- woman_animal_func also -->
     <tr>                           <th> figh(huma)</th><td>    </td><td>rumb</td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>    </td><td>          </td><td>    </td></tr> <!-- woman_animal_func also -->
     </table>"""
+
+# overuse, construction site, old, sick, kid,
+# firefighter
+
+#ignore, emergenc、kyakuhiki
+# ask the root, emergency
 
 
 
@@ -280,7 +276,19 @@ def wrong_order_func():
     def to_eat():
         place_ali=[]
         place_bob=[]
-        hps_to_eat_edible  =["The food there is fresh and can be eaten raw or alive.", "I got food poisoning there so I left a bad rating on yelp.", "It's Chiba's traditional food.", "I couldn't finish my meal, it was too much.", "This is too little and not satisfying.", hps_cb_use_place_x_for_purpose_y]
+        hps_to_eat_edible  =[
+          "The food there is fresh and can be eaten raw or alive."
+        , "I got food poisoning there so I left a bad rating on yelp."
+        , "It's Chiba's traditional food."
+        , "I couldn't finish my meal, it was too much."
+        , "This is too little and not satisfying."
+        , "My family don't like it."
+        , "Sometimes I take it home and sometimes I eat it on the spot."
+        , "Delivery service is also provided."
+        , hps_cb_use_place_x_for_purpose_y
+        ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+        # Don't add sentences that mention topics that have already been mentioned.Stop trying to add sentences that mean the same thing.
+
         hps_to_eat_inedible=["There were many (animal name)", "I'm glad they are protected from poachers.", "I gave my pets to them, I can't keep them so I have no choice.", "There were a lot of rescued animals there.", "There was an endangered species section."]
 
         for i in Place.ALL_PLACES:
@@ -379,7 +387,7 @@ def wrong_order_func():
     # Don't add sentences that mention topics that have already been mentioned.Stop trying to add sentences that mean the same thing.
     def to_film(i, person):
         if person == 'Ali':
-            return     i.show_human_animal_inanimate or i.vehivle_nature == 'n' # _1_aquarium, _1_mountain
+            return     i.show_human_animal_inanimate or i.vehicle_nature == 'n' # _1_aquarium, _1_mountain
         elif person == 'Bob':
             return not i.show_human_animal_inanimate and i.nudity_genital # _1_pool
 
@@ -446,7 +454,11 @@ def wrong_order_func():
     base.append(generate_html_table("to_hustle", hps_to_hustle, ali_imagines, bob_imagines))
 
 ####
-
+    # Add new 5 english statements. Respond only with the new statements you added. Align the spaces and characters with exist objects. Start answer with ```python
+    # This list is for creating comedy.
+    # The speaker talk about the brothel or strip club.
+    # But the listener mistook he's talking about a non-sexual exciting place, such as beauty mountain.
+    # So, the listener mistakenly believes that the speaker is a pervert.
     hps_to_arouse=[ # the speaker is cheating.
       "I got excited and got an erection."
     , "Honestly, this is better than my wife."
@@ -457,10 +469,7 @@ def wrong_order_func():
     , "I wanted to tell my therapist about it."
     , "I feel guilty about cheating on my wife."
     , hps_cb_use_place_x_for_purpose_y
-    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
-
-    #There is no need for sentences to refer to topics that have already been mentioned.
-
+    ]
     def to_arouse(i, person):
         if person == 'Ali':
             return                  i.place_name == ['brothel'] or     i.place_name == ['strip club']
@@ -471,12 +480,76 @@ def wrong_order_func():
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("to_arouse", hps_to_arouse, ali_imagines, bob_imagines))
 
+####
+    # Add new 5 english statements. Respond only with the new statements you added. Align the spaces and characters with exist objects. Start answer with ```python
+    # This list is for creating comedy.
+    # The speaker talk about his girlfiend. His girlfrined is an adult.
+    # But the listener mistook his girlfriend is a child..
+    # So, the listener mistakenly believes that the speaker is a pervert.
+    # All of these existing sentences are funny. Please side note which type of existing sentences have a similarity to the sentence you have added. Don't make new types.
+    hps_to_date=[
+      "I'm worried that she and I are a little apart in age." # Type LITTLE: Based on the listener's misunderstanding, It's funny that he says the age difference is "a little."
+    , "Admittedly, I tend to like younger a little." # Type LITTLE
+    , "We hardly had a fight in three years." # Type LONG: Based on the listener's misunderstanding, It's funny that he's been in the relationship for long period.
+    , "We've been together for almost a decade." # Type2 LONG
+    , "I would like to introduce her to my parents and her parents, but they might be against it." # Type UNWARE: Based on the listener's misunderstanding, It's funny that He is unaware of his abnormality. It is Fanny who says that he "might" be opposed.
+    , "Maybe it's because of the age difference, but people look at me strangely when we go to a hotel together." # Type UNWARE
+    , "I have to dress nicely in front of her parents to make a good impression." # Type UNWARE: Even if he dresses nicely, he will only get reported.
+    , "My parents and her parents approved of the relationship." # Type CONDONE : Based on the listener's misunderstanding, this is funny because the speaker's parents and his girlfriend's parents are condoning a pervert.
+    , "My father told me that if I was able to get a girl that young, I should never let her go." # Type CONDONE
+    ]
+
+    # Add new 5 english statements. Respond only with the new statements you added. Align the spaces and characters with exist objects. Start answer with ```python
+    # This list is for creating comedy.
+    # The speaker talk about his girlfiend. His girlfrined is young.
+    # But the listener mistook his girlfriend is 95 years old.
+    # So, the listener mistakenly believes that the speaker is a pervert.
+    hps_to_date2=[
+      "I'm worried that she and I are a little apart in age." # Type LITTLE: Based on the listener's misunderstanding, It's funny that he says the age difference is "a little."
+    , "Admittedly, I tend to like older a little." # Type LITTLE
+    , "I would like to introduce her to my parents, but they might be against it." # Type UNWARE: Based on the listener's misunderstanding, It's funny that He is unaware of his abnormality. It is Fanny who says that he "might" be opposed.
+    , "Maybe it's because of the age difference, but people look at me strangely when we go to a hotel together." # Type UNWARE
+    , "My parents and her parents approved of the relationship." # Type CONDONE : Based on the listener's misunderstanding, this is funny because the speaker's parents and his girlfriend's parents are condoning a pervert.
+    ]
+
+
+    hps_to_date.insert(0, "I got my girlfriend here.")
+    hps_to_date2.insert(0, "I got my girlfriend here.")
+
+    def to_date(i, person):
+        if person == 'Ali':
+            return i.pick_up_spot
+        elif person == 'Bob':
+            return i.kid_old == 'k'
+
+    ali_imagines, bob_imagines = gather_imagines(to_date)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_date(kid)", hps_to_date, ali_imagines, bob_imagines))
+
+    def to_date2(i, person):  # old
+        if person == 'Ali':
+            return i.pick_up_spot
+        elif person == 'Bob':
+            return i.kid_old == 'o'
+
+    ali_imagines, bob_imagines = gather_imagines(to_date2)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_date(old)", hps_to_date2, ali_imagines, bob_imagines))
+
+
+
+
 ########################################################################################################################################################################################################################################
     def to_appriciate():
         hps_appriciate = [
           "I often enjoy watching them here."
+        , "My family often wants to go home."
+        , "Sometimes I watch it in person and sometimes I watch it online."
+        , "It's a perfect spot for a date."
+        , "I wish they'd do something about the poor visibilit."
         , hps_cb_use_place_x_for_purpose_y
-        ]
+        ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+        #There is no need for sentences to refer to topics that have already been mentioned.
         col = []
         place_ali = []
         place_bob = []
@@ -569,7 +642,77 @@ def wrong_order_func():
     base.append(table_to_rumble)
 ########################################################################################################################################################################################################################################
 
+    # Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    # This list is for creating comedy.
+    # The speaker talks about a amusement or entertainment facility for adults, such as casino, bar and strip club, etc.
+    # But the listener mistakenly believes that he talks about children's one, such as see-saw, jungle gym and swing set, etc.
+    # So, the listener mistakenly believes that the speaker is carzy.
+    # All of these existing sentences are funny. Please side note which type of existing sentences have a similarity to the sentence you have added. Don't make new types.
+    hps_to_play_adult=[
+      "I hang out here on my days off." # typeFREQUENCY
+    , "I know all the staff by name."   # typeFREQUENCY
+    , "I became friends with the frequenters." # typeFREQUENCY
+    , "I spend hours here without noticing." # typeFREQUENCY
+    , "It's like I bought a car just to come here."  # typeFREQUENCY + typeCOST
+    , "I've spent a small fortune on this place." # typeFREQUENCY + typeCOST
+    , "Recently I stayed at the house of a friend I made here." # typeFREQUENCY + typePERVERT : It's funny to an adult become friend with children.
+    , "I don't know a more enjoyable place than this." # ENJOY : It's funny to an adult enjoys see-saw, jungle gym and swing set.
+    , "I got so enthusiastic that I got into fights with other frequenters a few times." # typeENJOY + typeIDIOT
+    , "Sometimes I come alone, sometimes with colleagues." # typeUNWARE : Based on the lestener's misunderstanding, it is funny who is unaware of his abnormality.
+    , "Even when I invite my colleagues, they always refuse." # typeUNWARE
+    , "My wife doesn't like me hanging out here." # typeUNWARE
+    , "I entertained a business partner here." # typeUNWARE
+    ]
 
+    # Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    # This list is for creating comedy.
+    # The speaker talk about amusement or entertainment for adults, such as see-saw, jungle gym and swing set.
+    # But the listener mistakes he talks about adults' one, such as casino, bar and strip club.
+    # So, the listener miskenly believes that the speaker is crazy.
+    # All of these existing sentences are funny. Please side note which type of existing sentences have a similarity to the sentence you have added. Don't make new types.
+    hps_to_play_adult2=[
+      "I used to play here a lot with my friends when I was in kindergarten."
+    , "I used to come here with my parents."
+    , "In the past, if I got good test scores, my dad would bring me here."
+    , "I made a lot of friends here."
+    , "I spend hours here without noticing."
+    , "I got so enthusiastic that I got into fights with others a few times."
+    , "Even when I invite my classmates, they always refuse."
+    , "My parents didn't like me hanging out here."
+    , "I celebrated my fifth birthday here."
+    , "I can't wait to bring my own kids here someday."
+    , "I still have a childhood photo of me crying because I didn't want to leave."
+    ]
+
+    def to_play(i, person):
+        if person == 'Ali':
+            return i.fun_for_kid_adult == 'a' and (i.retail_service_amusement_entertainment == 'a' or i.retail_service_amusement_entertainment == 'e')
+        elif person == 'Bob':
+            return i.fun_for_kid_adult == 'k'
+
+    ali_imagines, bob_imagines = gather_imagines(to_play)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_play", hps_to_play_adult, ali_imagines, bob_imagines))
+
+    def to_play2(i, person):
+        if person == 'Ali':
+            return i.fun_for_kid_adult == 'k'
+        elif person == 'Bob':
+            return i.fun_for_kid_adult == 'a' and i.holy_unholy == 'u'
+
+    ali_imagines, bob_imagines = gather_imagines(to_play2)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("to_play2", hps_to_play_adult2, ali_imagines, bob_imagines))
+
+
+
+########################################################################################################################################################################################################################################
+
+
+
+
+
+########################################################################################################################################################################################################################################
     hps_stop=[
         "I scolded him, saying everyone is looking at you."
         , "I asked them to leave."
@@ -748,8 +891,8 @@ def wrong_order_func():
 
     hps_thrilling_enjoy = [
       "I became addicted to the thrill there."                  #
-    , "I went many times with my family who didn't like it."    # opposed
     , "I said I'd pay him to make it more (thrilling / rough)." # encouragement
+    , "I went many times with my family who didn't like it."    # opposed
     , "I recommended it to all my friends."                     # recommend
     , hps_cb_use_place_x_for_purpose_y
     ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
@@ -828,9 +971,9 @@ def wrong_order_func():
 
     def condition_vehicle(i, person):
         if person == 'Ali':
-            return i.vehivle_nature == 'v' and (not i.animal and not i.fun_for_kid_adult)
+            return i.vehicle_nature == 'v' and (not i.animal and not i.fun_for_kid_adult)
         elif person == 'Bob':
-            return i.vehivle_nature == 'v' and (i.animal or i.fun_for_kid_adult)
+            return i.vehicle_nature == 'v' and (i.animal or i.fun_for_kid_adult)
 
     ali_imagines, bob_imagines = gather_imagines(condition_vehicle)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
@@ -896,7 +1039,7 @@ def wrong_order_func():
         if person == 'Ali':
             return not i.better_leave and not i.holy_unholy == 'u' and not i.clean_dirty == 'd' and not i.weaks
         elif person == 'Bob':
-            return     i.better_leave
+            return     i.better_leave # or (i.not_facility and not i.vehicle_nature == 's')
 
     ali_imagines, bob_imagines = gather_imagines(to_spend_a_long_time)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
@@ -931,19 +1074,85 @@ def wrong_order_func():
 
     def to_go_bankrupt(i, person):
         if person == 'Ali':
-            return i.place_name == ['casino']
+            return i.place_name == ['casino'] or i.place_name == ['racetrack']
         elif person == 'Bob':
-            return (i.coupon and not i.bankrupt and not i.holy_unholy == 'u') or (i.fun_for_kid_adult == 'k' and (i.fun_for_kid_adult or i.show_human_animal_inanimate)) # _1_aquarium, _1_genie_machine
+            return (i.coupon and not i.bankrupt and not i.holy_unholy == 'u' and i.paid) or (i.paid and i.fun_for_kid_adult == 'k' and (i.fun_for_kid_adult or i.show_human_animal_inanimate)) # _1_aquarium, _1_genie_machine
 
     ali_imagines, bob_imagines = gather_imagines(to_go_bankrupt)
     misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
     base.append(generate_html_table("to_go_bankrupt", hps_to_go_bankrupt, ali_imagines, bob_imagines))
 ####
 ####
+    hps_c_dollar_700 = [
+      "I spent over 700 dollars here."
+    , "This place is cheaper than others."
+    , "Admittedly, it's a little expensive here."
+    , "I used all my bonus money here."
+    , hps_cb_use_place_x_for_purpose_y
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    #It's not enough to simply say "He went bankrupted.", "He regret it" or "He's in trouble".
 
+    def c_dollar_700(i, person):
+        if person == 'Ali':
+            return     i.dollar_700
+        elif person == 'Bob':
+            return not i.dollar_700 and i.paid
+
+    ali_imagines, bob_imagines = gather_imagines(c_dollar_700)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("c_dollar_700", hps_c_dollar_700, ali_imagines, bob_imagines))
+####
+####
+    hps_c_entertainment_high_class=[
+      "I found (major celebrity)."
+    , "There was a work by (major artist)."
+    , "I think about 500 people were there."
+    , "I cried."
+    , "The ticket cost over $700."
+    , "Microsoft sponsored the event."
+    , "The event raised millions for charity."
+    , "It showed the power of Hollywood."
+    , "The after-party was held at the Palms Casino Resort."
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    # This list is for creating comedy.
+    # The speaker talk about high class festivity, such as Premieres of big name directors, exhibitions of famous painters, and concerts of famous musicians.
+    # But the listener mistakes he talks about low class festivity, such as Theater performances by non-regular workers in rural areas, concerts organized by local governments.
+    # So, the listener got shocked by the speaker.
+
+    hps_c_entertainment_low_class =[
+      "I found (minor celebrity)."
+    , "There was a work by (minor artist)."
+    , "I think about 2 people were there."
+    , "The ticket cost $5."
+    , "The local bakery sponsored the event."
+    , "The after-party was at a fast food joint."
+    , "We shared a bag of chips."
+    , "The venue was a local community center."
+    , "There was a reservation in the next room for a paper craft class for people with physical disabilities."
+    , "The organizer gave us a paper cup full of Pocari Sweat."
+    , "There were a couple of drunkard from the neighborhood there, coming to cool off."
+    ]# Add new 5 english statements without any explanations. respond only the new statements you added. Align the spaces and characters with exist objects. start answer with ```python
+    # This list is for creating comedy.
+    # The speaker talk about low class festivity, such as Theater performances by non-regular workers in rural areas, concerts organized by local governments.
+    # But the listener mistakes he talks about low class festivity, such as Premieres of big name directors, exhibitions of famous painters, and concerts of famous musicians.
+    # So, the listener got shocked by the speaker.
+
+
+    def c_entertainment_x_class(i, person):
+        if person == 'Ali':
+            return i.retail_service_amusement_entertainment == 'e' and not i.not_facility and (i.show_human_animal_inanimate == 'h' or i.show_human_animal_inanimate == 'i')
+        elif person == 'Bob':
+            return i.retail_service_amusement_entertainment == 'e' and not i.not_facility and (i.show_human_animal_inanimate == 'h' or i.show_human_animal_inanimate == 'i')
+
+    ali_imagines, bob_imagines = gather_imagines(c_entertainment_x_class)
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("c_entertainment_high_class", hps_c_entertainment_high_class, ali_imagines, bob_imagines))
+    misun_pairs.append(f"[{ali_imagines} : {bob_imagines}]")
+    base.append(generate_html_table("c_entertainment_low_class", hps_c_entertainment_low_class, ali_imagines, bob_imagines))
 
 ####
 ####
+
 
 
 
@@ -1137,6 +1346,7 @@ def wrong_order_func():
     base.append(generate_html_table("c_muscle_tissue", hps_muscle_tissue, ali_imagines, bob_imagines))
 ####
 ####
+
 
 
 
