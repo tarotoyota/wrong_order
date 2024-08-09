@@ -2,25 +2,28 @@ from dataclasses import dataclass
 from typing import List, ClassVar
 from master_class_saraba_func_py import apply_color_styles_saraba
 
-l_human_animal_A    =["(haA)", "I got angry at him because he ignored me when I spoke to him.", "He could barely understand English."]
-# Ali talks about "Ali's father". Bob mistakenly assumes that Ali is talking about "animal". Add new 5 funny sentence if Ali would say it in this situation.
-l_human_animal_B    =["(haB)","Let me pet him next time.","I'll give him some pet food next time.","Does he need a leash when you take him out?","Has he learned to use the toilet yet?"]
-# Ali talks about "Ali's father". Bob mistakenly assumes that Ali is talking about "animal". Add new 5 funny sentence if Bob would say it in this situation.
+l_human_animal_A    =["(haA)", "He could barely understand English.", "I got angry at him because he ignored me when I spoke to him.","He won't help me hang the laundry, it's so frustrating.", "He always cheats when we play chess.", "He files tax returns for me.", "Although he says he's good at golf, he's actually a terrible player and could only score 120 points.", "He's getting old, so I hope he'll stop driving soon.", "He insists on wearing his old college sweatshirt everywhere we go.", "I told him to cut back on his smoking.", "After his wife died, he started using Tinder, perhaps feeling lonely.", "Although he is unemployed, he refuses to work."]
+# Ali talks about "Ali's father". Bob mistakenly assumes that Ali is talking about "pet". Add new 5 funny sentence if Ali would say it in this situation in English without any explanation. Start answer with ```python
+# Ali talks about "Ali's father", not "pet".
 
-l_animal_human_A    =["(ahA)","He likes dog food.","He licked my face.", "He was in heat.","He loves pet food.","He dislikes leashes.","She's our pet.","She sleeps on the floor next to my bed.","I've been trying to get him to use the toilet but it's difficult.","I was amazed at the size of his poop and took a picture.","He poops everywhere.", "The master was controlling him with a whip.", "He was 4 years old.","They became docile when I petted them.","I like to pet them.","He gets so excited when I say the word 'treat'."]
+l_human_animal_B    =["(haB)","Let me pet him next time.","I'll give him some pet food next time.","Does he need a leash when you take him out?","Has he learned to use the toilet yet?","Perhaps we could train him to do some fun tricks, like fetch or roll over.", "He's cute, I want to touch him.", "I bet he'd look adorable in a little sweater when it gets cold out.", "Have you neutered him?", "Maybe we could get him a little collar with his name on it."]
+# Ali talks about "Ali's father". Bob mistakenly assumes that Ali is talking about "animal".  Add new 5 funny sentence if Ali would say it in this situation in English without any explanation. Start answer with ```python
+
+
+l_animal_human_A    =["(ahA)","He likes dog food.", "He's ten years old.", "He once got lost, but we found him thanks to a microchip." ,"He licked my face.", "He was in heat.","He loves pet food.","He dislikes leashes.","She's our pet.","She sleeps on the floor next to my bed.","I've been trying to get him to use the toilet but it's difficult.","I was amazed at the size of his poop and took a picture.","He poops everywhere.", "The master was controlling him with a whip.", "He was 4 years old.","They became docile when I petted them.","I like to pet them.","He gets so excited when I say the word 'treat'.", "When I throw him food he catches it and eats it."]
 # Ali talks about "animal". Bob mistakenly assumes that Ali is talking about "Ali's father". Add new 5 funny sentence if Ali would say it in this situation.
 l_animal_human_B    =["(ahB)"]
 # Ali talks about "animal". Bob mistakenly assumes that Ali is talking about "Ali's father". Add new 5 funny sentence if Bob would say it in this situation.
 
 l_woman_animal_A    =["(waA)","My father is against our marriage.","We've tried many times but have not been able to have children.","I once had a fight with her and went back to my parents' house."]
 # Ali talks about Ali's girlfriend, not an animal. Bob mistakenly assumes that Ali is talking about an animal, not Ali's girlfriend. Bob mistakenly believes Ali is perverted or crazy. Add new 5 funny sentence if Ali would say it in this situation.
-l_woman_animal_B    =["(waB)"]
+l_woman_animal_B    =["(waB)", "If she gives birth, please give me one."]
 
 
 l_animal_woman_A    =["(awA)"]
 
 l_animal_woman_B    =["(awB)","How often do you guys have sex?"]
-# Ali talks about a pet, not an animal. Bob mistakenly assumes that Ali is talking about a woman, not an animal. Bob mistakenly believes Ali is perverted or crazy. Add new 5 funny sentence if Ali would say it in this situation.
+# Ali talks about a pet, not an woman. Bob mistakenly assumes that Ali is talking about a woman, not a pet. Bob mistakenly believes Ali is perverted or crazy. Add new 5 funny sentence if Ali would say it in this situation.
 
 list_inanimate_A        =[]
 
@@ -29,7 +32,23 @@ list_inanimate_B        =[]
 
 l_human_inanimate_A = ["(hiA)","It seemed unwell so I took it to the hospital."]
 
-l_woman_inanimate_A = ["(wiA)","I picked it up at the bar.", "My father is against our marriage.","We've tried many times but have not been able to have children."]
+l_woman_inanimate_A = ["(wiA)"
+,"I picked it up at the bar." # Bob mistakes Ali for a thief.
+,"My father is against our marriage."
+,"We've tried many times but have not been able to have children."
+,"People around us stared at us in the mixed bath."
+,"We talk a lot and sometimes argue."
+,"Sometimes she can be a bit cold, but I just wrap her up in a blanket."
+,"I don't need another woman anymore."
+,"She never talks back or complains."
+,"I take her out for long walks in the park every Sunday."
+,"When I take her to the beach, all the guys around me stare."
+,"When is the right time to kiss her?"
+,"I'm thinking of taking her on a romantic getaway, but I'm not sure she'd enjoy it."
+,"She's quiet and gives little replies."
+
+]
+# Ali talks about 'Ali's girlfriend'. Bob mistakenly assumes that Ali is talking about "inanimate". Add new 5 funny sentence if Ali would say it in this situation in English without any explanation. Start answer with ```python
 
 
 l_woman_paid_A      = ["(wpA)","I found it at a bar, liked it so much I took it home.", "I picked up it on the street."]
@@ -158,7 +177,7 @@ class Object:
     def __post_init__(self):
         Object.ALL_OBJECTS.append(self)
         if self.human:
-            self.X_animal_A += [l_human_animal_A + l_woman_animal_A] # "I got angry at him because he ignored me when I spoke to him."
+            self.X_animal_A += [l_human_animal_A + l_woman_animal_A] # "He could barely understand English."
             self.X_animal_B += [l_human_animal_B + l_woman_animal_B] # "Let me pet him next time."
             self.animal_X_A += [l_animal_human_A + l_animal_woman_A] # "He likes dog food."
             self.animal_X_B += [l_animal_human_B] # (none)
@@ -166,7 +185,7 @@ class Object:
         if self.animal:
             self.X_human_A  += [l_animal_human_A + l_animal_woman_A] # "He poops everywhere."
             self.X_human_B  += [l_animal_human_B + l_animal_woman_B] # (none)
-            self.human_X_A  += [l_human_animal_A + l_woman_animal_A] # "I got angry at him because he ignored me when I spoke to him."
+            self.human_X_A  += [l_human_animal_A + l_woman_animal_A] # "He could barely understand English."
             self.human_X_B  += [l_human_animal_B + l_woman_animal_B] # "Let me pet this next time."
 
         if self.paid and not self.building:
@@ -230,6 +249,7 @@ class Object:
 
 #                                                                hum,ani,ina   pai,foo,veh,  bui,job,mer,  car,ren,sec,  pre,con,ins,  chi
 _dog                        =Object("dog"                       ,"" ,"y","" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["pet store", "animal shelter"],["doghouse"])
+_car                        =Object("car"                       ,"" ,"" ,"y",  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","y",  "y","y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["car dealership"],["garage"])
 _doctor                     =Object("doctor"                    ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["hospital", "clinic"],[])
 _baseball_glove             =Object("baseball glove"            ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","y","y",  "" ,"y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["sports shop"],["locker"])
 _hotel                      =Object("hotel"                     ,"" ,"" ,"y",  "y","" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["travel agency", "online booking"],["city center"])
@@ -239,7 +259,6 @@ _laptop                     =Object("laptop"                    ,"" ,"" ,"y",  "
 _fridge                     =Object("fridge"                    ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "y","y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["appliance store"],["kitchen"])
 _oven                       =Object("oven"                      ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "y","y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["appliance store"],["kitchen"])
 _microwave                  =Object("microwave"                 ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "y","y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["appliance store"],["kitchen"])
-_car                        =Object("car"                       ,"" ,"" ,"y",  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","y",  "y","y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["car dealership"],["garage"])
 _bed                        =Object("bed"                       ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["furniture store"],["bedroom"])
 _couch                      =Object("couch"                     ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["furniture store"],["living room"])
 _water_bottle               =Object("water bottle"              ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["supermarket", "convenience store"],["kitchen"])
@@ -716,7 +735,6 @@ def wrong_photo_func():
 
     base.append("""
     <details> <summary><strong>使用方法</strong></summary>
-
     "Aliはaについての話をするが、Bobはそれをbについての話と間違える"という内容のコントで使える文を大量生成します。<br>
     a, bが何であるかは自分で決めて下さい。<br>
     aが動物であり、bが人間である場合、dogのテーブルにある"X_human_A"の文を使えます。<br>
@@ -728,7 +746,6 @@ def wrong_photo_func():
     aが動物であり、bが女性である場合、dogのテーブルにある"X_woman_B"の文を使えます。<br>
     (a, b = dog, woman)の場合は"How often do you guys have sex?"という文を使えます。<br>
     "X_woman_B"というのは「Aliがxについての話をしていて、Bobがそれをwomanについての話と間違えている状況で、Bobが発する文」という意味です。<br>
-
     </details>
     """)
 
