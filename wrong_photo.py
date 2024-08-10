@@ -97,19 +97,34 @@ list_carry_around_A     =["I use this in my bedroom and bathroom.", "I left it a
 list_carry_around_B     =[]
 
 
-list_rent_A             =["Wanna borrow this?", "I borrow this often.", "I lent it to my brother.","I usually let my friends use it when they come over.", "I always make sure it's clean and ready before lending it out."]
+l_rent_A             =["(rA)"
+, "Wanna borrow this?"
+, "I borrow this often."
+, "I lent it to my brother."
+, "I usually let my friends use it when they come over."
+, "I always make sure it's clean and ready before lending it out."
+, "I found it in the lost and found and took it home."
+, "I borrowed it from someone and never gave it back."
+, "There is only one so I share it with my siblings."
+, "I've been trying to get it back from my brother for weeks, but he won't return it."
+]
 # Ali talks about the item that can be borrowed or lent (e.g. video games, massagers). Bob mistakenly assumes that Ali is talking about Ali's wife. Add 5 funny sentence if Ali would say it in this situation.
-list_rent_B             =["Please lend it to me.","I promise to take good care of it while I have it.","I'll make sure to return this on time.", "Can I get a discount if I rent it long-term?"]
+l_rent_B             =["(rB)"
+, "Please lend it to me."
+, "I promise to take good care of it while I have it."
+, "I'll make sure to return this on time."
+, "Can I get a discount if I rent it long-term?"
+]
 # Ali talks about Ali's wife. Bob mistakenly assumes that Ali is talking about the item that can be borrowed or lent (e.g. video games, massagers). Add 5 funny sentence if Bob would say it in this situation.
 
-list_second_hand_A      =["This is second hand.","It's second-hand. I wanna exchange it for a new one.","I got it from a previous owner who took good care of it.",  "I picked it up from a guy who was getting rid of it."]
+l_second_hand_A      =["(sA)","This is second hand.","It's second-hand. I wanna exchange it for a new one.","I got it from a previous owner who took good care of it.",  "I picked it up from a guy who was getting rid of it."]
 # Ali talks about the second-hand goods. Bob mistakenly assumes that Ali is talking about Ali's wife. Add 5 funny sentence if Ali would say it in this situation.
-list_second_hand_B      =["Is this second hand?","It's second-hand. Why not exchange it for a new one?","It's looks pretty good for being second-hand.",  "How many previous owners did it have?"]
+l_second_hand_B      =["(sB)","Is this second hand?","It's second-hand. Why not exchange it for a new one?","It's looks pretty good for being second-hand.",  "How many previous owners did it have?"]
 # Ali talks about Ali's wife. Bob mistakenly assumes that Ali is talking about the second-hand goods. Add 5 funny sentence if Bob would say it in this situation.
 
-list_present_A          =["I received this as a gift from my mother.","I asked my parents for this as a gift, but they wouldn't buy it for me."]
+l_present_A          =["(pA)","I received this as a gift from my mother.","I asked my parents for this as a gift, but they wouldn't buy it for me."]
 # Ali talks about something that was given as a gift. Bob mistakenly assumes that Ali is talking about Ali's wife. Add 5 funny sentence if Ali would say it in this situation.
-list_present_B          =["Did your mother give it to you as a gift?","I asked my parents for this as a gift, but they wouldn't buy it for me."]
+l_present_B          =["(pB)","Did your mother give it to you as a gift?","I asked my parents for this as a gift, but they wouldn't buy it for me."]
 # Ali talks about Ali's wife. Bob mistakenly assumes that Ali is talking about something that was given as a gift. Add 5 funny sentence if Bob would say it in this situation.
 
 
@@ -134,6 +149,7 @@ list_toilet_A=["I pooped there.","I was annoyed that there was no toilet paper."
 list_X_human_A=[]
 ############################################################################################################################################################
 
+# Task = "Define _ashtray instance without any explanation. Align the white spaces and the characters with exist instances."
 
 @dataclass
 class Object:
@@ -155,102 +171,32 @@ class Object:
     container :str # Container -> "y"
     insert    :str # Insert -> "y"
     child_use :str # It's common that children use this -> "y"
-    X_human_A:list
-    X_human_B:list
-    human_X_A:list
-    human_X_B:list
-    X_woman_A:list
-    X_woman_B:list
-    woman_X_A:list
-    woman_X_B:list
-    X_animal_A:list
-    X_animal_B:list
-    animal_X_A:list
-    animal_X_B:list
-    X_man_A:list
-    X_man_B:list
-    man_X_A:list
-    man_X_B:list
-    get       :list# Where you can buy or get this
-    keep      :list# Where you keep or put this
+    X_human_A   :list
+    X_human_B   :list
+    human_X_A   :list
+    human_X_B   :list
+    X_woman_A   :list
+    X_woman_B   :list
+    woman_X_A   :list
+    woman_X_B   :list
+    X_animal_A  :list
+    X_animal_B  :list
+    animal_X_A  :list
+    animal_X_B  :list
+    X_man_A     :list
+    X_man_B     :list
+    man_X_A     :list
+    man_X_B     :list
+    get         :list# Where you can buy or get this
+    keep        :list# Where you keep or put this
+    # 頻繁に買い替える？
 
     def __post_init__(self):
         Object.ALL_OBJECTS.append(self)
-        if self.human:
-            self.X_animal_A += [l_human_animal_A + l_woman_animal_A] # "He could barely understand English."
-            self.X_animal_B += [l_human_animal_B + l_woman_animal_B] # "Let me pet him next time."
-            self.animal_X_A += [l_animal_human_A + l_animal_woman_A] # "He likes dog food."
-            self.animal_X_B += [l_animal_human_B] # (none)
-
-        if self.animal:
-            self.X_human_A  += [l_animal_human_A + l_animal_woman_A] # "He poops everywhere."
-            self.X_human_B  += [l_animal_human_B + l_animal_woman_B] # (none)
-            self.human_X_A  += [l_human_animal_A + l_woman_animal_A] # "He could barely understand English."
-            self.human_X_B  += [l_human_animal_B + l_woman_animal_B] # "Let me pet this next time."
-
-        if self.paid and not self.building:
-            self.woman_X_A  += [l_woman_paid_A] # "I found it at a bar, liked it so much I took it home."
-            self.woman_X_B  += [l_woman_paid_B] # "How much did it cost?"
-
-        if self.inanimate and not self.building:
-            self.human_X_A  += [l_human_inanimate_A] # "It seemed unwell so I took it to the hospital."
-            self.woman_X_A  += [l_woman_inanimate_A] # "I picked it up at the bar."
-
-        if self.building:
-            self.X_woman_A  += [l_building_woman_A]
-            self.woman_X_B  += [l_woman_building_B]
-
-
-
-        if self.food:
-            self.X_woman_A +=[list_food_A] # "It was delicious."
-            self.woman_X_B +=[list_food_B] # "I've eaten this before."
-            self.X_animal_A+=[list_food_A] # "It was delicious."
-            self.animal_X_B+=[list_food_B] # "I've eaten this before."
-        if self.vehicle:
-            self.X_woman_A.extend([list_vehicle_A]) # "I like riding it."
-            self.woman_X_B.extend([list_vehicle_B]) # "I like riding it."
-        #3
-
-        if self.job:
-            pass
-        if self.merchant:
-            self.X_woman_A.extend([list_merchant_A]) # "They offer coupons"
-            self.woman_X_B.extend([list_merchant_B]) #
-        #4
-        if self.carry_around:
-            self.X_woman_A.extend([list_carry_around_A]) # "I left it at a friend's house."
-            self.woman_X_B.extend([list_carry_around_B]) #
-        if self.rent:
-            self.X_woman_A.extend([list_rent_A]) # "Wanna borrow?"
-            self.woman_X_B.extend([list_rent_B]) # "Please lend it to me."
-        if self.second_hand:
-            self.X_woman_A.extend([list_second_hand_A]) # "This is second hand."
-            self.woman_X_B.extend([list_second_hand_B]) # "Is this second hand?"
-        #5
-        if self.present:
-            self.X_woman_A.extend([list_present_A]) # "I received this as a gift from my mother."
-            self.woman_X_B.extend([list_present_B]) # "Did your mother give it to you as a gift?"
-        if self.container:
-            self.X_woman_A.extend([list_container_A])
-            self.woman_X_B.extend([list_container_B])
-        if self.insert:
-            self.X_woman_A.extend([list_insert_A])
-            self.woman_X_B.extend([list_insert_B])
-        #6
-        if self.child_use:
-            self.X_woman_A.extend([list_child_use_A]) # "I've been using this since I was ten years old."
-            self.woman_X_B.extend([list_child_use_B])
-        if self.get and not self.human:
-            self.X_human_A.extend([f"I got this in {self.get}."])
-        if self.keep and not self.human:
-            self.X_human_A.extend([f"I keep this in {self.keep}."])
-
 
 #                                                                hum,ani,ina   pai,foo,veh,  bui,job,mer,  car,ren,sec,  pre,con,ins,  chi
 _dog                        =Object("dog"                       ,"" ,"y","" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["pet store", "animal shelter"],["doghouse"])
 _car                        =Object("car"                       ,"" ,"" ,"y",  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","y",  "y","y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["car dealership"],["garage"])
-_doctor                     =Object("doctor"                    ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["hospital", "clinic"],[])
 _baseball_glove             =Object("baseball glove"            ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","y","y",  "" ,"y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["sports shop"],["locker"])
 _hotel                      =Object("hotel"                     ,"" ,"" ,"y",  "y","" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["travel agency", "online booking"],["city center"])
 _butterfly                  =Object("butterfly"                 ,"" ,"y","" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["park", "garden"],["insect cage"])
@@ -263,8 +209,6 @@ _bed                        =Object("bed"                       ,"" ,"" ,"y",  "
 _couch                      =Object("couch"                     ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["furniture store"],["living room"])
 _water_bottle               =Object("water bottle"              ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["supermarket", "convenience store"],["kitchen"])
 _compost                    =Object("compost"                   ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["garden center", "home improvement store"],["backyard"])
-_street_musician            =Object("street musician"           ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["street", "public square"],[])
-_clerk                      =Object("clerk"                     ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["office", "store"],[])
 _masseuse                   =Object("masseuse"                  ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["spa", "clinic"],["treatment room"])
 _cop                        =Object("cop"                       ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["police station"],["police station"])
 _baby                       =Object("baby"                      ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["home", "hospital"],["crib"])
@@ -277,22 +221,12 @@ _airplane                   =Object("airplane"                  ,"" ,"" ,"y",  "
 _tree                       =Object("tree"                      ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["nursery", "garden center"],["garden"])
 _pepper                     =Object("pepper"                    ,"" ,"" ,"y",  "y","y","" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["supermarket", "grocery store"],["kitchen"])
 _foliage_plant              =Object("foliage plant"             ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "y","" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["garden center", "nursery"],["living room"])
-_talking_ty                 =Object("talking toy"               ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y","" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["toy store", "online store"],["playroom"])
 _haunted_house              =Object("haunted house"             ,"" ,"" ,"y",  "y","" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["amusement park", "tourist attraction"],["amusement park"])
-_elderly                    =Object("elderly"                   ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["nursing home", "home"],["nursing home"])
-_temple                     =Object("temple"                    ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["religious site"],["religious site"])
 _horse                      =Object("horse"                     ,"" ,"y","" ,  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["farm", "market"],["stable"])
-_train                      =Object("train"                     ,"" ,"" ,"y",  "" ,"" ,"y",  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["train station", "online booking"],["rail yard"])
-_monument                   =Object("monument"                  ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["city square", "historical sites"],["landmark"])
-_library                    =Object("library"                   ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["city library", "university"],["reading room"])
-_clinic                     =Object("clinic"                    ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["hospital", "health center"],["treatment room"])
-_bar                        =Object("bar"                       ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["city center", "nightlife district"],["counter"])
 _hostel                     =Object("hostel"                    ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["tourist area", "city center"],["dormitory"])
-_radio                      =Object("radio"                     ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","y","y",  "y","" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["electronics store", "online store"],["broadcast station"])
 _mailbox                    =Object("mailbox"                   ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["post office", "hardware store"],["street corner"])
 _toilet                     =Object("toilet"                    ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["home improvement store", "department store"],["bathroom"])
 _iqos                       =Object("iqos"                      ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","y","y",  "y","y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["convenience store", "online store"],["pocket"])
-_charity_event              =Object("charity event"             ,"" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["community center", "online platform"],["hall"])
 _orphanage                  =Object("orphanage"                 ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["social service office", "charity organization"],["dormitory"])
 _tent_city                  =Object("tent city"                 ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["refugee camp", "emergency shelter"],["campground"])
 _taxi                       =Object("taxi"                      ,"" ,"" ,"y",  "" ,"" ,"y",  "" ,"" ,"y",  "" ,"y","" ,  "" ,"y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["taxi stand", "online app"],["garage"])
@@ -326,19 +260,44 @@ _knife                      =Object("knife"                     ,"" ,"" ,"y",  "
 _urn                        =Object("urn"                       ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["funeral home", "cemetery"],["grave"])
 _vase                       =Object("vase"                      ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "y","y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["home goods store", "flower shop"],["living room"])
 _money_box                  =Object("money box"                 ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["stationery store", "toy store"],["desk"])
-_light_bulb                 =Object("light bulb"                ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["hardware store", "supermarket"],["lamp"])
+_light_bulb                 =Object("light bulb"                ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["hardware store", "supermarket"],["lamp"])
 _plunger                    =Object("plunger"                   ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["hardware store", "home improvement store"],["toilet"])
 _toothpick                  =Object("toothpick"                 ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["supermarket", "restaurant supply store"],["dining room"])
 _dumpster                   =Object("dumpster"                  ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["sanitation company", "construction supply store"],["alley"])
+_hat                        =Object("hat"                       ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","" ,"y",  "y","" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["cloth store"],["coat rack"])
+_bathtub                    =Object("bathtub"                   ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["hardware store"],["bathroom"])
+_ashtray                    =Object("ashtray"                   ,"", "", "y",  "y", "", "",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["convenience store"], ["table"])
+
+
+#_radio                      =Object("radio"                     ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","y","y",  "y","" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["electronics store", "online store"],["broadcast station"])
+#_train                      =Object("train"                     ,"" ,"" ,"y",  "" ,"" ,"y",  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["train station", "online booking"],["rail yard"])
+#_monument                   =Object("monument"                  ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["city square", "historical sites"],["landmark"])
+#_library                    =Object("library"                   ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["city library", "university"],["reading room"])
+#_clinic                     =Object("clinic"                    ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["hospital", "health center"],["treatment room"])
+#_bar                        =Object("bar"                       ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["city center", "nightlife district"],["counter"])
+#_elderly                    =Object("elderly"                   ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["nursing home", "home"],["nursing home"])
+#_temple                     =Object("temple"                    ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["religious site"],["religious site"])
+#_talking_toy                =Object("talking toy"               ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y","" ,"" ,  "y",[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["toy store", "online store"],["playroom"])
+#_street_musician            =Object("street musician"           ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["street", "public square"],[])
+#_clerk                      =Object("clerk"                     ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["office", "store"],[])
+#_doctor                     =Object("doctor"                    ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["hospital", "clinic"],[])
+#_charity_event              =Object("charity event"             ,"" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],["community center", "online platform"],["hall"])
+
 
 ############################################################################################################################################################
+"""
+for i in Object.ALL_OBJECTS:
+    if i.present:
+        print(i.obj_name)
+"""
+
 
 # <timing>----
-# Ali talks about timings involving " x ".
-# Bob mistakenly thinks Ali is talking about " hostel ".
-# What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous?
-#  Generate 5 sentences without any explanations or annotations. Print only the statements.
-#   Add the sentences in each list.
+
+# Ali talks about accidents involving X.
+# Bob mistakes that Ali talks about Ali's girlfriend' body.
+# What could Ali say that would cause Bob to misinterpret Ali is a pervert?
+# Extend new 5 sentences in """ _train """ in English in python without any explanation. Align characters and whitespaces with exist objects.
 
 _baseball_glove .X_woman_A  +=["I change it every three years.","I like to break it in gently before really getting into it."]
 _bed            .X_woman_A  +=["I stay in it all winter."]
@@ -355,27 +314,37 @@ _safe           .X_woman_A  +=["I like to keep it locked up tight until I need i
 _vase           .X_woman_A  +=["I fill it up every morning.", "I love arranging flowers inside it daily."]
 _money_box      .X_woman_A  +=["I keep it hidden under my bed.", "When the coins run out, remove the contents."]
 _dumpster       .X_woman_A  +=["I throw garbages into it.","It starts to smell if I don't take care of it.","I make sure to empty it regularly.", "I clean it every few months."]
+_bathtub        .X_woman_A  +=["I always feel refreshed after spending time in it."]
+_train          .X_woman_A  +=["It can get really packed and tight inside during peak hours.", "I ride this every day.", "It was so crowded, I could hardly move.", "I had to squeeze in tightly to find a spot."]
+
 # ----</timing>
 
+_dog            .X_woman_A  +=["She loves dog food.","I am consulting a doctor about her fleas and ticks.", "She loves to jump on me unexpectedly, and sometimes I fall over.","I once found her chewing on my underwear.","She keeps trying to hump my leg whenever I sit down.","She ended up fucking someone else's dog at the dog park."]
 
 # <accident>----
-# Ali talks about accidents involving "_dumpster".
-# Bob mistakes that Ali talks about pussy.
-# What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences in English in python without any explanation. Align characters and whitespaces with exist objects.
+# Ali talks about accidents involving X.
+# Bob mistakes that Ali talks about Ali's girlfriend' body.
+# What could Ali say that would cause Bob to misinterpret Ali is a pervert?
+# Extend new 5 sentences in """ _train """ in English in python without any explanation. Align characters and whitespaces with exist objects.
 
-_dog            .X_woman_A  +=["She loves dog food.","I am consulting a doctor about her fleas and ticks.", "She loves to jump on me unexpectedly, and sometimes I fall over.","I once found her chewing on my underwear.","She keeps trying to hump my leg whenever I sit down.","She ended up fucking someone else's dog at the dog park."]
 _baseball_glove .X_woman_A  +=["I accidentally took home another player's one."]
 _bed            .X_woman_A  +=["I've stayed in it for up to 20 hours even though I knew it was no good."]
 _car            .X_woman_A  +=["I put in diesel by mistake.","I spilled lasagna in it.","I left my smartphone in it.", "The smartphone I left in it exploded due to the heat."]
 _couch          .X_woman_A  +=["My sock got stuck in the gap in it and I couldn't get it out.", "After scrubbing the inside of it with a metal scrubbing pad, it started to taste metallic."]
 _water_bottle   .X_woman_A  +=["I put protein in it and the smell didn't go away.", "The carbonated drink squirted out of it.", "I accidentally spilled the contents of it and damaged my computer."]
 _hotel          .X_woman_A  +=["I got scolded for stepping on that with my shoes on."]
-_shoes          .X_woman_A  +=["Just putting my foot in there once gave me athlete's foot."]
+_shoes          .X_woman_A  +=["Just putting my foot in there once gave me athlete's foot.", "I wore them without socks and they got really sweaty."]
 _mailbox        .X_woman_A  +=["I accidentally shoved something too big into it and it got stuck.","I tried to force it open and ended up breaking the lock."]
 _urn            .X_woman_A  +=["I accidentally knocked it over and everything spilled out."]
-_safe           .X_woman_A  +=["I tried to force it open and ended up breaking the lock.", "Once I forgot my pin number.", "I once lost the key to the padlock on this."]
-_vase           .X_woman_A  +=["Once, I put too many flowers in this and it overflowed", "I bumped into it and it fell off the table."]
-_dumpster       .X_woman_A  +=["I once got scolded for putting non-flammable material in this."]
+_safe           .X_woman_A  +=["I once lost the key to the padlock on this.", "I tried to force it open and ended up breaking the lock."]
+_vase           .X_woman_A  +=["I once put too many flowers in this and it overflowed", "I bumped into it and it fell off the table."]
+_dumpster       .X_woman_A  +=["I once got scolded for putting non-flammable material in this.", "I found a raccoon inside it once."]
+_microwave      .X_woman_A  +=["I once put something metal in it and sparks flew everywhere.", "Once I put an egg in it and it exploded."]
+_fridge         .X_woman_A  +=["I accidentally left it open and it got really wet inside.", "I found something moldy growing in the back of it.","The light inside it flickers.", "I stuffed it too full and the door wouldn't close.", "I once dropped an egg inside and it cracked all over the place.", "I left some fish in there too long and it smelled awful.", "I forgot to clean it and it started to stink.", "I found an expired yogurt that was months old."]
+_hat            .X_woman_A  +=["Thet was too tight when I put it on and it gave me a headache.", "I accidentally tore it while trying to take it off."]
+_bathtub        .X_woman_A  +=["I tried to clean it with bleach and the fumes were overwhelming.", "I dropped a bar of soap and it got stuck in the drain."]
+_train          .X_woman_A  +=["It was so packed I got squished against the wall.", "Someone accidentally grabbed me when it jerked.", "I got stuck standing in an awkward position for the whole ride."]
+
 
 # ----</accident>
 
@@ -396,11 +365,11 @@ _compost        .X_woman_A  +=["I put mealworms and food waste into this."]
 _dumpster       .X_woman_A  +=["I have to clean it out thoroughly to prevent bad smells."]
 # ----</care>
 
-
-# <tight_loose>----
-# Ali talks about how tight or loose " _dumpster " is.
-# Bob mistakes that Ali talks about the pussy.
-# What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences in English in python without any explanation. Align characters and whitespaces with exist objects.
+# <accident>----
+# Ali talks about how tight or loose X is.
+# Bob mistakes that Ali talks about Ali's girlfriend' body.
+# What could Ali say that would cause Bob to misinterpret Ali is a pervert?
+# Extend new 5 sentences in """ _train """ in English in python without any explanation. Align characters and whitespaces with exist objects.
 
 _baseball_glove .X_woman_A  +=["This fits snugly to my hand.", "This remembers the shape of my hand.", "This is tight around my wrist and hurt."]
 _shoes          .X_woman_A  +=["This is tight around my foot and hurt."]
@@ -412,6 +381,10 @@ _fridge         .X_woman_A  +=["This doesn't even fit a TV dinner.", "The fit is
 _safe           .X_woman_A  +=["It's too narrow to fit a large gold bar inside."]
 _vase           .X_woman_A  +=["The opening is too tight for my hand to fit.", "It's so narrow that arranging flowers inside is difficult.", "The fit is so snug that I can barely get anything in.", "It's too loose and things keep falling out.", "The neck is tight, making it hard to clean inside."]
 _dumpster       .X_woman_A  +=[ "It's so loose that garbages keep falling out.", "I find it hard to fit large garbages inside."]
+_hat            .X_woman_A  +=["It's too loose. it just slips right off from my head.", "It feels really tight and uncomfortable."]
+_bathtub        .X_woman_A  +=["This bathtub is narrow, so I have to bend my legs to get in."]
+_train          .X_woman_A  +=["It's so tight in here that I can barely move.", "I complained to make this wider.", "It was so tight that I ended up with bruises on my feet."]
+
 # ----</tight_loose>
 
 # <surround>----
@@ -425,6 +398,10 @@ _urn            .X_woman_A  +=["I'll show my grandchildren inside."]
 # <get>----
 # Ali talks about something related to getting the " safe ". Bob mistakes that Ali talks about the adult woman. What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences without any explanations or annotations. Print only the statements.
 
+#Ali talks about how he got the """ _hat """.
+# Bob mistakes that Ali talks about the woiman.
+# What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences in English in python without any explanation. Align characters and whitespaces with exist objects.
+
 _dog            .X_woman_A  +=["My son picked this up on the street when he was ten years old."]
 _baseball_glove .X_woman_A  +=["I can't wait to break it in and start playing."]
 _microwave      .X_woman_A  +=["I bought this because cooking at home is a pain."]
@@ -436,8 +413,8 @@ _car            .X_woman_A  +=["I found it at an auto shop and got it right away
 # ----</get>
 
 # <free>----
-# Ali talks about " _dumpster ".
-# Bob mistakes that Ali talks about the pussy.
+# Ali talks about " _train ".
+# Bob mistakes that Ali talks about woman.
 # What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences in English in python without any explanation. Align characters and whitespaces with exist objects.
 _baby           .X_woman_A  +=["She will start kindergarten next year.", "She recently learned to use the toilet.", "What kind of children's clothes do you think would be good for her to wear?"]
 _butterfly      .X_woman_A  +=["I caught this in a net.", "I spotted this in the park and immediately grabbed it."]
@@ -456,16 +433,20 @@ _oven           .X_woman_A  +=["I put the skewered chicken in this.", "It tastes
 _iqos           .X_woman_A  +=["Insert a cigarette into this and smoke it.", "When you use it, the taste is different from regular cigarettes."]
 _urn            .X_woman_A  +=["I have my grandfather's ashes in this.", "My grandfather is in this."]
 _vase           .X_woman_A  +=["I love seeing so many flowers in this."]
-_dumpster       .X_woman_A  +=["I once found a dead rat in there."]
+_dumpster       .X_woman_A  +=["I sometime find dead rats in there.", "I often visit it at night."]
 #  ----</free>
 
 
 
 
-
+####################
+# Cheap and be dependent
 # Misunderstanding comedy creation task
-# Ali talks about x. Bob mistakes that Ali talks about Bob's daughter. Bob is shocked when, based on the misunderstanding, he believes his daughter to be a pervert or crazy. Generate new 5 instances in English without any explanations or annotations. Print only the new instances. Start the answer with "```python"
-# Bob should mistakenly believe that Ali is talking dirty or that Bob's daughter is dependent on Ali.
+# Ali talks about "_train".
+# Bob mistakes that Ali talks about Bob's daughter.
+# Bob will mistakenly believe that Bob's daughter is a pervert and cheap, and that Bob's daughter is dependent on Ali.
+# Generate new 5 Ali's speech in English without any explanations or annotations. Print only the new instances. Start the answer with "```python"
+
 
 _taxi                       .X_woman_A  +=["If I call it will come right away and give me a ride, no matter how late.", "The ride is comfortable."]
 _pizza_deliverer            .X_woman_A  +=["If I call it will come right away, no matter how late.", "I'll have her leave at the front door."]
@@ -479,10 +460,11 @@ _haunted_house              .X_woman_A  +=["If I enter it, it makes me scream. S
 _nightclub                  .X_woman_A  +=["If I go there, it keeps me up all night.", "I often bring friends to the house."]
 _roller_coaster             .X_woman_A  +=["If I ride it, it gives me a thrilling experience."]
 _hot_water_bag              .X_woman_A  +=["Once it flooded the bed and I got mad.","I always bring this to bed."]
+_train                      .X_woman_A  +=["Hundreds of people ride that every day.","It's so cheap and always available when I need it.", "I can ride it any time I want, day or night.","That makes trips around Tokyo all day long.", "That sticks to the schedule exactly.", "There are many homeless guys."]
 
-# </x_woman bob's daughter>
 
-# <X_woman_A place>
+
+
 
 
 # Task1 = [Ali talks about x. Bob mistakes that Ali talks about Bob's daughter's house. Bob is shocked when, based on the misunderstanding, he believes his daughter to be a pervert. Generate new 5 instances in English without any explanations or annotations. Print only the new instances. Start the answer with "```python"]
@@ -678,7 +660,7 @@ _knife          .X_man_A+=["This is (supervised/used) by Guy Fieri"]
 #######################
 # Ali talks about the reaction to the "  " from people around him. Bob mistakes that Ali talks about dick or dildo. What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous?
 # Add new 5 sentences in each empty lists, without any explanations or annotations. Print only the statements.
-_urn            .X_man_A+=["I placed the remains inside, We can't just leave the remains lying around."]
+_urn            .X_human_A+=["I placed the remains inside, We can't just leave the remains lying around."]
 _matchstick     .X_man_A+=["If you rub it quickly it will catch fire."]
 
 #######################
@@ -704,10 +686,15 @@ _candle         .X_man_A+=["This one lasts for about 3 hours.", "I bought it wit
 _umbrella       .X_man_A+=[]
 _matchstick     .X_man_A+=[]
 
+#######################
+
+
+
+
+
+
 
 # 傘立てに置く
-# golf club, baseball bat, 飛距離
-
 
 
 
@@ -742,43 +729,122 @@ def wrong_photo_func():
     "X_human_A"というのは「Aliがxについての話をしていて、Bobがそれをhumanについての話と間違えている状況で、Aliが発する文」という意味です。<br>
     aが動物であり、bが女性である場合、dogのテーブルにある"woman_X_A"の文を使えます。<br>
     (a, b = dog, woman)の場合は"We've tried many times but have not been able to have children."という文を使えます。<br>
-    "woman_X_A"というのは「Aliがwomanについての話をしていて、BobがそれをXについての話と間違えている状況で、Aliが発する文」という意味です。<br>
+    "woman_X_A"というのは「Aliがwomanまたは女性器についての話をしていて、BobがそれをXについての話と間違えている状況で、Aliが発する文」という意味です。<br>
     aが動物であり、bが女性である場合、dogのテーブルにある"X_woman_B"の文を使えます。<br>
     (a, b = dog, woman)の場合は"How often do you guys have sex?"という文を使えます。<br>
-    "X_woman_B"というのは「Aliがxについての話をしていて、Bobがそれをwomanについての話と間違えている状況で、Bobが発する文」という意味です。<br>
+    "X_woman_B"というのは「Aliがxについての話をしていて、Bobがそれをwomanまたは女性器についての話と間違えている状況で、Bobが発する文」という意味です。<br>
+
+    各テーブルの一番上にanimal : dog : 19 のような文字列があります。<br>
+    これは {ジャンル(animal or human or inanimate)} : {名前} : {固有文の数} を意味します。<br>
+
     </details>
     """)
 
     for i in Object.ALL_OBJECTS:
-        genre=""
+        genre, th_color = "", ""
+        unique_item_number = sum(len(v) for v in [i.X_human_A,i.X_human_B,i.human_X_A,i.human_X_B,i.X_woman_A,i.X_woman_B,i.woman_X_A,i.woman_X_B,i.X_animal_A,i.X_animal_B,i.animal_X_A,i.animal_X_B,i.X_man_A,i.X_man_B,i.man_X_A,i.man_X_B])
+        if i.obj_name:
+            i.X_woman_A  += [list_child_use_A]
+            i.X_man_A    += [list_child_use_A]
         if i.human:
-            genre="human"
+            i.X_animal_A += [l_human_animal_A + l_woman_animal_A] # "He could barely understand English."
+            i.X_animal_B += [l_human_animal_B + l_woman_animal_B] # "Let me pet him next time."
+            i.animal_X_A += [l_animal_human_A + l_animal_woman_A] # "He likes dog food."
+            i.animal_X_B += [l_animal_human_B] # (none)
+
+        if i.animal:
+            i.X_human_A  += [l_animal_human_A + l_animal_woman_A] # "He poops everywhere."
+            i.X_human_B  += [l_animal_human_B + l_animal_woman_B] # (none)
+            i.human_X_A  += [l_human_animal_A + l_woman_animal_A] # "He could barely understand English."
+            i.human_X_B  += [l_human_animal_B + l_woman_animal_B] # "Let me pet this next time."
+
+        if i.paid and not i.building:
+            i.woman_X_A  += [l_woman_paid_A] # "I found it at a bar, liked it so much I took it home."
+            i.woman_X_B  += [l_woman_paid_B] # "How much did it cost?"
+
+        if i.inanimate and not i.building:
+            i.human_X_A  += [l_human_inanimate_A] # "It seemed unwell so I took it to the hospital."
+            i.woman_X_A  += [l_woman_inanimate_A] # "I picked it up at the bar."
+
+        if i.building:
+            i.X_woman_A  += [l_building_woman_A]
+            i.woman_X_B  += [l_woman_building_B]
+
+        if i.food:
+            i.X_woman_A +=[list_food_A] # "It was delicious."
+            i.woman_X_B +=[list_food_B] # "I've eaten this before."
+            i.X_animal_A+=[list_food_A] # "It was delicious."
+            i.animal_X_B+=[list_food_B] # "I've eaten this before."
+        if i.vehicle:
+            i.X_woman_A.extend([list_vehicle_A]) # "I like riding it."
+            i.woman_X_B.extend([list_vehicle_B]) # "I like riding it."
+
+        if i.job:
+            pass
+        if i.merchant:
+            i.X_woman_A.extend([list_merchant_A]) # "They offer coupons"
+            i.woman_X_B.extend([list_merchant_B]) #
+
+        if i.carry_around:
+            i.X_woman_A.extend([list_carry_around_A]) # "I left it at a friend's house."
+            i.woman_X_B.extend([list_carry_around_B]) #
+        if i.rent:
+            i.X_woman_A.extend([l_rent_A]) # "Wanna borrow?"
+            i.woman_X_B.extend([l_rent_B]) # "Please lend it to me."
+        if i.second_hand:
+            i.X_woman_A.extend([l_second_hand_A]) # "This is second hand."
+            i.woman_X_B.extend([l_second_hand_B]) # "Is this second hand?"
+
+        if i.present:
+            i.X_woman_A.extend([l_present_A]) # "I received this as a gift from my mother."
+            i.woman_X_B.extend([l_present_B]) # "Did your mother give it to you as a gift?"
+        if i.container:
+            i.X_woman_A.extend([list_container_A])
+            i.woman_X_B.extend([list_container_B])
+        if i.insert:
+            i.X_woman_A.extend([list_insert_A])
+            i.woman_X_B.extend([list_insert_B])
+
+        if i.child_use:
+            i.X_woman_A.extend([list_child_use_A]) # "I've been using this since I was ten years old."
+            i.woman_X_B.extend([list_child_use_B])
+        if i.get and not i.human:
+            i.X_human_A.extend([f"I got this in {i.get}."])
+        if i.keep and not i.human:
+            i.X_human_A.extend([f"I keep this in {i.keep}."])
+        if i.human:
+            genre, th_color = "human"    , "span style='background-color:#1a1ca1'" # blue
         elif i.animal:
-            genre="animal"
+            genre, th_color = "animal"   , "span style='background-color:#4e4f00'" # yellow
         elif i.inanimate:
-            genre="inanimate"
+            genre, th_color = "inanimate", "span style='background-color:#3b3b3b'" # gray
         else:
             genre="???"
+        if i.container:
+            pass
+        if i.insert:
+            pass
+
 
         base.append(f"""
         <table>
-        <tr><th colspan="2">{i.obj_name}({genre})       </th></tr>
-        <tr><th>X_human_A       </th><td>{i.X_human_A}  </td></tr>
-        <tr><th>X_human_B       </th><td>{i.X_human_B}  </td></tr>
-        <tr><th>human_X_A       </th><td>{i.human_X_A}  </td></tr>
-        <tr><th>human_X_B       </th><td>{i.human_X_B}  </td></tr>
-        <tr><th>X_woman_A       </th><td>{i.X_woman_A}  </td></tr>
-        <tr><th>X_woman_B       </th><td>{i.X_woman_B}  </td></tr>
-        <tr><th>woman_X_A       </th><td>{i.woman_X_A}  </td></tr>
-        <tr><th>woman_X_B       </th><td>{i.woman_X_B}  </td></tr>
-        <tr><th>X_man_A         </th><td>{i.X_man_A}    </td></tr>
-        <tr><th>X_man_B         </th><td>{i.X_man_B}    </td></tr>
-        <tr><th>man_X_A         </th><td>{i.man_X_A}    </td></tr>
-        <tr><th>man_X_B         </th><td>{i.man_X_B}    </td></tr>
-        <tr><th>X_animal_A      </th><td>{i.X_animal_A} </td></tr>
-        <tr><th>X_animal_B      </th><td>{i.X_animal_B} </td></tr>
-        <tr><th>animal_X_A      </th><td>{i.animal_X_A} </td></tr>
-        <tr><th>animal_X_B      </th><td>{i.animal_X_B} </td></tr>
+        <tr><th {th_color} colspan="2">{genre} : {i.obj_name} : {unique_item_number}     </th></tr>
+        <tr><th style='background-color:#1a1ca1'>X_human_A       </th><td>{i.X_human_A}  </td></tr>
+        <tr><th style='background-color:#1a1ca1'>X_human_B       </th><td>{i.X_human_B}  </td></tr>
+        <tr><th style='background-color:#1a1ca1'>human_X_A       </th><td>{i.human_X_A}  </td></tr>
+        <tr><th style='background-color:#1a1ca1'>human_X_B       </th><td>{i.human_X_B}  </td></tr>
+        <tr><th style='background-color:#1a1ca1'>X_woman_A       </th><td>{i.X_woman_A}  </td></tr>
+        <tr><th style='background-color:#1a1ca1'>X_woman_B       </th><td>{i.X_woman_B}  </td></tr>
+        <tr><th style='background-color:#1a1ca1'>woman_X_A       </th><td>{i.woman_X_A}  </td></tr>
+        <tr><th style='background-color:#1a1ca1'>woman_X_B       </th><td>{i.woman_X_B}  </td></tr>
+        <tr><th style='background-color:#1a1ca1'>X_man_A         </th><td>{i.X_man_A}    </td></tr>
+        <tr><th style='background-color:#1a1ca1'>X_man_B         </th><td>{i.X_man_B}    </td></tr>
+        <tr><th style='background-color:#1a1ca1'>man_X_A         </th><td>{i.man_X_A}    </td></tr>
+        <tr><th style='background-color:#1a1ca1'>man_X_B         </th><td>{i.man_X_B}    </td></tr>
+        <tr><th style='background-color:#4e4f00'>X_animal_A      </th><td>{i.X_animal_A} </td></tr>
+        <tr><th style='background-color:#4e4f00'>X_animal_B      </th><td>{i.X_animal_B} </td></tr>
+        <tr><th style='background-color:#4e4f00'>animal_X_A      </th><td>{i.animal_X_A} </td></tr>
+        <tr><th style='background-color:#4e4f00'>animal_X_B      </th><td>{i.animal_X_B} </td></tr>
         """)
     return apply_color_styles_saraba('<br>'.join(map(str, base)))
 
