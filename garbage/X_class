@@ -1,0 +1,466 @@
+from dataclasses import dataclass
+from typing import List, ClassVar
+
+list_human_robber_A     =["<span style='color: cyan;'>list_human_A           </span>","I asked about recommended tourist spots.", "I still keep in touch with him on SNS.","I told him to come to Japan.","I went to see him again with my family."]
+# Ali talks about a normal people. Bob mistakenly assumes that Ali is talking about a robber in a tourist spot. Add new 5 funny sentence if Ali would say it in this situation. Don't clear up that misunderstanding. Please do not add jokes that use quotation marks to make double meanings, as they are lame. You should not add jokes.
+list_human_robber_B     =["<span style='color: cyan;'>list_human_B           </span>",]
+# Ali talks about a normal people. Bob mistakenly assumes that Ali is talking about a robber in a tourist spot. Add new 5 funny sentence if Bob would say it in this situation. Don't clear up that misunderstanding. Please do not add jokes that use quotation marks to make double meanings, as they are lame. You should not add jokes.
+
+list_animal_A           =["<span style='color: cyan;'>list_animal_A          </span>", "I gave him the crumbs I had.","He loves pet food.","He dislikes leashes.","She sleeps on the floor next to my bed.","I've been trying to get him to use the toilet but it's difficult.","I was amazed at the size of his poop and took a picture.","He poops everywhere.", "The master was controlling him with a whip.", "He was 4 years old.","They became docile when I petted them.","I like to pet them.","He gets so excited when I say the word 'treat'."]
+# Ali talks about an animal. Bob mistakenly assumes that Ali is talking about Ali's father. Add new 5 funny sentence if Ali would say it in this situation.
+list_animal_B           =["<span style='color: cyan;'>list_animal_B          </span>", "Let me pet him next time.","I'll give him some pet food next time.","Does he need a leash when you take him out?","Has he learned to use the toilet yet?"]
+# Ali talks about Ali's father. Bob mistakenly assumes that Ali is talking about an animal. Add new 5 funny sentence if Bob would say it in this situation.
+
+list_woman_animal_A     =["<span style='color: cyan;'>list_woman_animate_A   </span>","My father is against our marriage.","We've tried many times but have not been able to have children.","I once had a fight with her and went back to my parents' house."]
+# Ali talks about Ali's girlfriend, not an animal. Bob mistakenly assumes that Ali is talking about an animal, not Ali's girlfriend. Bob mistakenly believes Ali is perverted or crazy. Add new 5 funny sentence if Ali would say it in this situation.
+
+list_inanimate_A        =["<span style='color: cyan;'>list_inanimate_A       </span>",]
+list_inanimate_B        =["<span style='color: cyan;'>list_inanimate_B       </span>",]
+list_paid_item_A        =["<span style='color: cyan;'>list_paid_item_A       </span>", "It had high online reviews.","They offer coupons.","I bargained.","I bought it cheaply.","They gave me detergent as an extra.","I bought a week's supply.","I also gave this to my family.","If you buy two you get one free.","I'm thinking of buying more."]
+# Ali talks about the peid item. Bob mistakenly assumes that Ali is talking about an woman. Add new 5 funny sentence if Ali would say it in this situation.
+
+list_paid_item_A       +=["<span style='color: cyan;'>list_paid_item_A(2)    </span>", "This costs about 400 yen.", "I bought it for 400 yen.", "I looked at the price tag and it said 400 yen.", "If you buy this, you also get some peanuts as a bonus.","It was confiscated by customs."]# Think of new five sentences that would be funny if Bob misunderstood Ali to be talking about a roller coaster rather than a cheap marchandise (e.g. radio, plushie, tobacco).
+
+list_paid_item_B        =["<span style='color: cyan;'>list_paid_item_B       </span>", "How much did it cost?", "Where did you bought it?"]
+
+list_woman_paid_item_A  =["<span style='color: cyan;'>list_woman_paid_item_A </span>", "I found it at a bar, liked it so much I took it home.", "I picked up it on the street."]
+# Ali talks about Ali's girlfriend. Bob mistakenly assumes that Ali is talking about a paid item(e.g. car, phone). Add 5 funny sentence if Ali would say it in this situation.
+
+list_food_A             =["<span style='color: cyan;'>list_food_A            </span>","This has a nice texture when you put it in your mouth.","It tastes like cheese.", "I got fat because of this.", "It was delicious.","We all competed for this.","I took it three times a day.","I ate this raw.", "I ate this one alive.", "This goes well with wine."]
+# Ali talks about the food. Bob mistakenly assumes that Ali is talking about a non-edible animal(e.g. cat, elephant) . Add 5 funny sentence if Ali would say it in this situation.
+
+list_food_B             =["<span style='color: cyan;'>list_food_B            </span>","This has a nice texture when you put it in your mouth.","I've eaten this before."]
+
+list_vehicle_A          =["<span style='color: cyan;'>list_vehicle_A         </span>","I like riding it.", "This is a comfortable ride."]
+# Ali talks about the vehicle, not his wife. Bob mistakenly assumes that Ali is talking about his wife, not the vehicle. Bob mistakenly believes Ali is perverted or crazy. Add new 5 funny sentence if Ali would say it in this situation.
+
+list_vehicle_B          =["<span style='color: cyan;'>list_vehicle_B         </span>","I like riding it.", "This is a comfortable ride."]
+
+list_building_A         =["<span style='color: cyan;'>list_building_A        </span>","The total construction cost is said to be 1 billion yen."]
+list_building_B         =["<span style='color: cyan;'>list_building_B        </span>",]
+
+list_building_woman_A   =["<span style='color: cyan;'>list_building_woman_A  </span>","I often go inside that.","I took photos inside that.","I left my phone inside that.","There is an entrance fee to get inside it.", "Many people can fit inside it at once."]
+# Ali talks about the building(e.g. library, museum), not his wife. Bob mistakenly assumes that Ali is talking about his wife, not the building. Bob mistakenly believes Ali is perverted or crazy. Add new 5 funny sentence if Ali would say it in this situation.
+
+list_building_woman_B   =["<span style='color: cyan;'>list_building_woman_A  </span>","Do you have any pictures of the inside of this?","Is there an entrance fee to get inside it?","How many people can fit inside it at once?"]
+# Ali talks about his wife, not the building(e.g. library, museum). Bob mistakenly assumes that Ali is talking about not the building, not his wife. Ali mistakenly believes Bob is perverted or crazy. Add new 5 funny sentence if Bob would say it in this situation.
+
+list_job_A              =["<span style='color: cyan;'>list_job_A             </span>","I used to do things like them too.", "I used to aspire to a life like theirs.","I want my son to be like them."]
+# Ali talks about the good person, not a robber. Bob mistakenly believes that Ali is talking about a robber, not the good person. Add new 5 funny sentence if Ali would say it in this situation.
+list_job_B              =["<span style='color: cyan;'>list_job_B             </span>",""]
+# Ali talks about the robber, not a good person. Bob mistakenly believes that Ali is talking about a good person, not the robber. Add new 5 funny sentence if Bob would say it in this situation.
+
+list_merchant_A         =["<span style='color: cyan;'>list_merchant_A        </span>","I've recommended that my friends go there when they travel abroad.","I like that kind of thing.","I even paid a tip.","I was hooked and went back with my family for a second time.","They gave us a discount.","They offer coupons.","Credit cards were accepted.","He gave me the correct change.","I was given a numbered ticket.","Failed to haggle.","I would like to go again next time.","I went there twice."," It seemed like they were at it for 10 hours a day."]
+list_merchant_B         =["<span style='color: cyan;'>list_merchant_B        </span>",]
+
+list_carry_around_A     =["<span style='color: cyan;'>list_carry_around_A    </span>","I use this in my bedroom and bathroom.", "I left it at a friend's house."]
+
+list_carry_around_B     =["<span style='color: cyan;'>list_carry_around_B    </span>",]
+
+
+list_rent_A             =["<span style='color: cyan;'>list_rent_A            </span>","Wanna borrow this?", "I borrow this often.", "I lent it to my brother.","I usually let my friends use it when they come over.", "I always make sure it's clean and ready before lending it out."]
+# Ali talks about the item that can be borrowed or lent (e.g. video games, massagers). Bob mistakenly assumes that Ali is talking about Ali's wife. Add 5 funny sentence if Ali would say it in this situation.
+list_rent_B             =["<span style='color: cyan;'>list_rent_B            </span>","Please lend it to me.","I promise to take good care of it while I have it.","I'll make sure to return this on time.", "Can I get a discount if I rent it long-term?"]
+# Ali talks about Ali's wife. Bob mistakenly assumes that Ali is talking about the item that can be borrowed or lent (e.g. video games, massagers). Add 5 funny sentence if Bob would say it in this situation.
+
+list_second_hand_A      =["<span style='color: cyan;'>list_second_hand_A     </span>","This is second hand.","It's second-hand. I wanna exchange it for a new one.","I got it from a previous owner who took good care of it."]
+# Ali talks about the second-hand goods. Bob mistakenly assumes that Ali is talking about Ali's wife. Add 5 funny sentence if Ali would say it in this situation.
+list_second_hand_B      =["<span style='color: cyan;'>list_second_hand_B     </span>","Is this second hand?","It's second-hand. Why not exchange it for a new one?","It's looks pretty good for being second-hand.",  "How many previous owners did it have?"]
+# Ali talks about Ali's wife. Bob mistakenly assumes that Ali is talking about the second-hand goods. Add 5 funny sentence if Bob would say it in this situation.
+
+list_present_A          =["<span style='color: cyan;'>list_present_A         </span>","I received this as a gift from my mother.","I asked my parents for this as a gift, but they wouldn't buy it for me."]
+# Ali talks about something that was given as a gift. Bob mistakenly assumes that Ali is talking about Ali's wife. Add 5 funny sentence if Ali would say it in this situation.
+list_present_B          =["<span style='color: cyan;'>list_present_B         </span>","Did your mother give it to you as a gift?","I asked my parents for this as a gift, but they wouldn't buy it for me."]
+# Ali talks about Ali's wife. Bob mistakenly assumes that Ali is talking about something that was given as a gift. Add 5 funny sentence if Bob would say it in this situation.
+
+
+list_container_A        =["<span style='color: cyan;'>list_container_A       </span>",]
+list_container_B        =["<span style='color: cyan;'>list_container_B       </span>",]
+list_insert_A           =["<span style='color: cyan;'>list_insert_A          </span>",]
+list_insert_B           =["<span style='color: cyan;'>list_insert_B          </span>",]
+list_child_use_A        =["<span style='color: cyan;'>list_child_use_A       </span>","I've been using this since I was ten years old."]
+list_child_use_B        =["<span style='color: cyan;'>list_child_use_B       </span>",]
+list_seats_A            =["<span style='color: cyan;'>list_seats_A           </span>","There was a noisy child, so I scolded him and made him quiet.","Someone brought their pet and it was making noise the entire time.","I complained because others were too noisy.","I scolded my daughter for spilling her coffee.","I moved seats because there was a smelly guy there.", "There was also baby seats.", "The guy next to me fell asleep and started noisy snoring."]# Think of new five sentences that would be funny if Bob misunderstood Ali to be talking about some place with seats (e.g. opera house, train) rather than a roller coaster.
+list_seats_B            =["<span style='color: cyan;'>list_seats_B           </span>",]
+list_hours_A            =["<span style='color: cyan;'>list_hours_A           </span>","I spent a few hours there.", "I took a nap there.","I didn't move for five hours straight.", "I enjoyed a cup of coffee and a good read there.", "I chatted with a friend for hours there."] # Think of new five sentences that would be funny if Bob misunderstood Ali to be talking about some place  to spend a long time (e.g. cafe, scenic spots) rather than a roller coaster.
+list_hours_B            =["<span style='color: cyan;'>list_hours_B           </span>",]
+list_cheap_A            =["<span style='color: cyan;'>list_cheap_A           </span>","This costs about 400 yen.", "I bought it for 400 yen.", "I looked at the price tag and it said 400 yen.", "If you buy this, you also get some peanuts as a bonus.","It was confiscated by customs."]# Think of new five sentences that would be funny if Bob misunderstood Ali to be talking about a roller coaster rather than a cheap marchandise (e.g. radio, plushie, tobacco).
+list_cheap_B            =["<span style='color: cyan;'>list_cheap_B           </span>",]
+
+list_robber_fight =["I bruised my collarbone.", "My friend and I defeated it together.","I was able to beat him because I knew karate.", "I was scared so I kicked and ran away.", "They asked me for a lot of money, so I punched them and ran away."]# A man tells a story about fighting a robber at a tourist spot. Add new 20 short statements without any explanations. Don't use any proper nouns. Don't make poems, just add normal statements. Don't use quotes.
+list_robber_lose  =["I lost 100,000 yen.","I was shocked when he demanded all my cash.","Covered by travel insurance.","He robbed me of my smartphone.","I handed over the money crying.", "I was scared so I called the police.","I was scared so I broke the window and ran away.","The language barrier made communication difficult.","This experience would make me a savvier traveler.","I reported it to the police but they didn't take action.","I screamed for help, but the people around me just watched.","Humiliation burned alongside the anger at my own carelessness.","Every stranger seemed suspicious."]# A man talks about being robbed at a tourist spot. Add new 20 short statements without any explanations. Don't use any proper nouns. Don't make poems, just add normal statements. Don't use quotes.
+list_robber_info  =["He uses a gun, a hammer and a knife.", "Some even target tour buses at stoplights.", "A decoy wallet might be a good idea.","Local vendors warned us to be extra cautious.", "He makes a living by robbing tourists of smartphones and watches.","The insecurity there is shocking.","Apparently they cause deaths on a regular basis.","The police are not keen to crack down on them.","Should've gotten travel insurance","It was just as I had heard, a dangerous place."]# A man expalains about robbers in tourist spot. Add new 20 short statements without any explanations. Don't use any proper nouns. Don't make one story or poems, just add normal statements.Don't use quotes.
+
+
+
+
+
+
+@dataclass
+class X_class:
+    all_X_class: ClassVar[List['X_class']] = []
+    X_class_name:str
+    #1
+    human:str
+    animal:str
+    inanimate:str
+    #2
+    paid_item:str
+    food:str
+    vehicle:str
+    #3
+    building:str
+    job:str
+    merchant:str
+    #4
+    carry_around:str
+    rent        :str
+    second_hand :str
+    #5
+    present:str
+    container:str
+    insert:str
+    #6
+    child_use:str
+    seats:str
+    hours:str
+    #woman
+    X_woman_A:list
+    X_woman_B:list
+    woman_X_A:list
+    woman_X_B:list
+    #animal
+    X_animal_A:list
+    X_animal_B:list
+    animal_X_A:list
+    animal_X_B:list
+    #robber
+    X_robber_A:list
+    X_robber_B:list
+    robber_X_A:list
+    robber_X_B:list
+    #roller_coaster
+    X_roller_coaster_A:list
+    X_roller_coaster_B:list
+    roller_coaster_X_A:list
+    roller_coaster_X_B:list
+
+
+    def __post_init__(self):
+        X_class.all_X_class.append(self)
+        #1
+        if self.X_class_name:
+            self.X_robber_A.extend([list_robber_info, list_robber_fight, list_robber_lose])
+        if self.human:
+            self.X_robber_A.extend([list_human_robber_A]) # "I asked about recommended tourist spots."
+            self.robber_X_A.extend([list_human_robber_B]) #
+
+        if self.animal:
+            self.X_woman_A.extend([list_animal_A]) # "He poops everywhere."
+            self.woman_X_B.extend([list_animal_B]) # "Let me pet this next time."
+            self.woman_X_A.extend([list_woman_animal_A])
+
+        if self.paid_item:
+            self.X_woman_A.extend([list_paid_item_A]) # "I bought it cheaply."
+            self.woman_X_B.extend([list_paid_item_B]) # "How much did it cost?"
+            self.X_roller_coaster_A.extend([list_paid_item_A, list_cheap_A])
+            self.roller_coaster_X_B.extend([list_paid_item_B, list_cheap_B])
+            self.woman_X_A.extend([list_woman_paid_item_A])
+
+        #2
+        if self.inanimate:
+            pass
+        if self.food:
+            self.X_woman_A.extend([list_food_A]) # "It was delicious."
+            self.woman_X_B.extend([list_food_B]) # "I've eaten this before."
+        if self.vehicle:
+            self.X_woman_A.extend([list_vehicle_A]) # "I like riding it."
+            self.woman_X_B.extend([list_vehicle_B]) # "I like riding it."
+        #3
+        if self.building:
+            self.X_roller_coaster_A.extend([list_building_A])
+            self.roller_coaster_X_B.extend([list_building_B])
+            self.X_woman_A.extend([list_building_woman_A])
+            self.woman_X_A.extend([list_building_woman_B])
+        if self.job:
+            self.X_robber_A.extend([list_job_A]) # "I used to do things like them too."
+            self.robber_X_B.extend([list_job_B]) #
+        if self.merchant:
+            self.X_woman_A.extend([list_merchant_A]) # "They offer coupons"
+            self.woman_X_B.extend([list_merchant_B]) #
+        #4
+        if self.carry_around:
+            self.X_woman_A.extend([list_carry_around_A]) # "I left it at a friend's house."
+            self.woman_X_B.extend([list_carry_around_B]) #
+        if self.rent:
+            self.X_woman_A.extend([list_rent_A]) # "Wanna borrow?"
+            self.woman_X_B.extend([list_rent_B]) # "Please lend it to me."
+        if self.second_hand:
+            self.X_woman_A.extend([list_second_hand_A]) # "This is second hand."
+            self.woman_X_B.extend([list_second_hand_B]) # "Is this second hand?"
+        #5
+        if self.present:
+            self.X_woman_A.extend([list_present_A]) # "I received this as a gift from my mother."
+            self.woman_X_B.extend([list_present_B]) # "Did your mother give it to you as a gift?"
+        if self.container:
+            self.X_woman_A.extend([list_container_A])
+            self.woman_X_B.extend([list_container_B])
+        if self.insert:
+            self.X_woman_A.extend([list_insert_A])
+            self.woman_X_B.extend([list_insert_B])
+        #6
+        if self.child_use:
+            self.X_woman_A.extend([list_child_use_A]) # "I've been using this since I was ten years old."
+            self.woman_X_B.extend([list_child_use_B])
+        if self.seats:
+            self.X_roller_coaster_A.extend([list_seats_A]) # "There was a noisy child, so I scolded him and made him quiet."
+            self.roller_coaster_X_B.extend([list_seats_B])
+        if self.hours:
+            self.X_roller_coaster_A.extend([list_hours_A]) # "I spent a few hours there."
+            self.roller_coaster_X_B.extend([list_hours_B])
+
+
+#                                               #1             #2           #3            #4            #5            #6
+_empty              =X_class(""                 ,"" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_dog                =X_class("dog"              ,"" ,"y","" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_butterfly          =X_class("butterfly"        ,"" ,"y","" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_baseball_glove     =X_class("baseball glove"   ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","y","y",  "" ,"y","" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_shoes              =X_class("shoes"            ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","y","y",  "" ,"y","" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_laptop             =X_class("laptop"           ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","y","y",  "y","" ,"" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_fridge             =X_class("fridge"           ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "y","y","" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_microwave          =X_class("microwave"        ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  "y","y","" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_car                =X_class("car"              ,"" ,"" ,"y",  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","y",  "y","y","" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_bed                =X_class("bed"              ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_couch              =X_class("couch"            ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_water_bottle       =X_class("water bottle"     ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"y","" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_compost            =X_class("compost"          ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_street_musician    =X_class("street musician"  ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_doctor             =X_class("doctor"           ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_clerk              =X_class("clerk"            ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_masseuse           =X_class("masseuse"         ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_cop                =X_class("cop"              ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_baby               =X_class("baby"             ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_gang               =X_class("gang"             ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_dorm_mate          =X_class("dorm mate"        ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_robber             =X_class("robber"           ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_wine               =X_class("wine"             ,"" ,"" ,"y",  "y","y","" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_seafood            =X_class("seafood"          ,"" ,"" ,"y",  "y","y","" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_airplane           =X_class("airplane"         ,"" ,"" ,"y",  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y","y","" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_hotel              =X_class("hotel"            ,"" ,"" ,"y",  "y","" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_tree               =X_class("tree"             ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_pepper             =X_class("pepper"           ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_foliage_plant      =X_class("foliage plant"    ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_talking_toy        =X_class("talking toy"      ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y","" ,"" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_haunted_house      =X_class("haunted house"    ,"" ,"" ,"y",  "y","" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_elderly            =X_class("elderly"          ,"y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_temple             =X_class("temple"           ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_horse              =X_class("horse"            ,"" ,"y","" ,  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_train              =X_class("train"            ,"" ,"" ,"y",  "" ,"" ,"y",  "" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "y","y","y",  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_monument           =X_class("monument"         ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"y",  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_library            =X_class("library"          ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"" ,  "" ,"" ,"" ,  "" ,"y","" ,  "y","y","y",  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_clinic             =X_class("clinic"           ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "y","" ,"y",  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_bar                =X_class("bar"              ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"y","y",  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_hostel             =X_class("hostel"           ,"" ,"" ,"y",  "" ,"" ,"" ,  "y","" ,"y",  "" ,"" ,"" ,  "" ,"y","" ,  "" ,"" ,"y",  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_radio              =X_class("radio"            ,"" ,"" ,"y",  "y","" ,"" ,  "" ,"" ,"" ,  "y","y","y",  "y","" ,"" ,  "y","" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+_mailbox            =X_class("mailbox"          ,"" ,"" ,"y",  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  "" ,"" ,"" ,  [],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+
+
+
+# <timing>----
+# Ali talks about timings involving a " mailbox ". Bob mistakes that Ali talks about the woman. What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences without any explanations or annotations. Print only the statements.
+
+_baseball_glove .X_woman_A  +=["I change it every three years.","I like to break it in gently before really getting into it."]
+_bed            .X_woman_A  +=["I stay in it all winter."]
+_car            .X_woman_A  +=["My brother is going on a trip so I lent it to him."]
+_couch          .X_woman_A  +=["On my days off, I eat, sleep and do everything on it."]
+_water_bottle   .X_woman_A  +=["I love to wrap my lips around it and take a big gulp, especially in the summer.","I always keep it close to me, especially when I'm working out."]
+_hotel          .X_woman_A  +=["Apparently that gets fully booked during the tourist season."]
+_shoes          .X_woman_A  +=["I put them on first thing in the morning and take them off right before bed."]
+_microwave      .X_woman_A  +=["It gets really hot inside after just a few minutes.", "It starts heating up as soon as I push the button."]
+_fridge         .X_woman_A  +=["In the summer, we put a lot of ice cream in it."]
+_wine           .X_woman_A  +=["This is delicious with crackers.","I like to open it slowly to let it breathe.", "I usually enjoy it in the evening, right before bed.","It gets better the longer I leave it alone."]
+_mailbox        .X_woman_A  +=["I check it every morning to see what has been put inside."]
+
+# ----</timing>
+
+
+# <accident>----
+# Ali talks about accidents involving a " mailbox ". Bob mistakes that Ali talks about the woman. What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences without any explanations or annotations. Print only the statements.
+
+_dog            .X_woman_A  +=["She loves dog food.","I am consulting a doctor about her fleas and ticks.", "She loves to jump on me unexpectedly, and sometimes I fall over.","I once found her chewing on my underwear.","She keeps trying to hump my leg whenever I sit down.","She ended up fucking someone else's dog at the dog park."]
+_baseball_glove .X_woman_A  +=["I accidentally took home another player's one."]
+_bed            .X_woman_A  +=["I've stayed in it for up to 20 hours even though I knew it was no good."]
+_car            .X_woman_A  +=["I put in diesel by mistake.","I spilled lasagna in it.","I left my smartphone in it.", "The smartphone I left in it exploded due to the heat."]
+_couch          .X_woman_A  +=["My sock got stuck in the gap in it and I couldn't get it out.", "After scrubbing the inside of it with a metal scrubbing pad, it started to taste metallic."]
+_water_bottle   .X_woman_A  +=["I put protein in it and the smell didn't go away.", "The carbonated drink squirted out of it.", "I accidentally spilled the contents of it and damaged my computer."]
+_hotel          .X_woman_A  +=["I got scolded for stepping on that with my shoes on."]
+_shoes          .X_woman_A  +=["Just putting my foot in there once gave me athlete's foot."]
+_mailbox        .X_woman_A  +=["I accidentally shoved something too big into it and it got stuck.","I tried to force it open and ended up breaking the lock."]
+# ----</accident>
+
+
+# <care>----
+# Ali talks about how to care for a " dog ". Bob mistakes that Ali talks about the woman. What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences without any explanations or annotations. Print only the statements.
+
+
+_baseball_glove .X_woman_A  +=["I spend extra time with it before every big game."]
+_car            .X_woman_A  +=["I used to wash this in the car wash but now I wash it with a hose to save money.","It's hard to wash this with a hose in the middle of winter."]
+_water_bottle   .X_woman_A  +=["I like it cold, so I keep it in the fridge overnight.","It's hard to scrub the inside with a brush."]
+_bed            .X_woman_A  +=["I love to air it out on sunny days to keep it smelling nice."]
+_baseball_glove .X_woman_A  +=["I empty the sand out of it after using it."]
+_shoes          .X_woman_A  +=["When not in use, I stuff some newspaper inside."]
+_dog            .X_woman_A  +=["I enjoy brushing it daily to keep its coat smooth and shiny.", "She has a lot of hair so flea treatment is important."]
+_compost        .X_woman_A  +=["I put mealworms and food waste into this."]
+# ----</care>
+
+
+# <tight_loose>----
+# Ali talks about how tight or loose a " mailbox " is. Bob mistakes that Ali talks about the woman. What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences without any explanations or annotations. Print only the statements.
+
+
+_baseball_glove .X_woman_A  +=["This fits snugly to my hand.", "This remembers the shape of my hand.", "This is tight around my wrist and hurt."]
+_shoes          .X_woman_A  +=["This is tight around my foot and hurt."]
+_car            .X_woman_A  +=["This can only fit three people in the back.", "This can only fit one golf bag."]
+_water_bottle   .X_woman_A  +=["The opening of this was clogged with ice.", "This is too small, so I drink up everything inside quickly."]
+_bed            .X_woman_A  +=["It's big enough for two, but sometimes it feels too cramped."]
+_microwave      .X_woman_A  +=["This doesn't even fit a TV dinner.", "The fit is snug, so I have to push things in carefully.","Sometimes it feels too cramped when I try to put something large inside."]
+_fridge         .X_woman_A  +=["This doesn't even fit a TV dinner.", "The fit is snug, so I have to push things in carefully.","Sometimes it feels too cramped when I try to put something large inside."]
+
+# ----</tight_loose>
+
+# <free>----
+# Ali talks about " compost ". Bob mistakes that Ali talks about the adult woman. What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences without any explanations or annotations. Print only the statements.
+_baby           .X_woman_A  +=["She will start kindergarten next year.", "She recently learned to use the toilet.", "What kind of children's clothes do you think would be good for her to wear?"]
+_baseball_glove .X_woman_A  +=["I had a baseball player sign this.","This was once used by Ichiro."]
+_hotel          .X_woman_A  +=["This costs $1000 a day.","That was swarming with tourists.", "I booked that on Booking.com."]
+_laptop         .X_woman_A  +=["Two hundred dangerous viruses were found on that.", "I periodically erase its memory."]
+_tree           .X_woman_A  +=["This stands in front of our house and protects our home from hurricanes.", "It's interesting to see this covered in cicadas in the summer.","We decorated this with lights for Christmas last year."]
+_fridge         .X_woman_A  +=["Indeed, I have heard that bananas are actually best stored at room temperature."]
+_dog            .X_woman_A  +=["She often smells her own ass.","Would it be cruel to put it in a cage?","I always keep it on a tight leash.","Sometimes it gets so excited, it jumps all over me."]
+_shoes          .X_woman_A  +=["These were made by Kanye West.", "These are the favorites of NBA players."]
+_compost        .X_woman_A  +=["Using this, food scraps can be decomposed.", "I got this to protect the environment and people."]
+#  ----</free>
+
+
+# <surround>----
+# Ali talks about the reaction to the " laptop " from people around him.. Bob mistakes that Ali talks about the adult woman. What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences without any explanations or annotations. Print only the statements.
+_dog            .X_woman_A  +=["At family gatherings, I often let my nephew touch her.", "If she gives birth to a baby, I plan to give it to my relatives."]
+_couch          .X_woman_A  +=["My dad praised the feel of it."]
+# </surround>----
+
+# <get>----
+# Ali talks about something related to getting the " _baseball_glove ". Bob mistakes that Ali talks about the adult woman. What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences without any explanations or annotations. Print only the statements.
+
+_dog            .X_woman_A  +=["My son picked this up on the street when he was ten years old."]
+_baseball_glove .X_woman_A  +=["I can't wait to break it in and start playing."]
+_microwave      .X_woman_A  +=["I bought this because cooking at home is a pain."]
+_couch          .X_woman_A  +=["My neighbor was selling this at the flea market."]
+_hotel          .X_woman_A  +=["I booked that through booking.com.", "I spent the night in that, and the service was excellent."]
+_pepper         .X_woman_A  +=["This destroyed my ass.", "I ate this as a penalty game.", "This flavor goes well with Spirytus."]
+# ----</get>
+
+
+# <woman_x>----
+# Ali talks about the woman. Bob mistakes that Ali talks about " mailbox ". What could Ali say that would cause Bob to misinterpret Ali as perverted or dangerous? Generate 5 sentences without any explanations or annotations. Print only the statements.
+_baseball_glove .woman_X_A  +=["I took it to the hospital."]
+_baby           .woman_X_A  +=["I leave the tax return to her.", "Although she looks young, she is 30 years old.", "She likes beer and drinks it often.", "Sometimes she fights with me and goes back to her parents' house."]
+_car            .woman_X_A  +=["I went into the hot spring with it.", "Others stared at us because it's a mixed bath."]
+_couch          .woman_X_A  +=["I found it at a bar, liked it, and took it home."]
+_dog            .woman_X_A  +=["We've been trying for ages but she still hasn't gotten pregnant.", "I found her at a bar, liked her, and took her home.", "It drinks more than me."]
+_cop            .woman_X_A  +=["I have to call them regularly to let her know where I am.", "They call me all the time and is very persistent.","She's so protective, it's like I'm under surveillance."]
+_gang           .woman_X_A  +=["My relationship with her is good.", "I leave the management of my money to her."]
+_foliage_plant  .woman_X_A  +=["I gave her a beer and her seemed happy.", "My father is against my marrying her."]
+_talking_toy    .woman_X_A  +=["I often get into arguments with her and end up losing.", "She's the life of every party we go to."]
+# </woman_x>
+
+# <animal><animal><animal><animal><animal><animal><animal><animal><animal><animal>
+# <animal_X_A>----
+# Ali talks about the safari elephant. Bob mistakes that Ali talks about "cop". What could Ali say that would cause Bob to misinterpret Ali is crazy? Generate 5 sentences without any explanations or annotations. Print only the statements.
+#"set_animal_x_A" stands for "Ali talks about the safari elephant. Bob mistakes that Ali talks about x."
+
+_seafood        .animal_X_A +=["I watched them play together, it was adorable.","They have such a strong bond, it's heartwarming.","These are parent and child, so cute!", "This individual was rescued by an animal protection organization from being abused.", "I hope he lives a long life.", "He was motionless, as if dead."]
+_airplane       .animal_X_A +=["I hit it hard and it started moving.","I had to get off every time I had to go to the bathroom."]
+_dorm_mate      .animal_X_A +=["I was amazed at the size of his poop and took a picture.", "I paid to ride on his back.", "He catches and eats the fruit I throw to him."]
+_masseuse       .animal_X_A +=["There was a four-year-old child.", "A parent and child came.", "The Master was controlling them with a whip."]
+_robber         .animal_X_A +=["It was a bit scary but I gave him a banana and he left.", "He robbed a banana in my hand.", "I was able to subdue him because I practiced judo."]
+
+# ----</animal_X_A>
+# <X_animal_A>----
+
+# Ali talks about the "cop". Bob mistakes that Ali talks about a safari elephant. What could Ali say that would cause Bob to misinterpret Ali is crazy? Generate 5 sentences without any explanations or annotations. Print only the statements.
+#"set_x_animal_A" stands for "Ali talks about the x. Bob mistakes that Ali talks about safari elephant."
+
+_seafood        .X_animal_A +=["I ate this raw.", "I ate this alive.","It's Chiba's traditional food.","It was so fresh, I could still feel it moving in my mouth."] # Ali talks about seafood, and Bob assumes that Ali has eaten Ali's daughter's dog. Add new 5 funny sentences.
+
+_airplane       .X_animal_A +=["There were about 50 people on this.", "I took this ride from India to Korea."]
+_dorm_mate      .X_animal_A +=["I shared a room with him at the hotel.","We could barely speak.", "I shared a bunk bed with him."]
+_masseuse       .X_animal_A +=["She stepped on my back.", "The session was a bit painful.", "I was surprised. No sexual services were offered."]
+_robber         .X_animal_A +=["He stole my iphone from my pocket.","They make a living by selling stolen goods.","Because I knew judo, I was able to subdue him."]
+
+# ----</X_animal_A>
+# </animal></animal></animal></animal></animal></animal></animal></animal></animal></animal>
+# <robber><robber><robber><robber><robber><robber><robber><robber><robber><robber><robber>
+
+
+# <X_robber_A>----
+
+# misunderstanding comedy creation task.
+# When Ali returns from his trip, he talks about the (x), but Bob mistakenly thinks he is talking about robbers, not the (x).
+# The (x) don't steal or rob. They just do normal things. Ali just does normal things.
+# Bob mistakenly believes that Ali, or the robbers, are crazy.
+# x_robber_A means "Ali talks about (x), not robbers. Bob mistakes that Ali talks about robbers, not (x)."
+# I'm asking for "lines."
+# define  """    """.x_robber_A . I need 5 sentences. Don't reply to an existing item.
+
+_dog            .X_robber_A +=["When I gave him the bread I had with me, he attacked me."] # Bob mistakenly assumes that Ali was begrudging his money and angered the robber by giving him bread.
+_butterfly      .X_robber_A +=["Local kids were catching them with nets."] # Bob mistakenly believes that a local child has caught the robber in a net.
+_masseuse       .X_robber_A +=["To be honest, I got an erection.", "I came twice."] # Bob mistakenly believes Ali is excited about being robbed.
+_clerk          .X_robber_A +=["They did accept credit cards."] # Bob mistakenly believes the robbers are high-tech.
+_haunted_house  .X_robber_A +=["I was hooked and went back with my family for a second time."] # Bob mistakenly believes that Ali has become addicted to being robbed.
+_street_musician.X_robber_A +=["I even paid a tip."]# Bob mistakenly believes that Ali paid the robber more than he was asked to pay.
+_cop            .X_robber_A +=["He told me to leave the area as it was dangerous."# Bob mistakenly believes the robber is being kind.
+                              ,"I rode in the police car with him." # Bob mistakenly believes Ali was arrested.
+                              ,"He was eating donuts with the cops."# Bob mistakenly believes the robber and cops are friends.
+                              ]
+_doctor         .X_robber_A +=["He told me to come back in a week for a follow-up. Then I went." # Bob mistakenly believes that the robber has ordered Ali to return and that Ali has obeyed.
+                              ]
+# ----</X_robber_A>
+# </robber></robber></robber></robber></robber></robber></robber></robber></robber></robber>
+
+# <roller_coaster><roller_coaster><roller_coaster><roller_coaster><roller_coaster><roller_coaster>
+# <x_roller_coaster> ----
+
+# misunderstanding comedy creation task.
+# When Ali returns from his trip, he talks about the (x), but Bob mistakenly thinks he is talking about a roller coaster, not the (x).
+# Bob mistakenly believes that the roller coaster or Ali is crazy.
+# x_roller_coaster_A means "Ali talks about (x), not roller coasters. Bob mistakes that Ali talks about roller coasters, not (x)."
+# I'm asking for "lines."
+
+
+_elderly        .X_roller_coaster_A +=["It's 80 years old.", "It has almost never had a checkup."] # Bob mistakenly believes Ali has gone on a very old unmaintained roller coaster.
+_temple         .X_roller_coaster_A +=["It's 120 years old.","This appears to be made of wood."]# Bob mistakenly believes Ali has gone on a very old wooden roller coaster.
+_horse          .X_roller_coaster_A +=["I slapped it and it started moving."]
+_train          .X_roller_coaster_A +=["I got off halfway because I had a stomach ache.", "There was a guy selling snacks in the aisle.", "I took this from Nepal to India."]
+_monument       .X_roller_coaster_A +=["This is made entirely of paper."] # Bob mistakenly believes Ali has gone on a paper roller coaster.
+_library        .X_roller_coaster_A +=["I spent hours studying for my exam there."]
+_clinic         .X_roller_coaster_A +=["I was born in there."]
+_bar            .X_roller_coaster_A +=["I proposed to my wife here."]
+_hostel         .X_roller_coaster_A +=["I had a really bad dream.","I woke up with a crick in my neck.", "There are also poor tourists who have been living there for more than a year."]
+_radio          .X_roller_coaster_A +=["This ran out of AA battery and stopped working."]
+
+# define """ _.x_robber_A """. I need 10 sentences. Don't reply to an existing item.
+
+# </x_roller_coaster></x_roller_coaster></x_roller_coaster></x_roller_coaster></x_roller_coaster></x_roller_coaster></x_roller_coaster>
+
+
+
+
+
+
+
+def get_instance_X_class():
+    instances_list = [
+        name for name, obj_instance in globals().items()
+        if isinstance(obj_instance, X_class)
+    ]
+    return instances_list
