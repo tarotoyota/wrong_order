@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Step 2 Instances</title>
+
+<meta name="google-adsense-account" content="ca-pub-1541998510052561">
+
+<meta charset="UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+
+<!-- Include jQuery and jQuery UI -->
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+</head>
+
+
+
+<body>
+
+<h1>Step 2 Instances</h1>
+
+<table>
+
+<tr>
+
+<th>Step_2_class_name</th>
+
+<th>X_woman_A</th>
+
+<th>X_woman_B</th>
+
+<th>woman_X_A</th>
+
+<th>woman_X_B</th>
+
+</tr>
+
+{% for instance in step_2_data %}
+
+<tr>
+
+<td>{{ instance.Step_2_class_name }}</td>
+
+<td>
+
+{% for item in instance.X_woman_A %}
+
+{{ item }}<br>
+
+{% endfor %}
+
+</td>
+
+<td>
+
+{% for item in instance.X_woman_B %}
+
+{{ item }}<br>
+
+{% endfor %}
+
+</td>
+
+<td>
+
+{% for item in instance.woman_X_A %}
+
+{{ item }}<br>
+
+{% endfor %}
+
+</td>
+
+<td>
+
+{% for item in instance.woman_X_B %}
+
+{{ item }}<br>
+
+{% endfor %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<table>
+
+<tr>
+
+<th>Step_2_class_name</th>
+
+<th>X_animal_A</th>
+
+<th>X_animal_B</th>
+
+<th>animal_X_A</th>
+
+<th>animal_X_B</th>
+
+</tr>
+
+{% for instance in step_2_data %}
+
+<tr>
+
+<td>{{ instance.Step_2_class_name }}</td>
+
+<td>
+
+{% for item in instance.X_animal_A %}
+
+{{ item }}<br>
+
+{% endfor %}
+
+</td>
+
+<td>
+
+{% for item in instance.X_animal_B %}
+
+{{ item }}<br>
+
+{% endfor %}
+
+</td>
+
+<td>
+
+{% for item in instance.animal_X_A %}
+
+{{ item }}<br>
+
+{% endfor %}
+
+</td>
+
+<td>
+
+{% for item in instance.animal_X_B %}
+
+{{ item }}<br>
+
+{% endfor %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>
