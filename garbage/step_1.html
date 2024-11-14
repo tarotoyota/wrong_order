@@ -1,0 +1,65 @@
+<!-- This page is /home/tarotoyota/templates/Step_1_html.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Step 1 Instances</title>
+<meta name="google-adsense-account" content="ca-pub-1541998510052561">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <!-- Include jQuery and jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+<!--
+@dataclass
+class Step_1: # It's located in /home/tarotoyota/Step_1_class_inst_py.py
+    all_Step_1: ClassVar[List['Step_1']] = []
+    did:str
+    right:list
+    wrong:dict
+    def __post_init__(self):
+        Step_1.all_Step_1.append(self)
+
+@app.route("/Step_1_html")  # It's located in /home/tarotoyota/app.py
+def Step_1_html():
+    step_1_instances = Step_1.all_Step_1
+    return render_template("Step_1_html.html", step_1_data=step_1_instances)
+-->
+
+
+
+</head>
+<body>
+    <h1>Step 1 Instances</h1>
+    <table>
+        <tr>
+            <th>Did</th>
+            <th>Right</th>
+            <th>Wrong</th>
+        </tr>
+        {% for instance in step_1_data %}
+        <tr>
+            <td>{{ instance.did }}</td>
+            <td>
+                {% for item in instance.right %}
+                    {{ item }}<br>
+                {% endfor %}
+            </td>
+            <td>
+                {% for key, value in instance.wrong.items() %}
+                    <b>{{ key }}:</b><br>
+                    {% for sub_item in value %}
+                        {{ sub_item }}<br>
+                    {% endfor %}
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
